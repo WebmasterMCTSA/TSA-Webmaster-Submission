@@ -54,13 +54,35 @@
       position: relative;
     }
 
-    .hero::after { content: ""; position: absolute; inset: 0; background: rgba(24, 24, 24, 0.5); }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(24, 24, 24, 0.5);
+    }
 
-    .hero h2, .hero p { position: relative; z-index: 1; margin: 0.5rem; }
-    .hero h2 { font-size: 2.8rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.5); }
-    .hero p { font-size: 1.2rem; max-width: 750px; text-shadow: 1px 1px 4px rgba(0,0,0,0.5); }
+    .hero h2, .hero p {
+      position: relative;
+      z-index: 1;
+      margin: 0.5rem;
+    }
 
-    main { max-width: 1100px; margin: 2rem auto; padding: 0 2rem; }
+    .hero h2 {
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 750px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
 
     section {
       background: #fff;
@@ -76,30 +98,68 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
 
-    h2 { color: #ffffff; font-size: 1.6rem; margin-top: 0; display: flex; align-items: center; gap: 0.6rem; }
+    h2 {
+      color: #ffffff;
+      font-size: 1.6rem;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
     ul { list-style: none; padding: 0; margin: 1rem 0 0 0; }
     ul li { padding: 0.75rem 0; border-bottom: 1px solid #eee; }
     ul li:hover { background: #f9fbff; }
     ul li strong { color: #1e305f; }
 
+    /* DETAILS STYLING */
     details {
-      border: none; margin-bottom: 1.5rem; background: #fff;
-      border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); transition: all 0.3s ease;
+      border: none;
+      margin-bottom: 1.5rem;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     }
 
     summary {
-      font-weight: 600; cursor: pointer; font-size: 1.3rem; color: #fff;
-      display: flex; align-items: center; gap: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
       padding: 1rem 1.5rem;
       background: #132040;
       border-radius: 10px 10px 0 0;
-      transition: background 0.3s ease, transform 0.2s ease;
+      transition: background 0.3s ease;
     }
 
     summary:hover { background: #0f2035; }
     details[open] summary { background: #0f2035; }
-    summary::marker { color: #fff; }
-    details section { margin: 0; padding-top: 0; border-radius: 0 0 10px 10px; box-shadow: none; }
+
+    /* Remove default arrow */
+    summary::-webkit-details-marker { display: none; }
+    summary::marker { display: none; content: ""; }
+
+    /* Custom arrow */
+    summary::after {
+      content: "▾";
+      margin-left: auto;
+      font-size: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    /* Rotate arrow when open */
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    details section {
+      margin: 0;
+      padding-top: 0;
+      border-radius: 0 0 10px 10px;
+      box-shadow: none;
+    }
 
     .calendar-container {
       position: relative;
@@ -119,16 +179,15 @@
       border-radius: 12px;
     }
 
-    /* Overlay for bottom-left corner to hide "Add to Calendar" */
     .calendar-overlay {
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 16%;   /* approximate button width */
-      height: 8%;   /* approximate button height */
-      background: #fff; /* matches calendar background */
+      width: 16%;
+      height: 8%;
+      background: #fff;
       z-index: 10;
-      pointer-events: all; /* blocks clicks */
+      pointer-events: all;
       border-radius: 0 0 0 12px;
     }
 
@@ -142,23 +201,20 @@
       .calendar-overlay { width: 25%; height: 12%; }
     }
 
-    footer { background: #132040; color: #fff; text-align: center; padding: 2rem 1rem; margin-top: 2rem; }
+    footer {
+      background: #132040;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+
     footer p { margin: 0.5rem 0; }
-
-    @media (max-width: 768px) {
-      header { flex-direction: column; text-align: center; }
-      nav { flex-wrap: wrap; justify-content: center; }
-      .hero h2 { font-size: 2.2rem; }
-      .hero p { font-size: 1rem; }
-    }
-
-    @media (max-width: 480px) {
-      .hero h2 { font-size: 1.8rem; }
-      nav a { font-size: 0.9rem; padding: 0.4rem 0.7rem; }
-    }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="logo-title">
       <a href="index.html">
@@ -184,6 +240,10 @@
   </div>
 
   <main>
+
+    <!-- ALL ORIGINAL DETAILS SECTIONS RESTORED HERE (unchanged content) -->
+
+    <!-- Government & Civic Engagement -->
     <details open>
       <summary>Government & Civic Engagement</summary>
       <section>
@@ -197,6 +257,7 @@
       </section>
     </details>
 
+    <!-- Community & Public Services -->
     <details>
       <summary>Community & Public Services</summary>
       <section>
@@ -210,6 +271,7 @@
       </section>
     </details>
 
+    <!-- Recreation & Tourism -->
     <details>
       <summary>Recreation & Tourism</summary>
       <section>
@@ -223,6 +285,7 @@
       </section>
     </details>
 
+    <!-- Economic & Development -->
     <details>
       <summary>Economic & Development</summary>
       <section>
@@ -235,6 +298,7 @@
       </section>
     </details>
 
+    <!-- Education & Transparency -->
     <details>
       <summary>Education & Transparency</summary>
       <section>
@@ -246,28 +310,12 @@
       </section>
     </details>
 
-    <section>
-      <h2>County Events Calendar</h2>
-      <p>View our full event schedule below. Click on any event for more details.</p>
-      <div class="calendar-container">
-        <iframe 
-          src="https://calendar.google.com/calendar/embed?src=c_2f3a3e87aea482189ad32c2c876b6e626675d98d5f02e94fd8fdeb501a85c01a%40group.calendar.google.com&ctz=America%2FNew_York&mode=MONTH&showTitle=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0" 
-          frameborder="0" 
-          scrolling="no">
-        </iframe>
-        <div class="calendar-overlay"></div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Follow our Facebook for more information!</h2>
-      <p>Visit the <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank">official McCreary County Fiscal Court Facebook</a> for registration details, meeting minutes, and the latest updates on upcoming events.</p>
-    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 McCreary County Fiscal Court</p>
     <p>Whitley City, KY | Phone: 606-376-2413</p>
   </footer>
+
 </body>
 </html>
