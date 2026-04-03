@@ -2,123 +2,274 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>McCreary County Fiscal Court</title>
 
-<!-- Font Awesome for icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --navy: #132040;
+    --navy-light: #1e305f;
+    --gold: #b47f2a;
+    --gold-light: #d4a040;
+    --white: #ffffff;
+    --off-white: #f9f9f9;
+    --text: #333;
+    --text-muted: #555;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+    --radius: 10px;
+    --header-h: 72px;
+  }
+
   html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    scroll-behavior: smooth;
+    margin: 0; padding: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
     background: #fff;
-    color: #333;
+    color: var(--text);
     overflow-x: hidden;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   a { text-decoration: none; color: inherit; }
-  a:hover, a:focus { text-decoration: none; }
 
+  /* ───── HEADER ───── */
   header {
-    background: #132040;
+    background: var(--navy);
     color: #fff;
+    height: var(--header-h);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    height: 212px;
-    padding: 0 2rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    justify-content: space-between;
+    padding: 0 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
 
-  .logo-title { display: flex; align-items: center; gap: 1rem; }
-  .logo-title a { display: flex; align-items: center; color: inherit; }
-  .logo-title img { height: 180px; width: auto; }
-  .logo-title h1 { margin: 0; font-size: 1.6rem; font-weight: 600; color: #fff; }
+  .logo-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    overflow: hidden;
+  }
 
-  nav { display: flex; gap: 1.5rem; }
-  nav a {
+  .logo-title img {
+    height: 52px;
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  .logo-title h1 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.3;
     color: #fff;
-    font-weight: 500;
-    padding: 0.4rem 0.8rem;
-    border-radius: 4px;
-    transition: background 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
-  nav a:hover, nav a.active { background: #1e305f; }
 
+  /* Hamburger button */
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.open span:nth-child(2) { opacity: 0; }
+  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ───── MOBILE NAV DRAWER ───── */
+  .nav-drawer {
+    position: fixed;
+    top: var(--header-h);
+    left: 0; right: 0;
+    background: var(--navy);
+    transform: translateY(-110%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    border-bottom: 3px solid var(--gold);
+  }
+
+  .nav-drawer.open {
+    transform: translateY(0);
+  }
+
+  .nav-drawer nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+  }
+
+  .nav-drawer nav a {
+    color: #fff;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.9rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: background 0.2s;
+    min-height: 48px; /* touch target */
+  }
+
+  .nav-drawer nav a:active,
+  .nav-drawer nav a:hover { background: var(--navy-light); }
+
+  .nav-drawer nav a i {
+    width: 20px;
+    color: var(--gold-light);
+    font-size: 0.95rem;
+  }
+
+  /* Desktop nav (hidden on mobile) */
+  .desktop-nav {
+    display: none;
+  }
+
+  /* ───── HERO ───── */
   .hero {
     position: relative;
     width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: calc(100svh - var(--header-h));
+    min-height: 300px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    transition: background-image 1s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);
   }
 
   .hero-text {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    position: relative;
     z-index: 2;
     text-align: center;
-    padding: 0 1rem;
+    padding: 0 1.5rem;
     color: #fff;
   }
 
   .hero-text h2 {
-    font-size: 3rem;
+    font-size: clamp(1.6rem, 6vw, 3.5rem);
     font-weight: 800;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    margin: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
   }
 
-  main { padding: 2rem; max-width: 1100px; margin: auto; }
+  /* Slide indicators */
+  .hero-dots {
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+  }
+
+  .hero-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .hero-dot.active {
+    background: #fff;
+    transform: scale(1.3);
+  }
+
+  /* ───── MAIN CONTENT ───── */
+  main {
+    padding: 1rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
   section {
     background: #fff;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s;
-  }
-  section:hover { transform: translateY(-3px); }
-
-  h2 {
-    background-color: #132040;
-    color: #ffffff;
-    margin-top: 0;
-    font-size: 1.8rem;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
   }
 
-  h3 { color: #ffffff; font-size: 1.2rem; }
+  section h2 {
+    background: var(--navy);
+    color: #fff;
+    margin: -1.5rem -1.5rem 1.25rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius) var(--radius) 0 0;
+    font-size: 1.3rem;
+    font-family: 'Georgia', serif;
+    font-weight: 700;
+  }
 
+  section p {
+    margin: 0;
+    line-height: 1.7;
+    font-size: 0.975rem;
+    color: var(--text-muted);
+  }
+
+  /* ───── FACTS GRID ───── */
   .facts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+    margin-top: 0;
   }
 
   .fact-card {
-    background: #f9f9f9;
-    border-radius: 12px;
-    padding: 1.5rem;
+    background: var(--off-white);
+    border-radius: 10px;
+    padding: 1.1rem 0.75rem;
     text-align: center;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s;
   }
-  .fact-card:hover { transform: translateY(-5px); box-shadow: 0 5px 12px rgba(0,0,0,0.15); }
-  .fact-card i { font-size: 2rem; margin-bottom: 0.5rem; }
-  .fact-card h4 { color: #132040; font-size: 1.3rem; margin-bottom: 0.5rem; }
-  .fact-card p { font-size: 1rem; color: #555; }
+
+  .fact-card:active { transform: scale(0.97); }
+
+  .fact-card i { font-size: 1.6rem; margin-bottom: 0.4rem; display: block; }
+  .fact-card h4 { color: var(--navy); font-size: 0.9rem; margin: 0 0 0.35rem; font-weight: 700; font-family: 'Segoe UI', Arial, sans-serif; }
+  .fact-card p { font-size: 0.8rem; color: var(--text-muted); margin: 0; line-height: 1.5; }
 
   .fa-landmark { color: #b47f2a; }
   .fa-users { color: #2a6db4; }
@@ -127,43 +278,164 @@
   .fa-handshake { color: #8c5ab4; }
   .fa-tree { color: #2e7d32; }
 
-  footer { background: #132040; color: #fff; padding: 2rem; }
-  .footer-columns { display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; max-width: 1100px; margin: auto; }
-  .footer-col { flex: 1 1 200px; }
-  footer p { margin: 0.25rem 0; }
+  /* ───── FOOTER ───── */
+  footer {
+    background: var(--navy);
+    color: #fff;
+    padding: 2rem 1.25rem 1.5rem;
+  }
 
-  @media (max-width: 1024px) { .hero-text h2 { font-size: 2.2rem; padding: 0 1rem; } }
-  @media (max-width: 768px) { nav { flex-wrap: wrap; justify-content: center; } .hero-text h2 { font-size: 1.8rem; padding: 0 1rem; } }
-  @media (max-width: 480px) { .hero-text h2 { font-size: 1.4rem; padding: 0 0.5rem; } }
+  .footer-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .footer-col h3 {
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    margin: 0 0 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  .footer-col p {
+    margin: 0.3rem 0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.85;
+  }
+
+  .footer-col a:hover { color: var(--gold-light); }
+
+  .copyright {
+    text-align: center;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ───── DESKTOP BREAKPOINT ───── */
+  @media (min-width: 768px) {
+    :root { --header-h: 90px; }
+
+    header { padding: 0 2rem; }
+    .logo-title img { height: 72px; }
+    .logo-title h1 { font-size: 1.3rem; }
+
+    .menu-toggle { display: none; }
+    .nav-drawer { display: none; }
+
+    .desktop-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .desktop-nav a {
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.4rem 0.75rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.active { background: var(--navy-light); }
+
+    main { padding: 2rem; }
+
+    section { padding: 2rem; }
+    section h2 {
+      margin: -2rem -2rem 1.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.6rem;
+    }
+
+    .facts-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .fact-card { padding: 1.5rem; }
+    .fact-card i { font-size: 2rem; }
+    .fact-card h4 { font-size: 1.1rem; }
+    .fact-card p { font-size: 0.95rem; }
+
+    .footer-columns { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (min-width: 1024px) {
+    :root { --header-h: 110px; }
+    .logo-title img { height: 90px; }
+    .logo-title h1 { font-size: 1.5rem; }
+    .desktop-nav a { font-size: 0.95rem; padding: 0.4rem 0.9rem; }
+  }
+
+  /* Safe area for notched phones */
+  @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    footer { padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
+  }
 </style>
 </head>
 <body>
 
+<!-- ── HEADER ── -->
 <header>
   <div class="logo-title">
-    <a href="index.html">
+    <a href="index.html" style="display:flex;align-items:center;gap:0.6rem;">
       <img src="images/McCrearyCountyFiscalCourt.png" alt="Fiscal Court Logo">
       <h1>McCreary County Fiscal Court</h1>
     </a>
   </div>
-  <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="events.html">Events</a>
-      <a href="records.html">Records</a>
-      <a href="tourism.html">Tourism</a>
-      <a href="resources.html">Resources</a>
-      <a href="contact.html">Contact</a>
-      <a href="tsaworklog.html">Reference Page</a>
+
+  <!-- Mobile hamburger -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Desktop nav -->
+  <nav class="desktop-nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="records.html">Records</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html">Contact</a>
+    <a href="tsaworklog.html">Reference Page</a>
   </nav>
 </header>
 
+<!-- ── MOBILE DRAWER ── -->
+<div class="nav-drawer" id="navDrawer" aria-hidden="true">
+  <nav>
+    <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="about.html"><i class="fa-solid fa-circle-info"></i> About Us</a>
+    <a href="events.html"><i class="fa-solid fa-calendar-days"></i> Events</a>
+    <a href="records.html"><i class="fa-solid fa-folder-open"></i> Records</a>
+    <a href="tourism.html"><i class="fa-solid fa-map-location-dot"></i> Tourism</a>
+    <a href="resources.html"><i class="fa-solid fa-book"></i> Resources</a>
+    <a href="contact.html"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a href="tsaworklog.html"><i class="fa-solid fa-file-lines"></i> Reference Page</a>
+  </nav>
+</div>
+
+<!-- ── HERO ── -->
 <section class="hero" id="hero">
   <div class="hero-text">
     <h2>Welcome to McCreary County</h2>
   </div>
+  <div class="hero-dots" id="heroDots"></div>
 </section>
 
+<!-- ── MAIN ── -->
 <main>
   <section id="about">
     <h2>About Us</h2>
@@ -207,6 +479,7 @@
   </section>
 </main>
 
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-columns">
     <div class="footer-col">
@@ -233,22 +506,68 @@
 </footer>
 
 <script>
-const heroImages = [
-  "images/Jumps.jpg",
-  "images/YOL-Web.jpg",
-  "images/NatArch-Web.jpg"
-];
-  const hero = document.querySelector('.hero');
+  // ── Hamburger menu ──
+  const toggle = document.getElementById('menuToggle');
+  const drawer = document.getElementById('navDrawer');
+
+  toggle.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    toggle.classList.toggle('open', isOpen);
+    toggle.setAttribute('aria-expanded', isOpen);
+    drawer.setAttribute('aria-hidden', !isOpen);
+  });
+
+  // Close drawer on nav link tap
+  drawer.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+      drawer.setAttribute('aria-hidden', true);
+    });
+  });
+
+  // Close on outside tap
+  document.addEventListener('click', (e) => {
+    if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
+      drawer.classList.remove('open');
+      toggle.classList.remove('open');
+      toggle.setAttribute('aria-expanded', false);
+    }
+  });
+
+  // ── Hero slideshow ──
+  const heroImages = [
+    "images/Jumps.jpg",
+    "images/YOL-Web.jpg",
+    "images/NatArch-Web.jpg"
+  ];
+
+  const hero = document.getElementById('hero');
+  const dotsContainer = document.getElementById('heroDots');
   let currentIndex = 0;
 
-  heroImages.forEach(src => new Image().src = src);
+  // Preload
+  heroImages.forEach(src => { const img = new Image(); img.src = src; });
 
-  hero.style.backgroundImage = `url('${heroImages[0]}')`;
+  // Build dots
+  const dots = heroImages.map((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Slide ${i + 1}`);
+    dot.addEventListener('click', () => goTo(i));
+    dotsContainer.appendChild(dot);
+    return dot;
+  });
 
-  setInterval(() => {
-    currentIndex = (currentIndex + 1) % heroImages.length;
-    hero.style.backgroundImage = `url('${heroImages[currentIndex]}')`;
-  }, 5000);
+  function goTo(index) {
+    currentIndex = index;
+    hero.style.backgroundImage = `url('${heroImages[index]}')`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === index));
+  }
+
+  goTo(0);
+  setInterval(() => goTo((currentIndex + 1) % heroImages.length), 5000);
 </script>
 </body>
 </html>
