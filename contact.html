@@ -14,106 +14,111 @@
       font-family: "Segoe UI", Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f5f7fa; /* light background */
+      background: #f5f7fa;
       color: #333;
-      line-height: 1.6; /* easier to read */
+      line-height: 1.6;
     }
 
-    a { text-decoration: none; color: inherit; } /* no underlines */
-    a:hover { color: #1e305f; } /* darker on hover */
+    a { text-decoration: none; color: inherit; }
+    a:hover { color: #1e305f; }
 
-    /* Header at top */
+    /* ── HEADER ── */
     header {
-      background: #132040; /* dark blue */
+      background: #132040;
       color: #fff;
       display: flex;
-      justify-content: space-between; /* logo left, nav right */
+      flex-direction: column;         /* stack logo + nav vertically on mobile */
       align-items: center;
-      height: 212px;
-      padding: 0 2rem;
+      gap: 0.75rem;
+      padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
     .logo-title {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .logo-title a {
       display: flex;
-      align-items: center; /* makes whole logo clickable */
+      align-items: center;
     }
 
     .logo-title img {
-      height: 180px;
+      height: 80px;                   /* smaller logo on mobile */
       width: auto;
     }
 
     .logo-title h1 {
       margin: 0;
-      font-size: 1.6rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: #fff;
+      line-height: 1.3;
     }
 
-    /* Navigation links */
+    /* ── NAV ── */
     nav {
       display: flex;
-      gap: 1.5rem;
+      flex-wrap: wrap;                /* wraps when links don't fit */
+      justify-content: center;
+      gap: 0.4rem;
+      width: 100%;
     }
 
     nav a {
       color: #fff;
       font-weight: 500;
-      padding: 0.4rem 0.8rem;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.65rem;
       border-radius: 4px;
       transition: background 0.3s;
+      white-space: nowrap;
     }
 
-    nav a:hover, nav a.active { 
-      background: #1e305f; /* darker when hovered */
+    nav a:hover, nav a.active {
+      background: #1e305f;
     }
 
-    /* Hero section with background image */
+    /* ── HERO ── */
     .hero {
       background: url('https://images.unsplash.com/photo-1581091215365-9f178b6ee8a6?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      /* image centered, covers whole area */
       color: #000000;
       text-align: center;
-      padding: 5rem 2rem;
+      padding: 3rem 1.25rem;          /* tighter padding on mobile */
     }
 
     .hero h2 {
-      font-size: 2.8rem;
+      font-size: 2rem;                /* smaller headline */
       margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* makes text readable */
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
 
     .hero p {
-      font-size: 1.2rem;
-      max-width: 700px; /* keeps text from getting too wide */
+      font-size: 1rem;
+      max-width: 700px;
       margin: auto;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
-    /* Main content area */
+    /* ── MAIN ── */
     main {
       max-width: 1100px;
-      margin: 2rem auto; /* centers content */
-      padding: 0 2rem;
+      margin: 1.25rem auto;
+      padding: 0 1rem;                /* narrower side padding */
     }
 
     section {
       background: #fff;
-      padding: 2rem;
-      margin-bottom: 2rem;
+      padding: 1.5rem 1.25rem;        /* comfortable inner padding */
+      margin-bottom: 1.25rem;
       border-radius: 8px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     h2, h3 {
-      color: #132040; /* dark blue headings */
+      color: #132040;
       margin-top: 0;
     }
 
@@ -121,86 +126,122 @@
       margin-bottom: 1rem;
     }
 
-    /* Contact form styling */
+    /* ── FORM ── */
     form {
       display: flex;
       flex-direction: column;
-      gap: 1rem; /* space between fields */
+      gap: 1rem;
     }
 
-    /* Form input fields */
     input, textarea {
       padding: 0.75rem;
       border: 1px solid #ccc;
       border-radius: 4px;
-      font-size: 1rem;
+      font-size: 1rem;                /* prevents iOS zoom on focus */
       width: 100%;
-      box-sizing: border-box; /* makes width work properly */
+      box-sizing: border-box;
     }
 
-    /* Submit button */
     button {
-      background-color: #132040; /* dark blue */
+      background-color: #132040;
       color: #fff;
       border: none;
-      padding: 0.75rem 1.5rem;
+      padding: 0.85rem 1.5rem;       /* slightly taller tap target */
       font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
       transition: background 0.3s;
+      width: 100%;                    /* full-width on mobile */
+      touch-action: manipulation;     /* removes 300 ms tap delay */
     }
 
     button:hover {
-      background-color: #1e305f; /* darker on hover */
+      background-color: #1e305f;
     }
 
-    /* Footer */
+    /* ── FOOTER ── */
     footer {
       background: #132040;
       color: #fff;
       text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
+      padding: 1.5rem 1rem;
+      margin-top: 1.5rem;
     }
 
-    footer p { 
-      margin: 0.5rem 0; 
+    footer p {
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
     }
 
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-      .logo-title img { 
-        height: 180px; 
+    /* ── TABLET & UP ── */
+    @media (min-width: 600px) {
+      header {
+        flex-direction: row;          /* logo left, nav right */
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: auto;
+        min-height: 100px;
       }
-      nav { 
-        justify-content: center; 
-        flex-wrap: wrap; /* wraps on small screens */
+
+      .logo-title img { height: 80px; }
+
+      .logo-title h1 { font-size: 1.3rem; }
+
+      nav { width: auto; }
+
+      nav a { font-size: 0.9rem; }
+
+      .hero { padding: 4rem 2rem; }
+      .hero h2 { font-size: 2.4rem; }
+
+      button { width: auto; }
+    }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 900px) {
+      header {
+        height: 212px;
+        padding: 0 2rem;
       }
+
+      .logo-title img { height: 180px; }
+
+      .logo-title h1 { font-size: 1.6rem; }
+
+      nav a { font-size: 1rem; padding: 0.4rem 0.8rem; }
+
+      .hero { padding: 5rem 2rem; }
+      .hero h2 { font-size: 2.8rem; }
+      .hero p { font-size: 1.2rem; }
+
+      main { padding: 0 2rem; }
+
+      section { padding: 2rem; }
     }
   </style>
 </head>
 <body>
 
   <!-- Top header -->
-<header>
-  <div class="logo-title">
-    <a href="index.html">
-       <img src="images/McCrearyCountyFiscalCourt.png" alt="Fiscal Court Logo">
-      <h1>McCreary County Fiscal Court</h1>
-    </a>
-  </div>
-  <!-- Main navigation -->
-  <nav>
+  <header>
+    <div class="logo-title">
+      <a href="index.html">
+        <img src="images/McCrearyCountyFiscalCourt.png" alt="Fiscal Court Logo">
+        <h1>McCreary County Fiscal Court</h1>
+      </a>
+    </div>
+    <!-- Main navigation -->
+    <nav>
       <a href="index.html">Home</a>
       <a href="about.html">About Us</a>
       <a href="events.html">Events</a>
       <a href="records.html">Records</a>
       <a href="tourism.html">Tourism</a>
       <a href="resources.html">Resources</a>
-      <a href="contact.html"class="active">Contact</a>
+      <a href="contact.html" class="active">Contact</a>
       <a href="tsaworklog.html">Reference Page</a>
-  </nav>
-</header>
+    </nav>
+  </header>
 
   <!-- Hero section -->
   <div class="hero">
