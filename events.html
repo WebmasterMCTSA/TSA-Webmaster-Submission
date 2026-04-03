@@ -19,32 +19,51 @@
 
     a { text-decoration: none; color: inherit; }
 
+    /* ── HEADER ── */
     header {
       background: #132040;
       color: #fff;
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;         /* stack on mobile */
       align-items: center;
-      height: 212px;
-      padding: 0 2rem;
+      gap: 0.75rem;
+      padding: 1rem;
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .logo-title { display: flex; align-items: center; gap: 1rem; }
+    .logo-title { display: flex; align-items: center; gap: 0.75rem; }
     .logo-title a { display: flex; align-items: center; }
-    .logo-title img { height: 180px; width: auto; }
-    .logo-title h1 { margin: 0; font-size: 1.6rem; font-weight: 600; color: #fff; }
+    .logo-title img { height: 80px; width: auto; }  /* compact on mobile */
+    .logo-title h1 { margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; line-height: 1.3; }
 
-    nav { display: flex; gap: 1.5rem; }
-    nav a { color: #fff; font-weight: 500; padding: 0.4rem 0.8rem; border-radius: 4px; transition: background 0.3s; }
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem;
+      width: 100%;
+    }
+
+    nav a {
+      color: #fff;
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 4px;
+      transition: background 0.3s;
+      white-space: nowrap;
+    }
+
     nav a:hover, nav a.active { background: #1e305f; }
 
+    /* ── HERO ── */
     .hero {
       background-image: url("images/Buzzrock-Web.jpg");
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
-      height: 60vh;
+      min-height: 40vh;               /* shorter on mobile */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -52,6 +71,7 @@
       text-align: center;
       color: #fff;
       position: relative;
+      padding: 2rem 1.25rem;
     }
 
     .hero::after {
@@ -68,34 +88,30 @@
     }
 
     .hero h2 {
-      font-size: 2.8rem;
+      font-size: 1.8rem;              /* smaller on mobile */
       text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       max-width: 750px;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
     }
 
+    /* ── MAIN ── */
     main {
       max-width: 1100px;
-      margin: 2rem auto;
-      padding: 0 2rem;
+      margin: 1.25rem auto;
+      padding: 0 1rem;                /* tight on mobile */
     }
 
     section {
       background: #fff;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      padding: 1.25rem 1rem;          /* more compact on mobile */
+      margin-bottom: 0;
+      border-radius: 0 0 10px 10px;
+      box-shadow: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    section:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
     }
 
     h2 {
@@ -107,15 +123,16 @@
       gap: 0.6rem;
     }
 
-    ul { list-style: none; padding: 0; margin: 1rem 0 0 0; }
-    ul li { padding: 0.75rem 0; border-bottom: 1px solid #eee; }
+    ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0; }
+    ul li { padding: 0.75rem 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
+    ul li:last-child { border-bottom: none; }
     ul li:hover { background: #f9fbff; }
-    ul li strong { color: #1e305f; }
+    ul li strong { color: #1e305f; display: block; margin-bottom: 0.1rem; }
 
-    /* DETAILS STYLING */
+    /* ── DETAILS ── */
     details {
       border: none;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.06);
@@ -124,18 +141,20 @@
     summary {
       font-weight: 600;
       cursor: pointer;
-      font-size: 1.3rem;
+      font-size: 1.1rem;              /* slightly smaller on mobile */
       color: #fff;
       display: flex;
       align-items: center;
-      padding: 1rem 1.5rem;
+      padding: 0.9rem 1.25rem;
       background: #132040;
       border-radius: 10px 10px 0 0;
       transition: background 0.3s ease;
+      -webkit-tap-highlight-color: transparent; /* removes blue flash on iOS */
+      touch-action: manipulation;
     }
 
     summary:hover { background: #0f2035; }
-    details[open] summary { background: #0f2035; }
+    details[open] summary { background: #0f2035; border-radius: 10px 10px 0 0; }
 
     /* Remove default arrow */
     summary::-webkit-details-marker { display: none; }
@@ -149,18 +168,9 @@
       transition: transform 0.3s ease;
     }
 
-    /* Rotate arrow when open */
-    details[open] summary::after {
-      transform: rotate(180deg);
-    }
+    details[open] summary::after { transform: rotate(180deg); }
 
-    details section {
-      margin: 0;
-      padding-top: 0;
-      border-radius: 0 0 10px 10px;
-      box-shadow: none;
-    }
-
+    /* ── CALENDAR ── */
     .calendar-container {
       position: relative;
       width: 100%;
@@ -191,25 +201,73 @@
       border-radius: 0 0 0 12px;
     }
 
-    @media (max-width: 768px) {
-      .calendar-container iframe { height: 500px; }
-      .calendar-overlay { width: 20%; height: 10%; }
-    }
-
-    @media (max-width: 480px) {
-      .calendar-container iframe { height: 420px; }
-      .calendar-overlay { width: 25%; height: 12%; }
-    }
-
+    /* ── FOOTER ── */
     footer {
       background: #132040;
       color: #fff;
       text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 2rem;
+      padding: 1.5rem 1rem;
+      margin-top: 1.5rem;
     }
 
-    footer p { margin: 0.5rem 0; }
+    footer p { margin: 0.5rem 0; font-size: 0.9rem; }
+
+    /* ── TABLET ── */
+    @media (min-width: 600px) {
+      header {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0 1.5rem;
+        height: auto;
+        min-height: 100px;
+      }
+
+      .logo-title img { height: 80px; }
+      .logo-title h1 { font-size: 1.3rem; }
+
+      nav { width: auto; }
+      nav a { font-size: 0.9rem; }
+
+      .hero { min-height: 50vh; padding: 3rem 2rem; }
+      .hero h2 { font-size: 2.2rem; }
+      .hero p { font-size: 1.1rem; }
+
+      summary { font-size: 1.2rem; padding: 1rem 1.5rem; }
+
+      section { padding: 1.5rem; }
+
+      .calendar-container iframe { height: 500px; }
+      .calendar-overlay { width: 20%; height: 10%; }
+    }
+
+    /* ── DESKTOP ── */
+    @media (min-width: 900px) {
+      header {
+        height: 212px;
+        padding: 0 2rem;
+      }
+
+      .logo-title img { height: 180px; }
+      .logo-title h1 { font-size: 1.6rem; }
+
+      nav a { font-size: 1rem; padding: 0.4rem 0.8rem; }
+
+      .hero { min-height: 60vh; padding: 4rem 2rem; }
+      .hero h2 { font-size: 2.8rem; }
+      .hero p { font-size: 1.2rem; }
+
+      main { padding: 0 2rem; margin: 2rem auto; }
+
+      summary { font-size: 1.3rem; }
+
+      section { padding: 2rem; }
+
+      .calendar-container iframe { height: 600px; }
+      .calendar-overlay { width: 16%; height: 8%; }
+
+      footer { padding: 2rem 1rem; }
+      footer p { font-size: 1rem; }
+    }
   </style>
 </head>
 
@@ -240,8 +298,6 @@
   </div>
 
   <main>
-
-    <!-- ALL ORIGINAL DETAILS SECTIONS RESTORED HERE (unchanged content) -->
 
     <!-- Government & Civic Engagement -->
     <details open>
