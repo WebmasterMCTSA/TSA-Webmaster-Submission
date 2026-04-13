@@ -1,377 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Events - McCreary County Fiscal Court</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Events – McCreary County Fiscal Court</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#f4f6fa;color:#333;line-height:1.6;font-size:16px}
+a{text-decoration:none;color:inherit}
 
-  <link rel="stylesheet" href="css/main.css">
+header{background:#132040;color:#fff;padding:.75rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.logo-row{display:flex;align-items:center;gap:.6rem}
+.logo-row img{height:56px;width:auto}
+.logo-row h1{font-size:1rem;font-weight:600;color:#fff;line-height:1.3}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;width:100%}
+nav a{color:#dde4f0;font-size:.82rem;font-weight:500;padding:.4rem .6rem;border-radius:4px;white-space:nowrap;transition:background .2s}
+nav a:hover,nav a.active{background:#1e305f;color:#fff}
 
-  <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f7fa;
-      color: #333;
-      line-height: 1.7;
-    }
+.hero{background:#1a2d4f url("images/Buzzrock-Web.jpg") center/cover no-repeat;min-height:30vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative;padding:2rem 1rem}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(10,18,40,.55)}
+.hero h2,.hero p{position:relative;z-index:1}
+.hero h2{font-size:1.5rem;font-weight:700;text-shadow:1px 2px 4px rgba(0,0,0,.5);margin-bottom:.4rem}
+.hero p{font-size:.95rem;max-width:600px;opacity:.92;text-shadow:1px 1px 3px rgba(0,0,0,.4)}
 
-    a { text-decoration: none; color: inherit; }
+main{max-width:720px;margin:1.25rem auto;padding:0 .75rem}
 
-    /* ── HEADER ── */
-    header {
-      background: #132040;
-      color: #fff;
-      display: flex;
-      flex-direction: column;         /* stack on mobile */
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+details{margin-bottom:.75rem;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+summary{list-style:none;display:flex;align-items:center;justify-content:space-between;background:#132040;color:#fff;padding:1rem 1.1rem;font-size:1rem;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;user-select:none}
+summary::-webkit-details-marker{display:none}
+summary .arrow{font-size:.9rem;transition:transform .3s;display:inline-block}
+details[open] summary .arrow{transform:rotate(180deg)}
+summary:hover{background:#0f1e3a}
+details[open] summary{background:#0f1e3a}
 
-    .logo-title { display: flex; align-items: center; gap: 0.75rem; }
-    .logo-title a { display: flex; align-items: center; }
-    .logo-title img { height: 80px; width: auto; }  /* compact on mobile */
-    .logo-title h1 { margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; line-height: 1.3; }
+.section-body{background:#fff;padding:0}
+.event-item{padding:.9rem 1.1rem;border-bottom:.5px solid #eef0f5;display:flex;flex-direction:column;gap:.15rem}
+.event-item:last-child{border-bottom:none}
+.event-item:active{background:#f7f9ff}
+.event-title{font-weight:600;color:#132040;font-size:.95rem;line-height:1.35}
+.event-detail{font-size:.88rem;color:#555;line-height:1.45}
 
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.4rem;
-      width: 100%;
-    }
+footer{background:#132040;color:#dde4f0;text-align:center;padding:1.5rem 1rem;margin-top:1.5rem}
+footer p{font-size:.88rem;margin:.3rem 0}
 
-    nav a {
-      color: #fff;
-      font-weight: 500;
-      font-size: 0.85rem;
-      padding: 0.35rem 0.65rem;
-      border-radius: 4px;
-      transition: background 0.3s;
-      white-space: nowrap;
-    }
-
-    nav a:hover, nav a.active { background: #1e305f; }
-
-    /* ── HERO ── */
-    .hero {
-      background-image: url("images/Buzzrock-Web.jpg");
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-      min-height: 40vh;               /* shorter on mobile */
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-      position: relative;
-      padding: 2rem 1.25rem;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(24, 24, 24, 0.5);
-    }
-
-    .hero h2, .hero p {
-      position: relative;
-      z-index: 1;
-      margin: 0.5rem;
-    }
-
-    .hero h2 {
-      font-size: 1.8rem;              /* smaller on mobile */
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    }
-
-    .hero p {
-      font-size: 1rem;
-      max-width: 750px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-
-    /* ── MAIN ── */
-    main {
-      max-width: 1100px;
-      margin: 1.25rem auto;
-      padding: 0 1rem;                /* tight on mobile */
-    }
-
-    section {
-      background: #fff;
-      padding: 1.25rem 1rem;          /* more compact on mobile */
-      margin-bottom: 0;
-      border-radius: 0 0 10px 10px;
-      box-shadow: none;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    h2 {
-      color: #ffffff;
-      font-size: 1.6rem;
-      margin-top: 0;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    ul { list-style: none; padding: 0; margin: 0.5rem 0 0 0; }
-    ul li { padding: 0.75rem 0; border-bottom: 1px solid #eee; font-size: 0.95rem; }
-    ul li:last-child { border-bottom: none; }
-    ul li:hover { background: #f9fbff; }
-    ul li strong { color: #1e305f; display: block; margin-bottom: 0.1rem; }
-
-    /* ── DETAILS ── */
-    details {
-      border: none;
-      margin-bottom: 1.25rem;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-    }
-
-    summary {
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 1.1rem;              /* slightly smaller on mobile */
-      color: #fff;
-      display: flex;
-      align-items: center;
-      padding: 0.9rem 1.25rem;
-      background: #132040;
-      border-radius: 10px 10px 0 0;
-      transition: background 0.3s ease;
-      -webkit-tap-highlight-color: transparent; /* removes blue flash on iOS */
-      touch-action: manipulation;
-    }
-
-    summary:hover { background: #0f2035; }
-    details[open] summary { background: #0f2035; border-radius: 10px 10px 0 0; }
-
-    /* Remove default arrow */
-    summary::-webkit-details-marker { display: none; }
-    summary::marker { display: none; content: ""; }
-
-    /* Custom arrow */
-    summary::after {
-      content: "▾";
-      margin-left: auto;
-      font-size: 1rem;
-      transition: transform 0.3s ease;
-    }
-
-    details[open] summary::after { transform: rotate(180deg); }
-
-    /* ── CALENDAR ── */
-    .calendar-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
-      background: #fff;
-      margin-top: 1rem;
-    }
-
-    .calendar-container iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
-      display: block;
-      border-radius: 12px;
-    }
-
-    .calendar-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 16%;
-      height: 8%;
-      background: #fff;
-      z-index: 10;
-      pointer-events: all;
-      border-radius: 0 0 0 12px;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #132040;
-      color: #fff;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 1.5rem;
-    }
-
-    footer p { margin: 0.5rem 0; font-size: 0.9rem; }
-
-    /* ── TABLET ── */
-    @media (min-width: 600px) {
-      header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 1.5rem;
-        height: auto;
-        min-height: 100px;
-      }
-
-      .logo-title img { height: 80px; }
-      .logo-title h1 { font-size: 1.3rem; }
-
-      nav { width: auto; }
-      nav a { font-size: 0.9rem; }
-
-      .hero { min-height: 50vh; padding: 3rem 2rem; }
-      .hero h2 { font-size: 2.2rem; }
-      .hero p { font-size: 1.1rem; }
-
-      summary { font-size: 1.2rem; padding: 1rem 1.5rem; }
-
-      section { padding: 1.5rem; }
-
-      .calendar-container iframe { height: 500px; }
-      .calendar-overlay { width: 20%; height: 10%; }
-    }
-
-    /* ── DESKTOP ── */
-    @media (min-width: 900px) {
-      header {
-        height: 212px;
-        padding: 0 2rem;
-      }
-
-      .logo-title img { height: 180px; }
-      .logo-title h1 { font-size: 1.6rem; }
-
-      nav a { font-size: 1rem; padding: 0.4rem 0.8rem; }
-
-      .hero { min-height: 60vh; padding: 4rem 2rem; }
-      .hero h2 { font-size: 2.8rem; }
-      .hero p { font-size: 1.2rem; }
-
-      main { padding: 0 2rem; margin: 2rem auto; }
-
-      summary { font-size: 1.3rem; }
-
-      section { padding: 2rem; }
-
-      .calendar-container iframe { height: 600px; }
-      .calendar-overlay { width: 16%; height: 8%; }
-
-      footer { padding: 2rem 1rem; }
-      footer p { font-size: 1rem; }
-    }
-  </style>
+@media(min-width:600px){
+  header{flex-direction:row;justify-content:space-between;padding:.75rem 1.5rem}
+  .logo-row img{height:72px}
+  .logo-row h1{font-size:1.15rem}
+  nav{width:auto;justify-content:flex-end}
+  .hero{min-height:38vh}
+  .hero h2{font-size:2rem}
+  .hero p{font-size:1.05rem}
+  summary{font-size:1.05rem;padding:1rem 1.25rem}
+  .event-item{padding:1rem 1.25rem}
+}
+@media(min-width:900px){
+  header{padding:1rem 2rem}
+  .logo-row img{height:88px}
+  .logo-row h1{font-size:1.35rem}
+  nav a{font-size:.9rem}
+  .hero{min-height:48vh}
+  main{padding:0 1.25rem;margin:1.75rem auto}
+}
+</style>
 </head>
-
 <body>
 
-  <header>
-    <div class="logo-title">
-      <a href="index.html">
-        <img src="images/McCrearyCountyFiscalCourt.png" alt="Fiscal Court Logo">
-        <h1>McCreary County Fiscal Court</h1>
-      </a>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="events.html" class="active">Events</a>
-      <a href="records.html">Records</a>
-      <a href="tourism.html">Tourism</a>
-      <a href="resources.html">Resources</a>
-      <a href="contact.html">Contact</a>
-      <a href="tsaworklog.html">Reference Page</a>
-    </nav>
-  </header>
-
-  <div class="hero">
-    <h2>Upcoming Events & Meetings</h2>
-    <p>Stay informed about Fiscal Court meetings, community programs, and local activities happening across McCreary County.</p>
+<header>
+  <div class="logo-row">
+    <a href="index.html">
+      <img src="images/McCrearyCountyFiscalCourt.png" alt="McCreary County Fiscal Court logo"/>
+    </a>
+    <h1>McCreary County Fiscal Court</h1>
   </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="events.html" class="active">Events</a>
+    <a href="records.html">Records</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html">Contact</a>
+    <a href="tsaworklog.html">Reference</a>
+  </nav>
+</header>
 
-  <main>
+<div class="hero">
+  <h2>Upcoming Events &amp; Meetings</h2>
+  <p>Stay informed about Fiscal Court meetings, community programs, and local activities happening across McCreary County.</p>
+</div>
 
-    <!-- Government & Civic Engagement -->
-    <details open>
-      <summary>Government & Civic Engagement</summary>
-      <section>
-        <ul>
-          <li><strong>Fiscal Court Meeting</strong> – Second Thursday of every month at 6:00 PM, Fiscal Courtroom, Whitley City.</li>
-          <li><strong>Public Hearings</strong> – Budget, zoning, and ordinance discussions announced as needed.</li>
-          <li><strong>Town Hall Meetings</strong> – Informal Q&A sessions with the Judge/Executive and Magistrates.</li>
-          <li><strong>Budget Workshops</strong> – Learn how county funds are allocated to local programs.</li>
-          <li><strong>Election Information Events</strong> – Voter registration and election education sessions.</li>
-        </ul>
-      </section>
-    </details>
+<main>
 
-    <!-- Community & Public Services -->
-    <details>
-      <summary>Community & Public Services</summary>
-      <section>
-        <ul>
-          <li><strong>Community Cleanup Day</strong> – May 15, 2025, 9:00 AM–3:00 PM, Various County Locations.</li>
-          <li><strong>Recycling Drop-Off Day</strong> – First Saturday monthly, County Transfer Station.</li>
-          <li><strong>Public Safety Awareness Week</strong> – Meet EMS, Fire, and Sheriff's Departments.</li>
-          <li><strong>Volunteer Recognition Event</strong> – Honoring community volunteers and organizations.</li>
-          <li><strong>Veterans Appreciation Ceremony</strong> – November 11, 2025, Courthouse Lawn.</li>
-        </ul>
-      </section>
-    </details>
+  <details open>
+    <summary>Government &amp; Civic Engagement <span class="arrow">▾</span></summary>
+    <div class="section-body">
+      <div class="event-item">
+        <span class="event-title">Fiscal Court Meeting</span>
+        <span class="event-detail">Second Thursday of every month · 6:00 PM · Fiscal Courtroom, Whitley City</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Public Hearings</span>
+        <span class="event-detail">Budget, zoning, and ordinance discussions announced as needed</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Town Hall Meetings</span>
+        <span class="event-detail">Informal Q&amp;A sessions with the Judge/Executive and Magistrates</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Budget Workshops</span>
+        <span class="event-detail">Learn how county funds are allocated to local programs</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Election Information Events</span>
+        <span class="event-detail">Voter registration and election education sessions</span>
+      </div>
+    </div>
+  </details>
 
-    <!-- Recreation & Tourism -->
-    <details>
-      <summary>Recreation & Tourism</summary>
-      <section>
-        <ul>
-          <li><strong>McCreary County Fair</strong> – August 10–14, 2025, McCreary County Fairgrounds.</li>
-          <li><strong>Historical Walking Tour</strong> – September 5, 2025, 10:00 AM, Downtown Whitley City.</li>
-          <li><strong>Fall Heritage Festival</strong> – October 12, 2025, Sandhill Park.</li>
-          <li><strong>Christmas Parade & Tree Lighting</strong> – December 6, 2025, Courthouse Square.</li>
-          <li><strong>Concert in the Park Series</strong> – Summer evenings featuring local artists and food vendors.</li>
-        </ul>
-      </section>
-    </details>
+  <details>
+    <summary>Community &amp; Public Services <span class="arrow">▾</span></summary>
+    <div class="section-body">
+      <div class="event-item">
+        <span class="event-title">Community Cleanup Day</span>
+        <span class="event-detail">May 15, 2025 · 9:00 AM–3:00 PM · Various County Locations</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Recycling Drop-Off Day</span>
+        <span class="event-detail">First Saturday monthly · County Transfer Station</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Public Safety Awareness Week</span>
+        <span class="event-detail">Meet EMS, Fire, and Sheriff's Departments</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Volunteer Recognition Event</span>
+        <span class="event-detail">Honoring community volunteers and organizations</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Veterans Appreciation Ceremony</span>
+        <span class="event-detail">November 11, 2025 · Courthouse Lawn</span>
+      </div>
+    </div>
+  </details>
 
-    <!-- Economic & Development -->
-    <details>
-      <summary>Economic & Development</summary>
-      <section>
-        <ul>
-          <li><strong>Small Business Roundtable</strong> – Quarterly networking for local entrepreneurs.</li>
-          <li><strong>Grant & Funding Workshop</strong> – Learn about available county and state assistance programs.</li>
-          <li><strong>Job & Resource Fair</strong> – June 20, 2025, McCreary Central High School Gym.</li>
-          <li><strong>Infrastructure Project Updates</strong> – Open house discussions for upcoming county improvements.</li>
-        </ul>
-      </section>
-    </details>
+  <details>
+    <summary>Recreation &amp; Tourism <span class="arrow">▾</span></summary>
+    <div class="section-body">
+      <div class="event-item">
+        <span class="event-title">McCreary County Fair</span>
+        <span class="event-detail">August 10–14, 2025 · McCreary County Fairgrounds</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Historical Walking Tour</span>
+        <span class="event-detail">September 5, 2025 · 10:00 AM · Downtown Whitley City</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Fall Heritage Festival</span>
+        <span class="event-detail">October 12, 2025 · Sandhill Park</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Christmas Parade &amp; Tree Lighting</span>
+        <span class="event-detail">December 6, 2025 · Courthouse Square</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Concert in the Park Series</span>
+        <span class="event-detail">Summer evenings · Local artists and food vendors</span>
+      </div>
+    </div>
+  </details>
 
-    <!-- Education & Transparency -->
-    <details>
-      <summary>Education & Transparency</summary>
-      <section>
-        <ul>
-          <li><strong>Civic Education Series</strong> – "How County Government Works" sessions for the public.</li>
-          <li><strong>Open Data Portal Launch</strong> – Learn how to access county data and resources.</li>
-          <li><strong>School Partnership Events</strong> – Student shadow programs and government day activities.</li>
-        </ul>
-      </section>
-    </details>
+  <details>
+    <summary>Economic &amp; Development <span class="arrow">▾</span></summary>
+    <div class="section-body">
+      <div class="event-item">
+        <span class="event-title">Small Business Roundtable</span>
+        <span class="event-detail">Quarterly networking for local entrepreneurs</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Grant &amp; Funding Workshop</span>
+        <span class="event-detail">Learn about available county and state assistance programs</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Job &amp; Resource Fair</span>
+        <span class="event-detail">June 20, 2025 · McCreary Central High School Gym</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Infrastructure Project Updates</span>
+        <span class="event-detail">Open house discussions for upcoming county improvements</span>
+      </div>
+    </div>
+  </details>
 
-  </main>
+  <details>
+    <summary>Education &amp; Transparency <span class="arrow">▾</span></summary>
+    <div class="section-body">
+      <div class="event-item">
+        <span class="event-title">Civic Education Series</span>
+        <span class="event-detail">"How County Government Works" sessions for the public</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">Open Data Portal Launch</span>
+        <span class="event-detail">Learn how to access county data and resources</span>
+      </div>
+      <div class="event-item">
+        <span class="event-title">School Partnership Events</span>
+        <span class="event-detail">Student shadow programs and government day activities</span>
+      </div>
+    </div>
+  </details>
 
-  <footer>
-    <p>&copy; 2025 McCreary County Fiscal Court</p>
-    <p>Whitley City, KY | Phone: 606-376-2413</p>
-  </footer>
+</main>
+
+<footer>
+  <p>&copy; 2025 McCreary County Fiscal Court</p>
+  <p>Whitley City, KY · Phone: 606-376-2413</p>
+</footer>
 
 </body>
 </html>
