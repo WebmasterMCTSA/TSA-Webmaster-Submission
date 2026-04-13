@@ -1,242 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Court Records - McCreary County Fiscal Court</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Court Records – McCreary County Fiscal Court</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI",Arial,sans-serif;background:#f4f6fa;color:#333;line-height:1.6;font-size:16px}
+a{text-decoration:none;color:inherit}
 
-  <link rel="stylesheet" href="css/main.css">
+header{background:#132040;color:#fff;padding:.75rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.6rem}
+.logo-row{display:flex;align-items:center;gap:.6rem}
+.logo-row img{height:56px;width:auto}
+.logo-row h1{font-size:1rem;font-weight:600;color:#fff;line-height:1.3}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:.3rem;width:100%}
+nav a{color:#dde4f0;font-size:.82rem;font-weight:500;padding:.4rem .6rem;border-radius:4px;white-space:nowrap;transition:background .2s}
+nav a:hover,nav a.active{background:#1e305f;color:#fff}
 
-  <style>
-    body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f7fa;
-      color: #333;
-      line-height: 1.6;
-    }
+.hero{background:#1a2d4f url('https://images.unsplash.com/photo-1590940292821-657d0e2b0f41?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;min-height:30vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;color:#fff;position:relative;padding:2rem 1rem}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(10,18,40,.55)}
+.hero h2,.hero p{position:relative;z-index:1}
+.hero h2{font-size:1.5rem;font-weight:700;text-shadow:1px 2px 4px rgba(0,0,0,.5);margin-bottom:.4rem}
+.hero p{font-size:.95rem;max-width:600px;opacity:.92;text-shadow:1px 1px 3px rgba(0,0,0,.4)}
 
-    a { text-decoration: none; color: inherit; }
+main{max-width:720px;margin:1.25rem auto;padding:0 .75rem;display:flex;flex-direction:column;gap:.75rem}
 
-    /* ── HEADER ── */
-    header {
-      background: #132040;
-      color: #fff;
-      display: flex;
-      flex-direction: column;         /* stack on mobile */
-      align-items: center;
-      gap: 0.75rem;
-      padding: 1rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
+.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.08)}
+.card-header{background:#132040;color:#fff;padding:.9rem 1.1rem;font-size:1rem;font-weight:600}
+.card-body{padding:1rem 1.1rem}
+.card-body p{font-size:.95rem;color:#444;margin-bottom:.75rem}
+.card-body p:last-of-type{margin-bottom:0}
 
-    .logo-title { display: flex; align-items: center; gap: 0.75rem; }
-    .logo-title a { display: flex; align-items: center; }
-    .logo-title img { height: 80px; width: auto; }
-    .logo-title h1 { margin: 0; font-size: 1.1rem; font-weight: 600; color: #fff; line-height: 1.3; }
+h3{color:#132040;font-size:.95rem;font-weight:600;margin:1rem 0 .5rem}
+.card-body h3:first-child{margin-top:0}
 
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.4rem;
-      width: 100%;
-    }
+ul{list-style:none;padding:0;margin:0 0 .75rem}
+li{padding:.65rem 0;border-bottom:.5px solid #eef0f5;font-size:.92rem;color:#444;padding-left:.75rem;position:relative}
+li::before{content:"›";position:absolute;left:0;color:#132040;font-weight:700}
+li:last-child{border-bottom:none}
 
-    nav a {
-      color: #fff;
-      font-weight: 500;
-      font-size: 0.85rem;
-      padding: 0.35rem 0.65rem;
-      border-radius: 4px;
-      transition: background 0.3s;
-      white-space: nowrap;
-    }
+.contact-row{display:flex;flex-direction:column;gap:.5rem;margin:.5rem 0 1rem}
+.contact-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.92rem;color:#444}
+.contact-label{font-weight:600;color:#132040;min-width:60px;font-size:.85rem}
 
-    nav a:hover, nav a.active { background: #1e305f; }
+.btn{display:block;text-align:center;background:#132040;color:#fff;padding:.9rem 1rem;border-radius:6px;font-size:.95rem;font-weight:600;transition:background .2s;touch-action:manipulation;margin-top:.75rem}
+.btn:hover{background:#1e305f}
 
-    /* ── HERO ── */
-    .hero {
-      background: url('https://images.unsplash.com/photo-1590940292821-657d0e2b0f41?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      color: #000000;
-      text-align: center;
-      padding: 3rem 1.25rem;
-    }
+footer{background:#132040;color:#dde4f0;text-align:center;padding:1.5rem 1rem;margin-top:1.5rem}
+footer p{font-size:.88rem;margin:.3rem 0}
 
-    .hero h2 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-    }
-
-    .hero p {
-      font-size: 1rem;
-      max-width: 700px;
-      margin: auto;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-
-    /* ── MAIN ── */
-    main {
-      max-width: 1100px;
-      margin: 1.25rem auto;
-      padding: 0 1rem;
-    }
-
-    section {
-      background: #fff;
-      padding: 1.5rem 1.25rem;
-      margin-bottom: 1.25rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    h2, h3 {
-      color: #132040;
-      margin-top: 0;
-    }
-
-    p { margin-bottom: 1rem; }
-
-    ul { list-style: none; padding: 0; }
-
-    ul li {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid #eee;
-      font-size: 0.95rem;
-    }
-
-    ul li:last-child { border-bottom: none; }
-
-    /* ── BUTTON ── */
-    a.button-link {
-      display: block;                 /* full-width on mobile — easy to tap */
-      text-align: center;
-      background-color: #132040;
-      color: #fff;
-      padding: 0.85rem 1rem;
-      border-radius: 4px;
-      transition: background 0.3s;
-      touch-action: manipulation;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-    }
-
-    a.button-link:hover { background-color: #1e305f; }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #132040;
-      color: #fff;
-      text-align: center;
-      padding: 1.5rem 1rem;
-      margin-top: 1.5rem;
-    }
-
-    footer p { margin: 0.5rem 0; font-size: 0.9rem; }
-
-    /* ── TABLET ── */
-    @media (min-width: 600px) {
-      header {
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 1.5rem;
-        height: auto;
-        min-height: 100px;
-      }
-
-      .logo-title img { height: 80px; }
-      .logo-title h1 { font-size: 1.3rem; }
-
-      nav { width: auto; }
-      nav a { font-size: 0.9rem; }
-
-      .hero { padding: 4rem 2rem; }
-      .hero h2 { font-size: 2.4rem; }
-      .hero p { font-size: 1.1rem; }
-
-      a.button-link { display: inline-block; width: auto; }
-    }
-
-    /* ── DESKTOP ── */
-    @media (min-width: 900px) {
-      header { height: 212px; padding: 0 2rem; }
-
-      .logo-title img { height: 180px; }
-      .logo-title h1 { font-size: 1.6rem; }
-
-      nav a { font-size: 1rem; padding: 0.4rem 0.8rem; }
-
-      .hero { padding: 5rem 2rem; }
-      .hero h2 { font-size: 2.8rem; }
-      .hero p { font-size: 1.2rem; }
-
-      main { padding: 0 2rem; margin: 2rem auto; }
-
-      section { padding: 2rem; }
-
-      footer { padding: 2rem 1rem; }
-      footer p { font-size: 1rem; }
-    }
-  </style>
+@media(min-width:600px){
+  header{flex-direction:row;justify-content:space-between;padding:.75rem 1.5rem}
+  .logo-row img{height:72px}
+  .logo-row h1{font-size:1.15rem}
+  nav{width:auto;justify-content:flex-end}
+  .hero{min-height:38vh}
+  .hero h2{font-size:2rem}
+  .hero p{font-size:1.05rem}
+  .card-header{font-size:1.05rem;padding:1rem 1.25rem}
+  .card-body{padding:1.25rem}
+  .btn{display:inline-block;width:auto;padding:.9rem 2rem}
+}
+@media(min-width:900px){
+  header{padding:1rem 2rem}
+  .logo-row img{height:88px}
+  .logo-row h1{font-size:1.35rem}
+  nav a{font-size:.9rem}
+  .hero{min-height:48vh}
+  main{padding:0 1.25rem;margin:1.75rem auto}
+}
+</style>
 </head>
 <body>
 
-  <!-- Top header -->
-  <header>
-    <div class="logo-title">
-      <a href="index.html">
-        <img src="images/McCrearyCountyFiscalCourt.png" alt="Fiscal Court Logo">
-        <h1>McCreary County Fiscal Court</h1>
-      </a>
-    </div>
-    <!-- Main navigation -->
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="about.html">About Us</a>
-      <a href="events.html">Events</a>
-      <a href="records.html" class="active">Records</a>
-      <a href="tourism.html">Tourism</a>
-      <a href="resources.html">Resources</a>
-      <a href="contact.html">Contact</a>
-      <a href="tsaworklog.html">Reference Page</a>
-    </nav>
-  </header>
-
-  <!-- Hero section -->
-  <div class="hero">
-    <h2>Court Records Access</h2>
-    <p>Learn how to access, request, and review public court records in McCreary County.</p>
+<header>
+  <div class="logo-row">
+    <a href="index.html">
+      <img src="images/McCrearyCountyFiscalCourt.png" alt="McCreary County Fiscal Court logo"/>
+    </a>
+    <h1>McCreary County Fiscal Court</h1>
   </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About Us</a>
+    <a href="events.html">Events</a>
+    <a href="records.html" class="active">Records</a>
+    <a href="tourism.html">Tourism</a>
+    <a href="resources.html">Resources</a>
+    <a href="contact.html">Contact</a>
+    <a href="tsaworklog.html">Reference</a>
+  </nav>
+</header>
 
-  <!-- Main content -->
-  <main>
-    <section>
-      <h2>Accessing Court Records</h2>
+<div class="hero">
+  <h2>Court Records Access</h2>
+  <p>Learn how to access, request, and review public court records in McCreary County.</p>
+</div>
+
+<main>
+
+  <div class="card">
+    <div class="card-header">Accessing Court Records</div>
+    <div class="card-body">
       <p>The McCreary County Fiscal Court maintains records in accordance with state law. Records may include meeting minutes, ordinances, resolutions, and other official documents.</p>
 
-      <h3>Requesting Records</h3>
+      <h3>How to Request Records</h3>
       <ul>
-        <li>Submit a written request via mail or email to the Fiscal Court office.</li>
-        <li>Provide the specific record name, date, or topic to ensure accurate processing.</li>
-        <li>Some records may require a nominal copying fee.</li>
+        <li>Submit a written request via mail or email to the Fiscal Court office</li>
+        <li>Provide the specific record name, date, or topic for accurate processing</li>
+        <li>Some records may require a nominal copying fee</li>
       </ul>
 
       <h3>Office Contact</h3>
-      <p>Address: 1 North Main Street, Whitley City, KY 42653</p>
-      <p>Phone: 606-376-2413</p>
-      <p>Email: <a href="mailto:records@mccrearycounty.com">records@mccrearycounty.com</a></p>
-      <p><a class="button-link" href="contact.html">Submit a Request</a></p>
-    </section>
-  </main>
+      <div class="contact-row">
+        <div class="contact-item">
+          <span class="contact-label">Address</span>
+          <span>1 North Main Street, Whitley City, KY 42653</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Phone</span>
+          <a href="tel:6063762413" style="color:#132040;font-weight:500">606-376-2413</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-label">Email</span>
+          <a href="mailto:records@mccrearycounty.com" style="color:#132040;font-weight:500">records@mccrearycounty.com</a>
+        </div>
+      </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 McCreary County Fiscal Court</p>
-    <p>Whitley City, KY | Phone: 606-376-2413</p>
-  </footer>
+      <a class="btn" href="contact.html">Submit a Request</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2025 McCreary County Fiscal Court</p>
+  <p>Whitley City, KY · Phone: 606-376-2413</p>
+</footer>
 
 </body>
 </html>
