@@ -58,6 +58,10 @@ header.scrolled{
 .desk-nav{display:none;align-items:center;gap:0.1rem}
 .desk-nav a{color:rgba(255,255,255,0.78);font-size:0.79rem;font-weight:500;padding:0.45rem 0.65rem;border-radius:var(--radius-sm);transition:color 0.2s,background 0.2s;letter-spacing:0.02em}
 .desk-nav a:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.header-right{display:flex;align-items:center;gap:0.5rem}
+.fb-header-btn{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.2);font-size:0.74rem;font-weight:500;padding:0.38rem 0.75rem;border-radius:30px;transition:background 0.2s;white-space:nowrap}
+.fb-header-btn:hover{background:rgba(59,89,152,0.5)}
+.fb-header-btn i{font-size:0.82rem;color:#8ab4f8}
 .burger{padding:0.5rem;display:flex;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent}
 .burger span{display:block;width:24px;height:1.5px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
 .burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
@@ -84,6 +88,28 @@ header.scrolled{
 }
 .drawer a:hover{color:var(--gold-light)}
 .drawer a span{font-size:0.7rem;color:var(--moss);font-family:var(--ff-body);font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
+.drawer-fb{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)!important}
+.drawer-fb i{font-size:1rem;color:#8ab4f8;margin-right:0.5rem}
+
+/* BURN BAN BANNER */
+#burn-ban-bar{
+  background:var(--forest);
+  padding:0.6rem 1.25rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:0.65rem;
+  flex-wrap:wrap;
+  font-size:0.8rem;
+  min-height:42px;
+}
+#burn-ban-bar .bb-label{color:var(--gold-light);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:0.7rem;white-space:nowrap}
+#burn-ban-bar .bb-status{font-weight:500;color:#fff;display:flex;align-items:center;gap:0.4rem}
+#burn-ban-bar .bb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+#burn-ban-bar .bb-dot.active{background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.7)}
+#burn-ban-bar .bb-dot.inactive{background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,0.6)}
+#burn-ban-bar .bb-dot.loading{background:var(--gold);animation:pulse 1.2s ease-in-out infinite}
+#burn-ban-bar .bb-source{font-size:0.68rem;color:rgba(255,255,255,0.4);margin-left:auto}
+#burn-ban-bar .bb-source a{color:rgba(255,255,255,0.4);text-decoration:underline}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
 
 /* HERO */
 .hero{
@@ -231,6 +257,18 @@ header.scrolled{
 .frow button:hover{background:var(--forest-mid)}
 .frow button:active{transform:scale(0.97)}
 
+/* SOCIAL / FACEBOOK SECTION */
+#social{background:var(--parchment)}
+.social-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border-radius:var(--radius-lg);padding:2.2rem 1.5rem;border:1px solid rgba(0,0,0,0.07);max-width:520px;margin:0 auto}
+.fb-icon-wrap{width:62px;height:62px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.fb-icon-wrap i{font-size:1.75rem;color:#fff}
+.social-card h3{font-family:var(--ff-display);font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem}
+.social-card p{font-size:0.91rem;color:#555;line-height:1.75;margin-bottom:1.5rem;max-width:380px}
+.btn-facebook{display:inline-flex;align-items:center;gap:0.55rem;background:#1877f2;color:#fff;font-size:0.88rem;font-weight:500;padding:0.78rem 1.6rem;border-radius:30px;transition:background 0.2s,transform 0.15s}
+.btn-facebook:hover{background:#1464d1}
+.btn-facebook:active{transform:scale(0.97)}
+.btn-facebook i{font-size:1rem}
+
 /* FOOTER */
 footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 .foot-in{max-width:1200px;margin:0 auto}
@@ -241,6 +279,9 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 .fc h4{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--gold-light);margin-bottom:0.6rem}
 .fc p,.fc a{display:block;font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:0.28rem;transition:color 0.2s;line-height:1.5}
 .fc a:hover{color:rgba(255,255,255,0.85)}
+.foot-social{display:flex;gap:0.6rem;margin-top:0.5rem}
+.foot-social a{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.55);font-size:0.82rem;transition:background 0.2s,color 0.2s}
+.foot-social a:hover{background:#1877f2;color:#fff}
 .foot-btm{text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07)}
 .foot-btm p{font-size:0.73rem;color:rgba(255,255,255,0.28)}
 
@@ -271,6 +312,10 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   .attr-grid{grid-template-columns:repeat(3,1fr)}
   .contact-wrap{grid-template-columns:1fr 1.35fr;align-items:start}
   .foot-cols{grid-template-columns:repeat(3,1fr)}
+  .fb-header-btn{display:flex}
+}
+@media(max-width:767px){
+  .fb-header-btn{display:none}
 }
 @media(min-width:1100px){
   .officials-grid{grid-template-columns:repeat(4,1fr)}
@@ -301,9 +346,14 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <a href="#resources">Resources</a>
     <a href="#contact">Contact</a>
   </nav>
-  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="header-right">
+    <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" class="fb-header-btn" aria-label="Follow us on Facebook">
+      <i class="fa-brands fa-facebook-f"></i> Follow Us
+    </a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </header>
 
 <!-- DRAWER -->
@@ -315,7 +365,18 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <a href="#tourism"><span>05</span>Tourism</a>
   <a href="#resources"><span>06</span>Resources</a>
   <a href="#contact"><span>07</span>Contact</a>
+  <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" class="drawer-fb"><span>FB</span><i class="fa-brands fa-facebook-f"></i>Facebook</a>
 </nav>
+
+<!-- BURN BAN BANNER -->
+<div id="burn-ban-bar">
+  <span class="bb-label"><i class="fa-solid fa-fire" style="margin-right:0.35rem;color:#ef4444"></i>McCreary County Burn Ban</span>
+  <span class="bb-status" id="bbStatus">
+    <span class="bb-dot loading" id="bbDot"></span>
+    <span id="bbText">Checking status…</span>
+  </span>
+  <span class="bb-source"><a href="https://eec.ky.gov/Natural-Resources/Forestry/wildland-fire-management/pages/county-burn-bans.aspx" target="_blank">KY EEC Source <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem"></i></a></span>
+</div>
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -562,6 +623,24 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 </div>
 </div>
 
+<!-- SOCIAL / FACEBOOK -->
+<div id="social">
+<div class="outer">
+  <div class="section-label reveal">Stay Connected</div>
+  <h2 class="section-title reveal" style="text-align:center">Follow Us on Facebook</h2>
+  <div class="social-card reveal">
+    <div class="fb-icon-wrap">
+      <i class="fa-brands fa-facebook-f"></i>
+    </div>
+    <h3>McCreary County Fiscal Court</h3>
+    <p>Stay up to date with county announcements, meeting notices, community news, and important updates — follow our official Facebook page.</p>
+    <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" rel="noopener noreferrer" class="btn-facebook">
+      <i class="fa-brands fa-facebook-f"></i> Follow on Facebook
+    </a>
+  </div>
+</div>
+</div>
+
 <!-- CONTACT -->
 <div id="contact">
 <div class="outer">
@@ -602,6 +681,9 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <p>Whitley City, KY 42653</p>
         <a href="tel:6063762413">606-376-2413</a>
         <a href="mailto:info@mccrearycounty.com">info@mccrearycounty.com</a>
+        <div class="foot-social">
+          <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
       </div>
       <div class="fc">
         <h4>Navigate</h4>
@@ -610,6 +692,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <a href="#events">Events</a>
         <a href="#records-section">Records</a>
         <a href="#resources">Resources</a>
+        <a href="#social">Follow Us</a>
         <a href="#contact">Contact</a>
       </div>
       <div class="fc">
@@ -618,6 +701,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <a href="http://www.mccrearycountyclerk.com" target="_blank">County Clerk</a>
         <a href="http://www.mccrearysheriff.com" target="_blank">Sheriff's Office</a>
         <a href="https://mccrearylibrary.org/" target="_blank">Public Library</a>
+        <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank">Facebook Page</a>
       </div>
     </div>
     <div class="foot-btm">
@@ -708,6 +792,89 @@ const co = new IntersectionObserver(entries => {
   entries.forEach((e,idx) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), idx*48); co.unobserve(e.target); } });
 }, {threshold:0.06, rootMargin:'0px 0px -24px 0px'});
 document.querySelectorAll('.ocard').forEach(c => co.observe(c));
+
+// =========================================================
+// BURN BAN STATUS — via Anthropic API with web_search tool
+// Uses Claude to fetch and parse the KY EEC burn ban page
+// =========================================================
+(async function fetchBurnBan() {
+  const dot = document.getElementById('bbDot');
+  const txt = document.getElementById('bbText');
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        system: `You are a data extraction assistant. Your ONLY job is to check whether McCreary County, Kentucky currently has an active burn ban according to the Kentucky Energy and Environment Cabinet (EEC) website. 
+        
+Use web_search to find the current burn ban status for McCreary County Kentucky from eec.ky.gov or other official sources. 
+
+After searching, respond with ONLY a JSON object in this exact format, nothing else:
+{"active": true, "details": "short reason or date if known"}
+OR
+{"active": false, "details": "no active burn ban"}
+OR
+{"active": null, "details": "unable to determine"}
+
+No markdown, no explanation, just the raw JSON object.`,
+        messages: [{ role: 'user', content: 'Is there currently an active burn ban for McCreary County Kentucky? Check the Kentucky EEC website.' }]
+      })
+    });
+
+    if (!response.ok) throw new Error('API error ' + response.status);
+    const data = await response.json();
+
+    // Find the final text block (after tool use)
+    let resultText = '';
+    for (const block of data.content) {
+      if (block.type === 'text') resultText = block.text;
+    }
+
+    // Parse JSON from response
+    const clean = resultText.replace(/```json|```/g, '').trim();
+    let result;
+    try { result = JSON.parse(clean); } catch(e) {
+      // Fallback: look for keywords
+      const lower = resultText.toLowerCase();
+      if (lower.includes('"active": true') || lower.includes('"active":true')) {
+        result = { active: true, details: 'Active burn ban in effect' };
+      } else if (lower.includes('"active": false') || lower.includes('"active":false')) {
+        result = { active: false, details: 'No active burn ban' };
+      } else {
+        result = { active: null, details: 'Status unavailable — check KY EEC' };
+      }
+    }
+
+    dot.classList.remove('loading');
+
+    if (result.active === true) {
+      dot.classList.add('active');
+      txt.textContent = 'BURN BAN IN EFFECT' + (result.details && result.details !== 'Active burn ban in effect' ? ' — ' + result.details : '');
+      txt.style.color = '#fca5a5';
+      txt.style.fontWeight = '600';
+    } else if (result.active === false) {
+      dot.classList.add('inactive');
+      txt.textContent = 'No active burn ban';
+      txt.style.color = '#86efac';
+    } else {
+      dot.style.background = '#e0b96a';
+      txt.textContent = 'Status unavailable — visit KY EEC';
+      txt.style.color = 'rgba(255,255,255,0.7)';
+    }
+
+  } catch(err) {
+    const dot = document.getElementById('bbDot');
+    const txt = document.getElementById('bbText');
+    dot.classList.remove('loading');
+    dot.style.background = '#e0b96a';
+    txt.textContent = 'Status unavailable — visit KY EEC';
+    txt.style.color = 'rgba(255,255,255,0.7)';
+  }
+})();
 </script>
 </body>
 </html>
