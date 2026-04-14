@@ -4,1123 +4,710 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>McCreary County Fiscal Court</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; }
- 
-  :root {
-    --navy: #132040;
-    --navy-light: #1e305f;
-    --gold: #b47f2a;
-    --gold-light: #d4a040;
-    --header-h: 64px;
-    --radius: 12px;
-  }
- 
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0; padding: 0;
-    font-family: "Georgia", "Times New Roman", serif;
-    background: #f4f7fb;
-    color: #333;
-    line-height: 1.7;
-    overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
-  }
-  h1,h2,h3,h4 { font-family: "Georgia", serif; color: var(--navy); margin: 0; }
-  a { text-decoration: none; color: inherit; }
-  ul { list-style: none; padding: 0; margin: 0; }
-  img { max-width: 100%; }
- 
-  /* ── HEADER ── */
-  header {
-    background: var(--navy);
-    height: var(--header-h);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
-  }
-  .logo-title { display: flex; align-items: center; gap: 0.6rem; overflow: hidden; }
-  .logo-title img { height: 46px; width: auto; flex-shrink: 0; }
-  .logo-title span {
-    font-family: "Georgia", serif;
-    font-size: 0.9rem;
-    color: #fff;
-    font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    line-height: 1.25;
-  }
- 
-  /* Hamburger */
-  .menu-toggle {
-    background: none; border: none; cursor: pointer;
-    padding: 0.5rem; display: flex; flex-direction: column;
-    gap: 5px; flex-shrink: 0;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .menu-toggle span {
-    display: block; width: 26px; height: 2px;
-    background: #fff; border-radius: 2px;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .menu-toggle.open span:nth-child(2) { opacity: 0; }
-  .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
- 
-  /* Mobile drawer */
-  .nav-drawer {
-    position: fixed;
-    top: var(--header-h); left: 0; right: 0;
-    background: var(--navy);
-    transform: translateY(-110%);
-    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
-    z-index: 999;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-    border-bottom: 3px solid var(--gold);
-    max-height: calc(100svh - var(--header-h));
-    overflow-y: auto;
-  }
-  .nav-drawer.open { transform: translateY(0); }
-  .nav-drawer nav { display: flex; flex-direction: column; padding: 0.4rem 0; }
-  .nav-drawer nav a {
-    color: #fff; font-family: "Segoe UI", Arial, sans-serif;
-    font-size: 0.97rem; font-weight: 500;
-    padding: 0.85rem 1.4rem;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-    display: flex; align-items: center; gap: 0.75rem;
-    transition: background 0.2s;
-    min-height: 48px;
-  }
-  .nav-drawer nav a:active, .nav-drawer nav a:hover { background: var(--navy-light); }
-  .nav-drawer nav a i { width: 20px; color: var(--gold-light); font-size: 0.9rem; }
- 
-  .desktop-nav { display: none; }
- 
-  /* ── HERO ── */
-  .hero {
-    position: relative;
-    height: calc(100svh - var(--header-h));
-    min-height: 320px;
-    max-height: 700px;
-    overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .hero-slides { position: absolute; inset: 0; }
-  .hero-slides img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.2s ease;
-  }
-  .hero-slides img.active { opacity: 1; }
-  .hero::after {
-    content: '';
-    position: absolute; inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
-    z-index: 1;
-  }
-  .hero-text {
-    position: relative; z-index: 2;
-    text-align: center; padding: 0 1.5rem; color: #fff;
-  }
-  .hero-text h2 {
-    font-size: clamp(1.7rem, 7vw, 3.4rem);
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.6);
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-  }
-  .hero-text p {
-    font-size: clamp(0.9rem, 3vw, 1.15rem);
-    opacity: 0.92;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
-    max-width: 550px;
-    margin: 0 auto 1.25rem;
-  }
-  .hero-cta {
-    display: inline-block;
-    background: var(--gold);
-    color: #fff;
-    font-family: "Segoe UI", sans-serif;
-    font-weight: 600;
-    font-size: 0.95rem;
-    padding: 0.7rem 1.6rem;
-    border-radius: 30px;
-    letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .hero-cta:active { transform: scale(0.97); background: var(--gold-light); }
-  .hero-dots {
-    position: absolute; bottom: 1.1rem; left: 50%;
-    transform: translateX(-50%); z-index: 3;
-    display: flex; gap: 7px;
-  }
-  .hero-dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,0.45);
-    border: none; cursor: pointer; padding: 0;
-    transition: background 0.3s, transform 0.3s;
-  }
-  .hero-dot.active { background: #fff; transform: scale(1.3); }
- 
-  /* ── SECTION WRAPPERS ── */
-  .page-section {
-    padding: 2rem 1rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .section-card {
-    background: #fff;
-    border-radius: var(--radius);
-    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-  }
-  .section-header {
-    background: var(--navy);
-    color: #fff;
-    padding: 0.85rem 1.25rem;
-    display: flex; align-items: center; gap: 0.6rem;
-  }
-  .section-header h2 {
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  .section-header i { color: var(--gold-light); font-size: 1rem; }
-  .section-body { padding: 1.25rem; }
- 
-  /* ── QUICK FACTS ── */
-  .facts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
-  }
-  .fact-card {
-    background: #f4f7fb;
-    border-radius: 10px;
-    padding: 1rem 0.75rem;
-    text-align: center;
-  }
-  .fact-card i { font-size: 1.5rem; margin-bottom: 0.35rem; display: block; }
-  .fact-card h4 { font-size: 0.85rem; color: var(--navy); margin-bottom: 0.25rem; font-family: "Segoe UI", sans-serif; font-weight: 700; }
-  .fact-card p { font-size: 0.78rem; color: #555; margin: 0; line-height: 1.45; }
-  .fa-landmark { color: #b47f2a; }
-  .fa-users { color: #2a6db4; }
-  .fa-gavel { color: #4e342e; }
-  .fa-mountain-sun { color: #3c8c4e; }
-  .fa-handshake { color: #8c5ab4; }
-  .fa-tree { color: #2e7d32; }
- 
-  /* ── OFFICIALS ── */
-  .officials-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.85rem;
-  }
-  .official-card {
-    background: #f9fbff;
-    border: 1px solid #dfe4ee;
-    border-radius: 10px;
-    padding: 0.85rem 0.6rem;
-    text-align: center;
-    transition: transform 0.2s;
-  }
-  .official-card:active { transform: scale(0.97); }
-  .official-card img {
-    width: 68px; height: 68px;
-    border-radius: 50%; object-fit: cover;
-    margin-bottom: 0.4rem;
-    border: 2px solid #dfe4ee;
-  }
-  .official-card h4 { font-size: 0.82rem; margin: 0.3rem 0 0.2rem; font-family: "Segoe UI", sans-serif; }
-  .official-card .role { font-size: 0.72rem; color: #555; margin-bottom: 0.3rem; font-style: italic; }
-  .official-card .contact { font-size: 0.7rem; color: #444; }
-  .official-card .contact a { color: var(--navy); }
- 
-  /* ── EVENTS ── */
-  details {
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 0.6rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  }
-  summary {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--navy-light);
-    color: #fff;
-    padding: 0.85rem 1rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    font-family: "Segoe UI", sans-serif;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    min-height: 48px;
-  }
-  summary::-webkit-details-marker { display: none; }
-  summary .arrow { font-size: 0.85rem; transition: transform 0.3s; }
-  details[open] summary .arrow { transform: rotate(180deg); }
-  details[open] summary { background: #0f1e3a; }
-  .event-list { background: #fff; }
-  .event-item {
-    padding: 0.8rem 1rem;
-    border-bottom: 0.5px solid #eef0f5;
-    display: flex; flex-direction: column; gap: 0.1rem;
-  }
-  .event-item:last-child { border-bottom: none; }
-  .event-title { font-weight: 600; color: var(--navy); font-size: 0.88rem; font-family: "Segoe UI", sans-serif; }
-  .event-detail { font-size: 0.8rem; color: #666; }
- 
-  /* ── RECORDS ── */
-  .records-list li {
-    padding: 0.65rem 0 0.65rem 1rem;
-    border-bottom: 1px solid #eee;
-    font-size: 0.88rem;
-    color: #444;
-    position: relative;
-    font-family: "Segoe UI", sans-serif;
-  }
-  .records-list li::before { content: "›"; position: absolute; left: 0; color: var(--navy); font-weight: 700; }
-  .records-list li:last-child { border-bottom: none; }
-  .contact-grid { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
-  .contact-row-item { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.88rem; font-family: "Segoe UI", sans-serif; }
-  .contact-row-item .lbl { font-weight: 600; color: var(--navy); min-width: 55px; font-size: 0.82rem; }
-  .btn-navy {
-    display: block; text-align: center;
-    background: var(--navy); color: #fff;
-    padding: 0.8rem 1rem; border-radius: 6px;
-    font-size: 0.9rem; font-weight: 600;
-    font-family: "Segoe UI", sans-serif;
-    margin-top: 0.75rem; transition: background 0.2s;
-    touch-action: manipulation;
-  }
-  .btn-navy:active { background: var(--navy-light); }
- 
-  /* ── TOURISM ── */
-  .tourism-hero {
-    position: relative;
-    height: 220px;
-    overflow: hidden;
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
-  .tourism-hero img {
-    position: absolute; inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1s;
-  }
-  .tourism-hero img.active { opacity: 1; }
-  .tourism-arrows {
-    position: absolute; top: 50%; transform: translateY(-50%);
-    width: 100%; display: flex; justify-content: space-between;
-    padding: 0 0.75rem; z-index: 2;
-  }
-  .t-arrow {
-    background: rgba(0,0,0,0.38); color: #fff;
-    border: none; border-radius: 50%;
-    width: 34px; height: 34px;
-    font-size: 0.9rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .attractions-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.8rem;
-    margin-top: 0.85rem;
-  }
-  .attr-card {
-    border-radius: 8px;
-    overflow: hidden;
-    background: #f4f7fb;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  }
-  .attr-card img { width: 100%; height: 90px; object-fit: cover; display: block; }
-  .attr-card-body { padding: 0.5rem 0.6rem; }
-  .attr-card h4 { font-size: 0.78rem; color: var(--navy); margin-bottom: 0.15rem; font-family: "Segoe UI", sans-serif; }
-  .attr-card p { font-size: 0.7rem; color: #666; margin: 0; }
- 
-  /* ── RESOURCES ── */
-  .resource-group { margin-bottom: 1.25rem; }
-  .resource-group h3 { font-size: 1rem; color: var(--navy); margin-bottom: 0.5rem; font-family: "Segoe UI", sans-serif; border-bottom: 2px solid var(--gold); padding-bottom: 0.3rem; display: inline-block; }
-  .resource-group ul li { padding: 0.5rem 0; border-bottom: 1px solid #eee; font-size: 0.88rem; font-family: "Segoe UI", sans-serif; }
-  .resource-group ul li:last-child { border-bottom: none; }
-  .resource-group ul li a { color: var(--navy); }
-  .resource-group ul li a:hover { text-decoration: underline; }
- 
-  /* ── CONTACT FORM ── */
-  .form-group { display: flex; flex-direction: column; gap: 0.75rem; }
-  .form-group input, .form-group textarea {
-    padding: 0.75rem;
-    border: 1px solid #ccd0d8;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-family: "Segoe UI", sans-serif;
-    width: 100%;
-    background: #f9fbff;
-    transition: border-color 0.2s;
-  }
-  .form-group input:focus, .form-group textarea:focus {
-    outline: none; border-color: var(--navy);
-  }
-  .form-group textarea { resize: vertical; min-height: 110px; }
-  .form-group button {
-    background: var(--navy); color: #fff; border: none;
-    padding: 0.85rem 1.5rem; font-size: 1rem;
-    font-family: "Segoe UI", sans-serif;
-    font-weight: 600; border-radius: 6px;
-    cursor: pointer; transition: background 0.2s;
-    touch-action: manipulation;
-  }
-  .form-group button:active { background: var(--navy-light); }
- 
-  .office-info p { font-size: 0.9rem; margin: 0.35rem 0; color: #444; font-family: "Segoe UI", sans-serif; }
-  .office-info a { color: var(--navy); }
- 
-  /* ── MAP ── */
-  iframe.map { width: 100%; height: 260px; border: 0; border-radius: 8px; margin-top: 0.75rem; }
- 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy);
-    color: #fff;
-    padding: 2rem 1.25rem 1.5rem;
-    margin-top: 2rem;
-  }
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-    max-width: 900px;
-    margin: 0 auto 1.25rem;
-  }
-  .footer-col h3 { color: var(--gold-light); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; font-family: "Segoe UI", sans-serif; margin-bottom: 0.5rem; }
-  .footer-col p, .footer-col a { font-size: 0.82rem; color: rgba(255,255,255,0.8); margin: 0.25rem 0; display: block; font-family: "Segoe UI", sans-serif; }
-  .footer-col a:hover { color: var(--gold-light); }
-  .copyright { text-align: center; font-size: 0.78rem; opacity: 0.5; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.12); font-family: "Segoe UI", sans-serif; }
- 
-  @supports (padding-bottom: env(safe-area-inset-bottom)) {
-    footer { padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); }
-  }
- 
-  /* ── BURN BAN ── */
-  .burn-ban-bar {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 0.88rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    border: 1.5px solid transparent;
-    flex-wrap: wrap;
-  }
-  .burn-ban-bar.ban-active { background: #FCEBEB; border-color: #E24B4A; color: #791F1F; }
-  .burn-ban-bar.ban-none   { background: #EAF3DE; border-color: #639922; color: #3B6D11; }
-  .burn-ban-bar.ban-loading{ background: #FAEEDA; border-color: #BA7517; color: #854F0B; }
-  .burn-ban-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .ban-active .burn-ban-dot { background: #E24B4A; }
-  .ban-none   .burn-ban-dot { background: #639922; }
-  .ban-loading .burn-ban-dot{ background: #BA7517; }
-  .burn-ban-label { flex: 1; }
-  .burn-ban-source { font-size: 0.75rem; font-weight: 400; opacity: 0.8; }
-  .burn-ban-source a { color: inherit; text-decoration: underline; }
- 
-  /* ── FACEBOOK BANNER ── */
-  .fb-banner {
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    background: #f0f4fb;
-    border: 1px solid #cfd9ef;
-    border-radius: 10px;
-    padding: 0.85rem 1rem;
-    text-decoration: none;
-    transition: background 0.2s;
-    margin-top: 1.25rem;
-  }
-  .fb-banner:hover, .fb-banner:active { background: #e2eaf7; }
-  .fb-icon-wrap {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: #1877F2;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-  .fb-icon-wrap i { color: #fff; font-size: 1.1rem; }
-  .fb-banner-text { flex: 1; }
-  .fb-banner-text strong { display: block; font-size: 0.88rem; color: var(--navy); font-family: "Segoe UI", sans-serif; }
-  .fb-banner-text span { font-size: 0.78rem; color: #666; font-family: "Segoe UI", sans-serif; }
-  .fb-banner-arrow { color: #aaa; font-size: 0.9rem; flex-shrink: 0; }
- 
-  /* ── DESKTOP ── */
-  @media (min-width: 768px) {
-    :root { --header-h: 80px; }
-    .logo-title img { height: 60px; }
-    .logo-title span { font-size: 1.15rem; }
-    .menu-toggle { display: none; }
-    .nav-drawer { display: none !important; }
-    .desktop-nav { display: flex; gap: 0.4rem; }
-    .desktop-nav a {
-      color: #fff; font-family: "Segoe UI", sans-serif;
-      font-weight: 500; font-size: 0.88rem;
-      padding: 0.4rem 0.65rem; border-radius: 4px;
-      transition: background 0.2s; white-space: nowrap;
-    }
-    .desktop-nav a:hover { background: var(--navy-light); }
- 
-    .page-section { padding: 2rem 1.5rem; }
-    .section-header h2 { font-size: 1.4rem; }
-    .section-body { padding: 1.5rem; }
-    .facts-grid { grid-template-columns: repeat(3, 1fr); }
-    .officials-grid { grid-template-columns: repeat(3, 1fr); }
-    .official-card img { width: 85px; height: 85px; }
-    .official-card h4 { font-size: 0.9rem; }
-    .official-card .role { font-size: 0.8rem; }
-    .attractions-grid { grid-template-columns: repeat(3, 1fr); }
-    .attr-card img { height: 110px; }
-    .footer-grid { grid-template-columns: repeat(3, 1fr); }
-    iframe.map { height: 350px; }
-    .tourism-hero { height: 320px; }
-    .form-group button { width: auto; }
-  }
- 
-  @media (min-width: 1024px) {
-    :root { --header-h: 96px; }
-    .logo-title img { height: 74px; }
-    .logo-title span { font-size: 1.35rem; }
-    .desktop-nav a { font-size: 0.93rem; padding: 0.4rem 0.8rem; }
-    .officials-grid { grid-template-columns: repeat(4, 1fr); }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0d1b0f;
+  --forest:#1a3a1e;
+  --forest-mid:#2d5c33;
+  --moss:#4a7c52;
+  --sage:#8aaf90;
+  --cream:#f5f0e8;
+  --parchment:#ede8dc;
+  --gold:#c8973a;
+  --gold-light:#e0b96a;
+  --radius-sm:6px;
+  --radius-md:12px;
+  --radius-lg:20px;
+  --header-h:68px;
+  --ff-display:'Playfair Display',Georgia,serif;
+  --ff-body:'DM Sans','Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-body);background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-text-size-adjust:100%}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--cream)}
+::-webkit-scrollbar-thumb{background:var(--moss);border-radius:2px}
+
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--header-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;
+  transition:background 0.4s,box-shadow 0.4s;
+}
+header.scrolled{
+  background:rgba(13,27,15,0.95);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 1px 0 rgba(255,255,255,0.06);
+}
+.logo-wrap{display:flex;align-items:center;gap:0.65rem}
+.logo-wrap img{height:44px;width:auto;flex-shrink:0}
+.logo-text{line-height:1.2}
+.logo-text .l1{font-family:var(--ff-display);font-size:0.78rem;font-weight:700;color:#fff;letter-spacing:0.04em;text-transform:uppercase;display:block}
+.logo-text .l2{font-size:0.64rem;color:var(--gold-light);font-weight:300;letter-spacing:0.1em;text-transform:uppercase;display:block}
+.desk-nav{display:none;align-items:center;gap:0.1rem}
+.desk-nav a{color:rgba(255,255,255,0.78);font-size:0.79rem;font-weight:500;padding:0.45rem 0.65rem;border-radius:var(--radius-sm);transition:color 0.2s,background 0.2s;letter-spacing:0.02em}
+.desk-nav a:hover{color:#fff;background:rgba(255,255,255,0.1)}
+.burger{padding:0.5rem;display:flex;flex-direction:column;gap:5px;-webkit-tap-highlight-color:transparent}
+.burger span{display:block;width:24px;height:1.5px;background:#fff;border-radius:2px;transition:transform 0.3s,opacity 0.3s}
+.burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.drawer{
+  position:fixed;top:var(--header-h);left:0;right:0;bottom:0;
+  background:var(--ink);z-index:999;
+  transform:translateX(100%);
+  transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  display:flex;flex-direction:column;
+  padding:2rem 1.5rem;gap:0.2rem;
+  overflow-y:auto;
+}
+.drawer.open{transform:translateX(0)}
+.drawer a{
+  color:rgba(255,255,255,0.7);
+  font-family:var(--ff-display);
+  font-size:1.55rem;font-weight:400;
+  padding:0.65rem 0;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:color 0.2s;
+}
+.drawer a:hover{color:var(--gold-light)}
+.drawer a span{font-size:0.7rem;color:var(--moss);font-family:var(--ff-body);font-weight:500;letter-spacing:0.12em;text-transform:uppercase}
+
+/* HERO */
+.hero{
+  position:relative;height:100svh;min-height:500px;
+  overflow:hidden;display:flex;align-items:flex-end;
+}
+.hero-slides{position:absolute;inset:0}
+.hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease}
+.hero-slides img.active{opacity:1}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(155deg,rgba(13,27,15,0.08) 0%,rgba(13,27,15,0.3) 45%,rgba(13,27,15,0.78) 100%)}
+.hero-content{position:relative;z-index:2;padding:2rem 1.5rem 3rem;max-width:680px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.68rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:0.75rem}
+.hero-eyebrow::before{content:'';display:block;width:26px;height:1px;background:var(--gold-light)}
+.hero-content h1{font-family:var(--ff-display);font-size:clamp(2.4rem,9vw,5rem);font-weight:900;color:#fff;line-height:1.05;margin-bottom:1rem;letter-spacing:-0.01em}
+.hero-content h1 em{font-style:italic;color:var(--gold-light)}
+.hero-content p{font-size:clamp(0.88rem,2.5vw,1rem);color:rgba(255,255,255,0.8);max-width:430px;margin-bottom:1.75rem;line-height:1.75;font-weight:300}
+.hero-ctas{display:flex;gap:0.75rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:var(--ink);font-size:0.83rem;font-weight:500;letter-spacing:0.04em;padding:0.75rem 1.4rem;border-radius:30px;transition:background 0.2s,transform 0.15s}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-primary:active{transform:scale(0.97)}
+.btn-ghost{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.28);font-size:0.83rem;font-weight:400;letter-spacing:0.04em;padding:0.75rem 1.4rem;border-radius:30px;backdrop-filter:blur(6px);transition:background 0.2s}
+.btn-ghost:hover{background:rgba(255,255,255,0.18)}
+.hero-dots{position:absolute;bottom:1.5rem;right:1.5rem;z-index:3;display:flex;flex-direction:column;gap:5px}
+.h-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.35);border:none;padding:0;transition:background 0.3s,height 0.3s}
+.h-dot.active{background:var(--gold-light);height:18px;border-radius:3px}
+
+/* FACTS STRIP */
+.facts-strip{background:var(--forest);padding:1.75rem 1.25rem;overflow-x:auto;scrollbar-width:none}
+.facts-strip::-webkit-scrollbar{display:none}
+.facts-inner{display:flex;min-width:max-content;max-width:1200px;margin:0 auto}
+.fact-item{flex:0 0 auto;padding:0.65rem 1.4rem;border-right:1px solid rgba(255,255,255,0.1);text-align:center;min-width:130px}
+.fact-item:last-child{border-right:none}
+.fact-num{font-family:var(--ff-display);font-size:1.6rem;color:var(--gold-light);font-weight:700;display:block}
+.fact-lbl{font-size:0.68rem;color:rgba(255,255,255,0.5);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.15rem;display:block}
+
+/* LAYOUT */
+.outer{padding:4rem 1.25rem;max-width:1200px;margin:0 auto}
+.section-label{display:inline-flex;align-items:center;gap:0.5rem;font-size:0.66rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--moss);margin-bottom:0.55rem}
+.section-label::before{content:'';display:block;width:18px;height:1px;background:var(--moss)}
+.section-title{font-family:var(--ff-display);font-size:clamp(1.65rem,4.5vw,2.7rem);font-weight:700;color:var(--forest);line-height:1.1;margin-bottom:0.45rem}
+.section-sub{font-size:0.93rem;color:#555;max-width:540px;line-height:1.75;margin-bottom:2rem}
+
+/* ABOUT */
+#about{background:var(--cream)}
+.about-grid{display:grid;gap:2rem}
+.about-text p{font-size:0.93rem;color:#444;line-height:1.85;margin-bottom:1rem}
+.about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-top:0.5rem}
+.pillar{background:#fff;border-radius:var(--radius-md);padding:1rem;border:1px solid rgba(0,0,0,0.07)}
+.pillar i{font-size:1rem;color:var(--moss);margin-bottom:0.35rem;display:block}
+.pillar h4{font-size:0.79rem;font-weight:500;color:var(--forest);margin-bottom:0.2rem;font-family:var(--ff-body)}
+.pillar p{font-size:0.73rem;color:#666;margin:0;line-height:1.5}
+
+/* OFFICIALS */
+#officials{background:var(--parchment)}
+.officials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem}
+.ocard{background:#fff;border-radius:var(--radius-md);padding:1rem 0.8rem;display:flex;flex-direction:column;align-items:center;text-align:center;border:1px solid rgba(0,0,0,0.06);transition:transform 0.25s,box-shadow 0.25s;opacity:0;transform:translateY(18px)}
+.ocard.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,box-shadow 0.25s}
+.ocard:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,0.1)}
+.ocard-img{width:62px;height:62px;border-radius:50%;object-fit:cover;margin-bottom:0.6rem;border:2px solid var(--parchment);box-shadow:0 2px 8px rgba(0,0,0,0.12)}
+.ocard-name{font-family:var(--ff-display);font-size:0.81rem;font-weight:700;color:var(--forest);margin-bottom:0.18rem;line-height:1.25}
+.ocard-role{font-size:0.67rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--moss);margin-bottom:0.45rem}
+.ocard-contact{font-size:0.69rem;color:#666;line-height:1.65}
+.ocard-contact a{color:var(--forest-mid)}
+
+/* EVENTS */
+#events{background:var(--cream)}
+.acc-item{border-radius:var(--radius-md);overflow:hidden;margin-bottom:0.5rem;background:#fff;border:1px solid rgba(0,0,0,0.07)}
+.acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:0.95rem 1.1rem;background:none;font-family:var(--ff-body);font-size:0.88rem;font-weight:500;color:var(--forest);text-align:left;gap:0.5rem;transition:background 0.2s;min-height:52px}
+.acc-trigger:hover{background:rgba(0,0,0,0.025)}
+.acc-trigger.active{background:var(--forest);color:#fff}
+.acc-icon{width:26px;height:26px;border-radius:50%;background:var(--parchment);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.68rem;color:var(--forest);transition:transform 0.3s,background 0.2s}
+.acc-trigger.active .acc-icon{background:rgba(255,255,255,0.15);color:#fff;transform:rotate(45deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1)}
+.acc-body.open{max-height:900px}
+.acc-event{padding:0.82rem 1.1rem;border-top:1px solid rgba(0,0,0,0.05);display:flex;flex-direction:column;gap:0.18rem}
+.acc-event:first-child{border-top:none}
+.evt-name{font-size:0.84rem;font-weight:500;color:var(--forest)}
+.evt-detail{font-size:0.76rem;color:#777;line-height:1.5}
+
+/* RECORDS */
+#records-section{background:var(--forest);padding:4rem 1.25rem}
+.records-inner{max-width:680px;margin:0 auto}
+.records-inner .section-label{color:var(--sage)}
+.records-inner .section-title{color:var(--cream)}
+.records-desc{color:rgba(255,255,255,0.65);font-size:0.91rem;line-height:1.85;margin-bottom:1.5rem}
+.r-step{display:flex;gap:1rem;padding:0.95rem 0;border-bottom:1px solid rgba(255,255,255,0.08)}
+.r-step:last-child{border-bottom:none}
+.r-num{font-family:var(--ff-display);font-size:1.25rem;font-weight:700;color:var(--gold);flex-shrink:0;width:26px;padding-top:0.1rem}
+.r-text{font-size:0.86rem;color:rgba(255,255,255,0.72);line-height:1.6}
+.rec-contact{display:grid;gap:0.5rem;margin-top:1.5rem;padding:1.2rem;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.1)}
+.rc-row{display:flex;gap:0.7rem;align-items:flex-start;font-size:0.84rem}
+.rc-row .lbl{color:var(--gold-light);font-weight:500;min-width:54px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;padding-top:0.1rem}
+.rc-row span, .rc-row a{color:rgba(255,255,255,0.8)}
+.btn-gold{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:var(--ink);font-weight:500;font-size:0.84rem;letter-spacing:0.03em;padding:0.78rem 1.5rem;border-radius:30px;margin-top:1.25rem;transition:background 0.2s,transform 0.15s}
+.btn-gold:hover{background:var(--gold-light)}
+.btn-gold:active{transform:scale(0.97)}
+
+/* TOURISM */
+#tourism{background:var(--cream)}
+.t-hero-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden;height:250px;margin-bottom:1.4rem}
+.t-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1s}
+.t-slides img.active{opacity:1}
+.t-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,27,15,0.6) 0%,transparent 60%)}
+.t-caption{position:absolute;bottom:0.9rem;left:1.2rem;z-index:2;font-size:0.73rem;color:rgba(255,255,255,0.82);font-weight:300;letter-spacing:0.08em}
+.t-arrows{position:absolute;top:50%;transform:translateY(-50%);width:100%;display:flex;justify-content:space-between;padding:0 0.7rem;z-index:3}
+.t-btn{width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,0.28);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.82rem;transition:background 0.2s;backdrop-filter:blur(4px);-webkit-tap-highlight-color:transparent}
+.t-btn:hover{background:rgba(0,0,0,0.5)}
+.attr-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.72rem}
+.attr-card{border-radius:var(--radius-md);overflow:hidden;position:relative;aspect-ratio:4/3;display:block}
+.attr-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s}
+.attr-card:hover img{transform:scale(1.06)}
+.attr-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,27,15,0.8) 0%,transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:0.72rem}
+.attr-info h4{font-family:var(--ff-display);font-size:0.86rem;color:#fff;margin-bottom:0.12rem}
+.attr-info p{font-size:0.69rem;color:rgba(255,255,255,0.7);margin:0;line-height:1.35}
+.map-embed{border-radius:var(--radius-lg);overflow:hidden;margin-top:1.4rem;height:270px}
+.map-embed iframe{width:100%;height:100%;border:0}
+
+/* RESOURCES */
+#resources{background:var(--parchment)}
+.res-tabs{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.res-tab{font-size:0.77rem;font-weight:500;letter-spacing:0.03em;padding:0.43rem 0.88rem;border-radius:30px;border:1px solid rgba(0,0,0,0.14);color:#555;background:transparent;transition:all 0.2s;-webkit-tap-highlight-color:transparent}
+.res-tab.active{background:var(--forest);color:#fff;border-color:var(--forest)}
+.res-panel{display:none}
+.res-panel.active{display:block}
+.res-list{display:flex;flex-direction:column;gap:0.32rem}
+.res-link{display:flex;align-items:center;justify-content:space-between;background:#fff;border-radius:var(--radius-sm);padding:0.78rem 1rem;font-size:0.86rem;color:var(--forest);border:1px solid rgba(0,0,0,0.06);transition:background 0.2s,transform 0.15s;font-weight:500}
+.res-link:hover{background:var(--cream);transform:translateX(3px)}
+.res-link i{font-size:0.68rem;color:var(--moss);flex-shrink:0}
+
+/* CONTACT */
+#contact{background:var(--cream)}
+.contact-wrap{display:grid;gap:1.75rem}
+.ci-card{display:flex;align-items:center;gap:0.8rem;background:#fff;border-radius:var(--radius-md);padding:0.88rem 1rem;border:1px solid rgba(0,0,0,0.07);margin-bottom:0.6rem}
+.ci-icon{width:36px;height:36px;border-radius:9px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--gold-light);font-size:0.82rem;flex-shrink:0}
+.ci-lbl{font-size:0.68rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--moss);font-weight:500;display:block}
+.ci-val{font-size:0.86rem;color:var(--forest);font-weight:500;display:block}
+.ci-val a{color:var(--forest-mid)}
+.cform{background:#fff;border-radius:var(--radius-lg);padding:1.5rem;border:1px solid rgba(0,0,0,0.07)}
+.cform h3{font-family:var(--ff-display);font-size:1.18rem;color:var(--forest);margin-bottom:1rem}
+.frow{display:flex;flex-direction:column;gap:0.7rem}
+.frow input,.frow textarea{width:100%;padding:0.82rem 0.95rem;border:1px solid rgba(0,0,0,0.14);border-radius:var(--radius-sm);font-family:var(--ff-body);font-size:0.9rem;background:var(--cream);color:var(--ink);transition:border-color 0.2s,background 0.2s;outline:none}
+.frow input:focus,.frow textarea:focus{border-color:var(--moss);background:#fff}
+.frow textarea{resize:vertical;min-height:108px}
+.frow button{display:inline-flex;align-items:center;gap:0.5rem;background:var(--forest);color:#fff;font-family:var(--ff-body);font-weight:500;font-size:0.88rem;padding:0.85rem 1.65rem;border-radius:30px;transition:background 0.2s,transform 0.15s;align-self:flex-start}
+.frow button:hover{background:var(--forest-mid)}
+.frow button:active{transform:scale(0.97)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:3rem 1.25rem 2rem}
+.foot-in{max-width:1200px;margin:0 auto}
+.foot-logo{display:flex;align-items:center;gap:0.7rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.08)}
+.foot-logo img{height:38px;opacity:0.8}
+.foot-logo span{font-family:var(--ff-display);font-size:0.88rem;color:rgba(255,255,255,0.55);line-height:1.35}
+.foot-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin-bottom:2rem}
+.fc h4{font-size:0.66rem;text-transform:uppercase;letter-spacing:0.16em;color:var(--gold-light);margin-bottom:0.6rem}
+.fc p,.fc a{display:block;font-size:0.8rem;color:rgba(255,255,255,0.45);margin-bottom:0.28rem;transition:color 0.2s;line-height:1.5}
+.fc a:hover{color:rgba(255,255,255,0.85)}
+.foot-btm{text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07)}
+.foot-btm p{font-size:0.73rem;color:rgba(255,255,255,0.28)}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.on{opacity:1;transform:translateY(0)}
+.d1{transition-delay:0.1s}
+.d2{transition-delay:0.2s}
+.d3{transition-delay:0.3s}
+
+/* DESKTOP */
+@media(min-width:768px){
+  :root{--header-h:72px}
+  .burger{display:none}
+  .drawer{display:none!important}
+  .desk-nav{display:flex}
+  .logo-text .l1{font-size:0.88rem}
+  .hero-content{padding:2.5rem 3rem 4.5rem}
+  .outer{padding:5rem 2rem}
+  .facts-strip{padding:2rem 2rem}
+  .facts-inner{min-width:auto;justify-content:center}
+  .fact-item{flex:1;min-width:0}
+  #records-section{padding:5rem 2rem}
+  .about-grid{grid-template-columns:1.1fr 1fr;align-items:start}
+  .officials-grid{grid-template-columns:repeat(3,1fr)}
+  .ocard-img{width:76px;height:76px}
+  .t-hero-wrap{height:360px}
+  .attr-grid{grid-template-columns:repeat(3,1fr)}
+  .contact-wrap{grid-template-columns:1fr 1.35fr;align-items:start}
+  .foot-cols{grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:1100px){
+  .officials-grid{grid-template-columns:repeat(4,1fr)}
+  .ocard-img{width:84px;height:84px}
+}
+@supports(padding-bottom:env(safe-area-inset-bottom)){
+  footer{padding-bottom:calc(2rem + env(safe-area-inset-bottom))}
+}
 </style>
 </head>
 <body>
- 
-<!-- ── HEADER ── -->
-<header>
-  <div class="logo-title">
-    <a href="#home" style="display:flex;align-items:center;gap:0.6rem;">
-      <img src="images/McCrearyCountyFiscalCourt.png" alt="Fiscal Court Logo">
-      <span>McCreary County Fiscal Court</span>
-    </a>
-  </div>
-  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="desktop-nav">
-    <a href="#home">Home</a>
+
+<!-- HEADER -->
+<header id="header">
+  <a href="#home" class="logo-wrap">
+    <img src="images/McCrearyCountyFiscalCourt.png" alt="McCreary County Seal">
+    <div class="logo-text">
+      <span class="l1">McCreary County</span>
+      <span class="l2">Fiscal Court</span>
+    </div>
+  </a>
+  <nav class="desk-nav">
     <a href="#about">About</a>
     <a href="#officials">Officials</a>
     <a href="#events">Events</a>
-    <a href="#records">Records</a>
+    <a href="#records-section">Records</a>
     <a href="#tourism">Tourism</a>
     <a href="#resources">Resources</a>
     <a href="#contact">Contact</a>
   </nav>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </header>
- 
-<!-- ── MOBILE DRAWER ── -->
-<div class="nav-drawer" id="navDrawer" aria-hidden="true">
-  <nav>
-    <a href="#home"><i class="fa-solid fa-house"></i> Home</a>
-    <a href="#about"><i class="fa-solid fa-circle-info"></i> About Us</a>
-    <a href="#officials"><i class="fa-solid fa-people-group"></i> Officials</a>
-    <a href="#events"><i class="fa-solid fa-calendar-days"></i> Events</a>
-    <a href="#records"><i class="fa-solid fa-folder-open"></i> Records</a>
-    <a href="#tourism"><i class="fa-solid fa-map-location-dot"></i> Tourism</a>
-    <a href="#resources"><i class="fa-solid fa-book"></i> Resources</a>
-    <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
-  </nav>
-</div>
- 
-<!-- ── HERO ── -->
+
+<!-- DRAWER -->
+<nav class="drawer" id="drawer" aria-hidden="true">
+  <a href="#about"><span>01</span>About</a>
+  <a href="#officials"><span>02</span>Officials</a>
+  <a href="#events"><span>03</span>Events</a>
+  <a href="#records-section"><span>04</span>Records</a>
+  <a href="#tourism"><span>05</span>Tourism</a>
+  <a href="#resources"><span>06</span>Resources</a>
+  <a href="#contact"><span>07</span>Contact</a>
+</nav>
+
+<!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-slides" id="heroSlides">
     <img src="images/Jumps.jpg" class="active" alt="Devils Jumps">
-    <img src="images/YOL-Web.jpg" alt="Year of the Land">
+    <img src="images/CFalls-Web.jpg" alt="Cumberland Falls">
     <img src="images/NatArch-Web.jpg" alt="Natural Arch">
     <img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock">
-    <img src="images/CFalls-Web.jpg" alt="Cumberland Falls">
+    <img src="images/YOL-Web.jpg" alt="Year of the Land">
   </div>
-  <div class="hero-text">
-    <h2>Welcome to McCreary County</h2>
-    <p>Kentucky's youngest county — rich in nature, heritage, and community.</p>
-    <a href="#about" class="hero-cta">Explore Our County</a>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">McCreary County, Kentucky</div>
+    <h1>Where Nature<br>Meets <em>Community</em></h1>
+    <p>Kentucky's youngest county — home to the Daniel Boone National Forest, Big South Fork, and a proud tradition of open, responsive government.</p>
+    <div class="hero-ctas">
+      <a href="#tourism" class="btn-primary"><i class="fa-solid fa-map-location-dot"></i> Explore</a>
+      <a href="#contact" class="btn-ghost">Contact Us</a>
+    </div>
   </div>
   <div class="hero-dots" id="heroDots"></div>
 </section>
- 
-<!-- ── MAIN ── -->
-<div class="page-section">
- 
-  <!-- ABOUT -->
-  <div class="section-card" id="about">
-    <div class="section-header">
-      <i class="fa-solid fa-circle-info"></i>
-      <h2>About Us</h2>
+
+<!-- FACTS -->
+<div class="facts-strip">
+  <div class="facts-inner">
+    <div class="fact-item"><span class="fact-num">1912</span><span class="fact-lbl">Year Founded</span></div>
+    <div class="fact-item"><span class="fact-num">16,887</span><span class="fact-lbl">Residents</span></div>
+    <div class="fact-item"><span class="fact-num">4</span><span class="fact-lbl">Districts</span></div>
+    <div class="fact-item"><span class="fact-num">7+</span><span class="fact-lbl">Landmarks</span></div>
+    <div class="fact-item"><span class="fact-num">KY</span><span class="fact-lbl">Youngest County</span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+<div class="outer">
+  <div class="section-label reveal">Our County</div>
+  <h2 class="section-title reveal">Serving McCreary County<br>with Pride</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Nestled between the Daniel Boone National Forest and the Big South Fork National River and Recreation Area, McCreary County is a place of extraordinary natural beauty, deep-rooted Appalachian heritage, and close-knit community spirit.</p>
+      <p>Our Fiscal Court meets the second Thursday of every month to set policy, approve budgets, and ensure every resident has access to the services they need — transparently and accountably.</p>
+      <a href="#contact" class="btn-primary" style="display:inline-flex;margin-top:0.75rem"><i class="fa-solid fa-paper-plane"></i> Get in Touch</a>
     </div>
-    <div class="section-body">
-      <p style="font-size:0.95rem;color:#555;margin-bottom:1rem;">Nestled between the Daniel Boone National Forest and the Big South Fork NRRA, McCreary County is rich in natural beauty, outdoor adventure, and cultural heritage. Our elected officials work collaboratively to meet the needs of residents and provide effective governance.</p>
-      <ul style="font-family:'Segoe UI',sans-serif;">
-        <li style="padding:0.5rem 0;border-bottom:1px solid #eee;font-size:0.88rem;"><i class="fa-solid fa-gavel" style="color:var(--gold);margin-right:0.5rem;"></i> Fiscal Court meets the second Thursday of every month to set policies, approve budgets, and oversee county claims.</li>
-        <li style="padding:0.5rem 0;border-bottom:1px solid #eee;font-size:0.88rem;"><i class="fa-solid fa-handshake-angle" style="color:var(--gold);margin-right:0.5rem;"></i> Officials collaborate to maintain transparency and community engagement.</li>
-        <li style="padding:0.5rem 0;border-bottom:1px solid #eee;font-size:0.88rem;"><i class="fa-solid fa-balance-scale" style="color:var(--gold);margin-right:0.5rem;"></i> Responsible budgeting ensures essential public services are fully supported.</li>
-        <li style="padding:0.5rem 0;font-size:0.88rem;"><i class="fa-solid fa-file-lines" style="color:var(--gold);margin-right:0.5rem;"></i> Public records are accessible under the Open Records Act for full transparency.</li>
-      </ul>
-      <div class="facts-grid" style="margin-top:1.25rem;">
-        <div class="fact-card"><i class="fa-solid fa-landmark"></i><h4>Founded</h4><p>Established 1912 — Kentucky's youngest county.</p></div>
-        <div class="fact-card"><i class="fa-solid fa-users"></i><h4>Population</h4><p>~16,887 residents (2024).</p></div>
-        <div class="fact-card"><i class="fa-solid fa-gavel"></i><h4>County Seat</h4><p>Whitley City, Kentucky.</p></div>
-        <div class="fact-card"><i class="fa-solid fa-mountain-sun"></i><h4>Scenic Beauty</h4><p>Daniel Boone National Forest &amp; Big South Fork.</p></div>
-        <div class="fact-card"><i class="fa-solid fa-handshake"></i><h4>Community</h4><p>Service, integrity, and collaboration.</p></div>
-        <div class="fact-card"><i class="fa-solid fa-tree"></i><h4>Heritage</h4><p>Rich Appalachian culture &amp; outdoor recreation.</p></div>
+    <div class="about-pillars reveal d1">
+      <div class="pillar"><i class="fa-solid fa-gavel"></i><h4>Monthly Meetings</h4><p>2nd Thursday, 6 PM · Fiscal Courtroom, Whitley City</p></div>
+      <div class="pillar"><i class="fa-solid fa-handshake-angle"></i><h4>Transparency</h4><p>Open records and community engagement at every level</p></div>
+      <div class="pillar"><i class="fa-solid fa-balance-scale"></i><h4>Accountability</h4><p>Responsible budgeting to sustain essential public services</p></div>
+      <div class="pillar"><i class="fa-solid fa-file-lines"></i><h4>Open Records</h4><p>Full access under Kentucky's Open Records Act</p></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- OFFICIALS -->
+<div id="officials" style="background:var(--parchment)">
+<div class="outer">
+  <div class="section-label reveal">Leadership</div>
+  <h2 class="section-title reveal">County Officials</h2>
+  <p class="section-sub reveal">Elected and appointed officials working together for McCreary County residents.</p>
+  <div class="officials-grid" id="officialsGrid">
+    <div class="ocard"><img class="ocard-img" src="images/Jimmie-Bevo-Greene.jpg" alt="Jimmie W Greene II"><div class="ocard-name">Jimmie W Greene, II</div><div class="ocard-role">Judge-Executive</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:bgreene@mccrearycounty.com">bgreene@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Bill-Hale.png" alt="Bill Hale"><div class="ocard-name">Bill Hale</div><div class="ocard-role">Magistrate – District 1</div><div class="ocard-contact"><a href="tel:6065153315">606-515-3315</a><br><a href="mailto:bill.hale@jrninc.com">bill.hale@jrninc.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Bill-Taylor.png" alt="Bill Taylor"><div class="ocard-name">Bill Taylor</div><div class="ocard-role">Magistrate – District 2</div><div class="ocard-contact"><a href="tel:6063108350">606-310-8350</a><br><a href="mailto:w.taylor@highland.net">w.taylor@highland.net</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Bobby-Strunk.png" alt="Bobby Strunk"><div class="ocard-name">Bobby Strunk</div><div class="ocard-role">Magistrate – District 3</div><div class="ocard-contact"><a href="tel:6063100266">606-310-0266</a><br><a href="mailto:bobsbodyshop23@gmail.com">bobsbodyshop23@gmail.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Randy-Maxwell.png" alt="Randy Maxwell"><div class="ocard-name">Randy Maxwell</div><div class="ocard-role">Magistrate – District 4</div><div class="ocard-contact"><a href="tel:6063100746">606-310-0746</a><br><a href="mailto:randymaxwell1965@gmail.com">randymaxwell1965@gmail.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Eric-Haynes.png" alt="Eric Haynes"><div class="ocard-name">Eric Haynes</div><div class="ocard-role">County Clerk</div><div class="ocard-contact"><a href="tel:6063762411">606-376-2411</a><br><a href="mailto:eric.haynes@ky.gov">eric.haynes@ky.gov</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/David-Sampson.png" alt="David Sampson"><div class="ocard-name">David Sampson</div><div class="ocard-role">Sheriff</div><div class="ocard-contact"><a href="tel:6063762322">606-376-2322</a><br><a href="http://www.mccrearysheriff.com" target="_blank">mccrearysheriff.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Austin-Price.png" alt="Austin Price"><div class="ocard-name">Austin Price</div><div class="ocard-role">County Attorney</div><div class="ocard-contact"><a href="tel:6063762333">606-376-2333</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Jessie-Hatfield.png" alt="Jessie Hatfield"><div class="ocard-name">Jessie Hatfield</div><div class="ocard-role">County Jailer</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Timothy-Corder.png" alt="Timothy Corder"><div class="ocard-name">Timothy "Tim" Corder</div><div class="ocard-role">County Coroner</div><div class="ocard-contact"><a href="tel:6063769117">606-376-9117</a><br><a href="mailto:mccrearycountycoroner@gmail.com">coroner@gmail.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Dwight-Ross.png" alt="Dwight Ross"><div class="ocard-name">Dwight Ross</div><div class="ocard-role">PVA</div><div class="ocard-contact"><a href="tel:6063762514">606-376-2514</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Debbie-Gilreath.png" alt="Debbie Gilreath"><div class="ocard-name">Debbie Gilreath</div><div class="ocard-role">Finance &amp; HR Director</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:debbie@mccrearycounty.com">debbie@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Joshua-Stephens.png" alt="Josh Stephens"><div class="ocard-name">Joshua Stephens</div><div class="ocard-role">Economic Development Dir.</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:Joshua@mccrearycounty.com">Joshua@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Tony-Kidd.png" alt="Tony Kidd"><div class="ocard-name">Tony Kidd</div><div class="ocard-role">Road Dept. Supervisor</div><div class="ocard-contact"><a href="tel:6063768796">606-376-8796</a><br><a href="mailto:tony@mccrearycounty.com">tony@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Stephen-McKinney.png" alt="Stephen McKinney"><div class="ocard-name">Stephen McKinney</div><div class="ocard-role">Emergency Mgmt. Dir.</div><div class="ocard-contact"><a href="tel:6063760267">606-376-0267</a><br><a href="mailto:stephen@mccrearycounty.com">stephen@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Michelle-Perry.png" alt="Michelle Perry"><div class="ocard-name">Michelle Perry</div><div class="ocard-role">Tourism Director</div><div class="ocard-contact"><a href="tel:6063763008">606-376-3008</a><br><a href="mailto:tourism@mccrearycounty.com">tourism@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Jimmy-Barnett.png" alt="Jimmy Barnett"><div class="ocard-name">Jimmy Barnett</div><div class="ocard-role">EMS / 911 Director</div><div class="ocard-contact"><a href="tel:6063765063">606-376-5063</a><br><a href="mailto:jimmy@mccrearycounty.com">jimmy@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Melissa-Vanover.png" alt="Melissa Vanover"><div class="ocard-name">Melissa Vanover</div><div class="ocard-role">Park Manager</div><div class="ocard-contact"><a href="tel:6063767275">606-376-7275</a><br><a href="mailto:melissa@mccrearycounty.com">melissa@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Brenda-Blevins.png" alt="Brenda Blevins"><div class="ocard-name">Brenda Blevins</div><div class="ocard-role">ABC Administrator</div><div class="ocard-contact"><a href="tel:6063762337">606-376-2337</a><br><a href="mailto:mccrearyabc@outlook.com">mccrearyabc@outlook.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Stephanie-Tucker.png" alt="Stephanie Tucker"><div class="ocard-name">Stephanie Tucker</div><div class="ocard-role">Occupational Tax Admin.</div><div class="ocard-contact"><a href="tel:6063761322">606-376-1322</a><br><a href="mailto:stephanie@mccrearycounty.com">stephanie@mccrearycounty.com</a></div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Greg-Smith.png" alt="Greg Smith"><div class="ocard-name">Greg Smith</div><div class="ocard-role">Animal Control</div><div class="ocard-contact"><a href="tel:6063108667">606-310-8667</a><br><a href="mailto:animalcontrol@mccrearycounty.com">animalcontrol@mccrearycounty.com</a></div></div>
+  </div>
+</div>
+</div>
+
+<!-- EVENTS -->
+<div id="events">
+<div class="outer">
+  <div class="section-label reveal">Stay Informed</div>
+  <h2 class="section-title reveal">Events &amp; Meetings</h2>
+  <p class="section-sub reveal">From monthly Fiscal Court sessions to community festivals — here's what's happening in McCreary County.</p>
+  <div class="reveal">
+    <div class="acc-item">
+      <button class="acc-trigger active" data-acc="gov">Government &amp; Civic<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
+      <div class="acc-body open" id="acc-gov">
+        <div class="acc-event"><span class="evt-name">Fiscal Court Meeting</span><span class="evt-detail">Second Thursday of every month · 6:00 PM · Fiscal Courtroom, Whitley City</span></div>
+        <div class="acc-event"><span class="evt-name">Public Hearings</span><span class="evt-detail">Budget, zoning &amp; ordinance discussions — announced as needed</span></div>
+        <div class="acc-event"><span class="evt-name">Town Hall Meetings</span><span class="evt-detail">Informal Q&amp;A with the Judge/Executive and Magistrates</span></div>
+        <div class="acc-event"><span class="evt-name">Budget Workshops</span><span class="evt-detail">Learn how county funds are allocated to local programs</span></div>
+        <div class="acc-event"><span class="evt-name">Election Information Events</span><span class="evt-detail">Voter registration and election education sessions</span></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" data-acc="comm">Community &amp; Public Services<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
+      <div class="acc-body" id="acc-comm">
+        <div class="acc-event"><span class="evt-name">Community Cleanup Day</span><span class="evt-detail">May 15, 2025 · 9:00 AM–3:00 PM · Various County Locations</span></div>
+        <div class="acc-event"><span class="evt-name">Recycling Drop-Off Day</span><span class="evt-detail">First Saturday monthly · County Transfer Station</span></div>
+        <div class="acc-event"><span class="evt-name">Veterans Appreciation Ceremony</span><span class="evt-detail">November 11, 2025 · Courthouse Lawn</span></div>
+        <div class="acc-event"><span class="evt-name">Volunteer Recognition Event</span><span class="evt-detail">Honoring community volunteers and organizations</span></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" data-acc="rec">Recreation &amp; Tourism<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
+      <div class="acc-body" id="acc-rec">
+        <div class="acc-event"><span class="evt-name">McCreary County Fair</span><span class="evt-detail">August 10–14, 2025 · McCreary County Fairgrounds</span></div>
+        <div class="acc-event"><span class="evt-name">Historical Walking Tour</span><span class="evt-detail">September 5, 2025 · 10:00 AM · Downtown Whitley City</span></div>
+        <div class="acc-event"><span class="evt-name">Fall Heritage Festival</span><span class="evt-detail">October 12, 2025 · Sandhill Park</span></div>
+        <div class="acc-event"><span class="evt-name">Christmas Parade &amp; Tree Lighting</span><span class="evt-detail">December 6, 2025 · Courthouse Square</span></div>
+        <div class="acc-event"><span class="evt-name">Concert in the Park Series</span><span class="evt-detail">Summer evenings · Local artists and food vendors</span></div>
+      </div>
+    </div>
+    <div class="acc-item">
+      <button class="acc-trigger" data-acc="econ">Economic &amp; Development<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
+      <div class="acc-body" id="acc-econ">
+        <div class="acc-event"><span class="evt-name">Small Business Roundtable</span><span class="evt-detail">Quarterly networking for local entrepreneurs</span></div>
+        <div class="acc-event"><span class="evt-name">Grant &amp; Funding Workshop</span><span class="evt-detail">Learn about available county and state assistance programs</span></div>
+        <div class="acc-event"><span class="evt-name">Job &amp; Resource Fair</span><span class="evt-detail">June 20, 2025 · McCreary Central High School Gym</span></div>
+        <div class="acc-event"><span class="evt-name">Infrastructure Project Updates</span><span class="evt-detail">Open house discussions for upcoming county improvements</span></div>
       </div>
     </div>
   </div>
- 
-  <!-- OFFICIALS -->
-  <div class="section-card" id="officials">
-    <div class="section-header">
-      <i class="fa-solid fa-people-group"></i>
-      <h2>County Officials</h2>
-    </div>
-    <div class="section-body">
-      <div class="officials-grid">
- 
-        <div class="official-card">
-          <img src="images/Jimmie-Bevo-Greene.jpg" alt="Jimmie W Greene II">
-          <h4>Jimmie W Greene, II</h4>
-          <div class="role">Judge-Executive</div>
-          <div class="contact">606-376-2413<br><a href="mailto:bgreene@mccrearycounty.com">bgreene@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Bill-Hale.png" alt="Bill Hale">
-          <h4>Bill Hale</h4>
-          <div class="role">Magistrate – District 1</div>
-          <div class="contact">606-515-3315<br><a href="mailto:bill.hale@jrninc.com">bill.hale@jrninc.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Bill-Taylor.png" alt="Bill Taylor">
-          <h4>Bill Taylor</h4>
-          <div class="role">Magistrate – District 2</div>
-          <div class="contact">606-310-8350<br><a href="mailto:w.taylor@highland.net">w.taylor@highland.net</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Bobby-Strunk.png" alt="Bobby Strunk">
-          <h4>Bobby Strunk</h4>
-          <div class="role">Magistrate – District 3</div>
-          <div class="contact">606-310-0266<br><a href="mailto:bobsbodyshop23@gmail.com">bobsbodyshop23@gmail.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Randy-Maxwell.png" alt="Randy Maxwell">
-          <h4>Randy Maxwell</h4>
-          <div class="role">Magistrate – District 4</div>
-          <div class="contact">606-310-0746<br><a href="mailto:randymaxwell1965@gmail.com">randymaxwell1965@gmail.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Eric-Haynes.png" alt="Eric Haynes">
-          <h4>Eric Haynes</h4>
-          <div class="role">County Clerk</div>
-          <div class="contact">606-376-2411<br><a href="mailto:eric.haynes@ky.gov">eric.haynes@ky.gov</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/David-Sampson.png" alt="David Sampson">
-          <h4>David Sampson</h4>
-          <div class="role">Sheriff</div>
-          <div class="contact">606-376-2322<br><a href="http://www.mccrearysheriff.com" target="_blank">mccrearysheriff.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Austin-Price.png" alt="Austin Price">
-          <h4>Austin Price</h4>
-          <div class="role">County Attorney</div>
-          <div class="contact">606-376-2333</div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Jessie-Hatfield.png" alt="Jessie Hatfield">
-          <h4>Jessie Hatfield</h4>
-          <div class="role">County Jailer</div>
-          <div class="contact">606-376-2413</div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Timothy-Corder.png" alt="Timothy Corder">
-          <h4>Timothy "Tim" Corder</h4>
-          <div class="role">County Coroner</div>
-          <div class="contact">606-376-9117<br><a href="mailto:mccrearycountycoroner@gmail.com">coroner@gmail.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Dwight-Ross.png" alt="Dwight Ross">
-          <h4>Dwight Ross</h4>
-          <div class="role">PVA</div>
-          <div class="contact">606-376-2514</div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Debbie-Gilreath.png" alt="Debbie Gilreath">
-          <h4>Debbie Gilreath</h4>
-          <div class="role">Finance &amp; HR Director</div>
-          <div class="contact">606-376-2413<br><a href="mailto:debbie@mccrearycounty.com">debbie@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Joshua-Stephens.png" alt="Joshua Stephens">
-          <h4>Joshua Stephens</h4>
-          <div class="role">Economic Development Dir.</div>
-          <div class="contact">606-376-2413<br><a href="mailto:Joshua@mccrearycounty.com">Joshua@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Tony-Kidd.png" alt="Tony Kidd">
-          <h4>Tony Kidd</h4>
-          <div class="role">Road Dept. Supervisor</div>
-          <div class="contact">606-376-8796<br><a href="mailto:tony@mccrearycounty.com">tony@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Stephen-McKinney.png" alt="Stephen McKinney">
-          <h4>Stephen McKinney</h4>
-          <div class="role">Emergency Mgmt. Dir.</div>
-          <div class="contact">606-376-0267<br><a href="mailto:stephen@mccrearycounty.com">stephen@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Michelle-Perry.png" alt="Michelle Perry">
-          <h4>Michelle Perry</h4>
-          <div class="role">Tourism Director</div>
-          <div class="contact">606-376-3008<br><a href="mailto:tourism@mccrearycounty.com">tourism@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Jimmy-Barnett.png" alt="Jimmy Barnett">
-          <h4>Jimmy Barnett</h4>
-          <div class="role">EMS / 911 Director</div>
-          <div class="contact">606-376-5063<br><a href="mailto:jimmy@mccrearycounty.com">jimmy@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Melissa-Vanover.png" alt="Melissa Vanover">
-          <h4>Melissa Vanover</h4>
-          <div class="role">Park Manager</div>
-          <div class="contact">606-376-7275<br><a href="mailto:melissa@mccrearycounty.com">melissa@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Brenda-Blevins.png" alt="Brenda Blevins">
-          <h4>Brenda Blevins</h4>
-          <div class="role">ABC Administrator</div>
-          <div class="contact">606-376-2337<br><a href="mailto:mccrearyabc@outlook.com">mccrearyabc@outlook.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Stephanie-Tucker.png" alt="Stephanie Tucker">
-          <h4>Stephanie Tucker</h4>
-          <div class="role">Occupational Tax Admin.</div>
-          <div class="contact">606-376-1322<br><a href="mailto:stephanie@mccrearycounty.com">stephanie@mccrearycounty.com</a></div>
-        </div>
- 
-        <div class="official-card">
-          <img src="images/Greg-Smith.png" alt="Greg Smith">
-          <h4>Greg Smith</h4>
-          <div class="role">Animal Control</div>
-          <div class="contact">606-310-8667<br><a href="mailto:animalcontrol@mccrearycounty.com">animalcontrol@...</a></div>
-        </div>
- 
-      </div>
-    </div>
+</div>
+</div>
+
+<!-- RECORDS -->
+<div id="records-section" style="background:var(--forest);padding:4rem 1.25rem">
+<div class="records-inner">
+  <div class="section-label reveal" style="color:var(--sage)">Transparency</div>
+  <h2 class="section-title reveal" style="color:var(--cream)">Court Records</h2>
+  <p class="records-desc reveal">The Fiscal Court maintains records under Kentucky state law — including meeting minutes, ordinances, resolutions, and official documents. All records are available upon written request.</p>
+  <div class="reveal">
+    <div class="r-step"><div class="r-num">1</div><div class="r-text">Submit a written request via mail or email to the Fiscal Court office</div></div>
+    <div class="r-step"><div class="r-num">2</div><div class="r-text">Provide the specific record name, date, or topic for accurate processing</div></div>
+    <div class="r-step"><div class="r-num">3</div><div class="r-text">Some records may require a nominal copying fee per Kentucky law</div></div>
   </div>
- 
-  <!-- EVENTS -->
-  <div class="section-card" id="events">
-    <div class="section-header">
-      <i class="fa-solid fa-calendar-days"></i>
-      <h2>Events &amp; Meetings</h2>
-    </div>
-    <div class="section-body" style="padding-bottom:0.5rem;">
- 
-      <details open>
-        <summary>Government &amp; Civic Engagement <span class="arrow">▾</span></summary>
-        <div class="event-list">
-          <div class="event-item"><span class="event-title">Fiscal Court Meeting</span><span class="event-detail">Second Thursday of every month · 6:00 PM · Fiscal Courtroom, Whitley City</span></div>
-          <div class="event-item"><span class="event-title">Public Hearings</span><span class="event-detail">Budget, zoning, and ordinance discussions announced as needed</span></div>
-          <div class="event-item"><span class="event-title">Town Hall Meetings</span><span class="event-detail">Informal Q&amp;A sessions with the Judge/Executive and Magistrates</span></div>
-          <div class="event-item"><span class="event-title">Budget Workshops</span><span class="event-detail">Learn how county funds are allocated to local programs</span></div>
-          <div class="event-item"><span class="event-title">Election Information Events</span><span class="event-detail">Voter registration and election education sessions</span></div>
-        </div>
-      </details>
- 
-      <details>
-        <summary>Community &amp; Public Services <span class="arrow">▾</span></summary>
-        <div class="event-list">
-          <div class="event-item"><span class="event-title">Community Cleanup Day</span><span class="event-detail">May 15, 2025 · 9:00 AM–3:00 PM · Various County Locations</span></div>
-          <div class="event-item"><span class="event-title">Recycling Drop-Off Day</span><span class="event-detail">First Saturday monthly · County Transfer Station</span></div>
-          <div class="event-item"><span class="event-title">Public Safety Awareness Week</span><span class="event-detail">Meet EMS, Fire, and Sheriff's Departments</span></div>
-          <div class="event-item"><span class="event-title">Volunteer Recognition Event</span><span class="event-detail">Honoring community volunteers and organizations</span></div>
-          <div class="event-item"><span class="event-title">Veterans Appreciation Ceremony</span><span class="event-detail">November 11, 2025 · Courthouse Lawn</span></div>
-        </div>
-      </details>
- 
-      <details>
-        <summary>Recreation &amp; Tourism <span class="arrow">▾</span></summary>
-        <div class="event-list">
-          <div class="event-item"><span class="event-title">McCreary County Fair</span><span class="event-detail">August 10–14, 2025 · McCreary County Fairgrounds</span></div>
-          <div class="event-item"><span class="event-title">Historical Walking Tour</span><span class="event-detail">September 5, 2025 · 10:00 AM · Downtown Whitley City</span></div>
-          <div class="event-item"><span class="event-title">Fall Heritage Festival</span><span class="event-detail">October 12, 2025 · Sandhill Park</span></div>
-          <div class="event-item"><span class="event-title">Christmas Parade &amp; Tree Lighting</span><span class="event-detail">December 6, 2025 · Courthouse Square</span></div>
-          <div class="event-item"><span class="event-title">Concert in the Park Series</span><span class="event-detail">Summer evenings · Local artists and food vendors</span></div>
-        </div>
-      </details>
- 
-      <details>
-        <summary>Economic &amp; Development <span class="arrow">▾</span></summary>
-        <div class="event-list">
-          <div class="event-item"><span class="event-title">Small Business Roundtable</span><span class="event-detail">Quarterly networking for local entrepreneurs</span></div>
-          <div class="event-item"><span class="event-title">Grant &amp; Funding Workshop</span><span class="event-detail">Learn about available county and state assistance programs</span></div>
-          <div class="event-item"><span class="event-title">Job &amp; Resource Fair</span><span class="event-detail">June 20, 2025 · McCreary Central High School Gym</span></div>
-          <div class="event-item"><span class="event-title">Infrastructure Project Updates</span><span class="event-detail">Open house discussions for upcoming county improvements</span></div>
-        </div>
-      </details>
- 
-    </div>
+  <div class="rec-contact reveal">
+    <div class="rc-row"><span class="lbl">Address</span><span>1 North Main Street, Whitley City, KY 42653</span></div>
+    <div class="rc-row"><span class="lbl">Phone</span><a href="tel:6063762413">606-376-2413</a></div>
+    <div class="rc-row"><span class="lbl">Email</span><a href="mailto:records@mccrearycounty.com">records@mccrearycounty.com</a></div>
   </div>
- 
-  <!-- RECORDS -->
-  <div class="section-card" id="records">
-    <div class="section-header">
-      <i class="fa-solid fa-folder-open"></i>
-      <h2>Court Records</h2>
-    </div>
-    <div class="section-body">
-      <p style="font-size:0.9rem;color:#555;margin-bottom:1rem;font-family:'Segoe UI',sans-serif;">The McCreary County Fiscal Court maintains records in accordance with state law, including meeting minutes, ordinances, resolutions, and official documents.</p>
-      <h3 style="font-size:0.95rem;margin-bottom:0.5rem;font-family:'Segoe UI',sans-serif;">How to Request Records</h3>
-      <ul class="records-list">
-        <li>Submit a written request via mail or email to the Fiscal Court office</li>
-        <li>Provide the specific record name, date, or topic for accurate processing</li>
-        <li>Some records may require a nominal copying fee</li>
-      </ul>
-      <div class="contact-grid">
-        <div class="contact-row-item"><span class="lbl">Address</span><span style="font-size:0.88rem;color:#444;">1 North Main Street, Whitley City, KY 42653</span></div>
-        <div class="contact-row-item"><span class="lbl">Phone</span><a href="tel:6063762413" style="font-size:0.88rem;color:var(--navy);font-weight:600;">606-376-2413</a></div>
-        <div class="contact-row-item"><span class="lbl">Email</span><a href="mailto:records@mccrearycounty.com" style="font-size:0.88rem;color:var(--navy);">records@mccrearycounty.com</a></div>
-      </div>
-      <a class="btn-navy" href="#contact">Submit a Request</a>
-    </div>
-  </div>
- 
-  <!-- TOURISM -->
-  <div class="section-card" id="tourism">
-    <div class="section-header">
-      <i class="fa-solid fa-map-location-dot"></i>
-      <h2>Tourism</h2>
-    </div>
-    <div class="tourism-hero" id="tourismHero">
+  <a href="#contact" class="btn-gold reveal"><i class="fa-solid fa-paper-plane"></i> Submit a Request</a>
+</div>
+</div>
+
+<!-- TOURISM -->
+<div id="tourism">
+<div class="outer">
+  <div class="section-label reveal">Explore</div>
+  <h2 class="section-title reveal">Discover McCreary County</h2>
+  <p class="section-sub reveal">From moonbow waterfalls to ancient rock arches — adventure is always close at hand.</p>
+  <div class="t-hero-wrap reveal" id="tourismHero">
+    <div class="t-slides">
       <img src="images/CFalls-Web.jpg" class="active" alt="Cumberland Falls">
       <img src="images/Crack-in-the-rocks-Web.jpg" alt="Crack in the Rocks">
       <img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock">
-      <img src="images/YOL-Web.jpg" alt="Year of the Land">
       <img src="images/Jumps.jpg" alt="Devils Jumps">
-      <div class="tourism-arrows">
-        <button class="t-arrow" id="tPrev">&#10094;</button>
-        <button class="t-arrow" id="tNext">&#10095;</button>
-      </div>
+      <img src="images/YOL-Web.jpg" alt="Year of the Land">
     </div>
-    <div class="section-body">
-      <p style="font-size:0.9rem;color:#555;margin-bottom:0.75rem;font-family:'Segoe UI',sans-serif;">Experience breathtaking natural landscapes, historic landmarks, and vibrant community events in the heart of Kentucky.</p>
-      <div class="attractions-grid">
- 
-        <a href="https://www.google.com/maps/search/?api=1&query=Cumberland+Falls+State+Resort+Park+KY" target="_blank" style="display:block;">
-          <div class="attr-card"><img src="images/Cumberland-Falls-Web.jpg" alt="Cumberland Falls"><div class="attr-card-body"><h4>Cumberland Falls</h4><p>"Niagara of the South" — famous for its moonbow.</p></div></div>
-        </a>
- 
-        <a href="https://www.google.com/maps/search/?api=1&query=Natural+Arch+Scenic+Area+Kentucky" target="_blank" style="display:block;">
-          <div class="attr-card"><img src="images/NatArch-Web.jpg" alt="Natural Arch"><div class="attr-card-body"><h4>Natural Arch</h4><p>Iconic geological formation for hiking &amp; photos.</p></div></div>
-        </a>
- 
-        <a href="https://www.google.com/maps/search/?api=1&query=Buzzard+Rock+McCreary+County+KY" target="_blank" style="display:block;">
-          <div class="attr-card"><img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock"><div class="attr-card-body"><h4>Buzzard Rock</h4><p>Panoramic views — ideal for photography.</p></div></div>
-        </a>
- 
-        <a href="https://www.google.com/maps/search/?api=1&query=Devils+Jumps+McCreary+County+KY" target="_blank" style="display:block;">
-          <div class="attr-card"><img src="images/Jumps.jpg" alt="Devils Jumps"><div class="attr-card-body"><h4>Devils Jumps</h4><p>Thrilling cliffside for experienced hikers.</p></div></div>
-        </a>
- 
-        <a href="https://www.google.com/maps/search/?api=1&query=Eagle+Falls+Kentucky" target="_blank" style="display:block;">
-          <div class="attr-card"><img src="images/EagleFalls-Web.jpg" alt="Eagle Falls"><div class="attr-card-body"><h4>Eagle Falls</h4><p>Hidden waterfall offering serene nature.</p></div></div>
-        </a>
- 
-        <a href="https://www.google.com/maps/search/?api=1&query=Princess+Falls+Kentucky" target="_blank" style="display:block;">
-          <div class="attr-card"><img src="images/Princess-Fass-Web.jpg" alt="Princess Falls"><div class="attr-card-body"><h4>Princess Falls</h4><p>Picturesque waterfall with peaceful surroundings.</p></div></div>
-        </a>
- 
-      </div>
-      <iframe class="map" src="https://www.google.com/maps?q=McCreary+County,+Kentucky&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="McCreary County Map"></iframe>
+    <div class="t-overlay"></div>
+    <div class="t-caption" id="tCaption">Cumberland Falls</div>
+    <div class="t-arrows">
+      <button class="t-btn" id="tPrev"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="t-btn" id="tNext"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </div>
- 
-  <!-- RESOURCES -->
-  <div class="section-card" id="resources">
-    <div class="section-header">
-      <i class="fa-solid fa-book"></i>
-      <h2>Resources</h2>
-    </div>
-    <div class="section-body">
- 
-      <!-- ── BURN BAN STATUS ── -->
-      <div id="burnBanBar" class="burn-ban-bar ban-loading">
-        <span class="burn-ban-dot"></span>
-        <span class="burn-ban-label" id="burnBanText">Checking McCreary County burn ban status…</span>
-        <span class="burn-ban-source"><a href="https://eec.ky.gov/Natural-Resources/Forestry/wildland-fire-management/pages/county-burn-bans.aspx" target="_blank" rel="noopener">KY Forestry ↗</a></span>
-      </div>
- 
-      <div class="resource-group">
-        <h3>Utilities &amp; Services</h3>
-        <ul>
-          <li><a href="https://www.mccrearywater.com/" target="_blank">McCreary County Water District</a></li>
-          <li><a href="https://www.skrecc.com/" target="_blank">South Kentucky RECC (Electric)</a></li>
-          <li><a href="https://lge-ku.com/" target="_blank">LG &amp; KU (Electric)</a></li>
-          <li><a href="https://highland.net/" target="_blank">Highland Telephone (Internet)</a></li>
-          <li><a href="https://www.spectrum.com/services/kentucky/stearns" target="_blank">Spectrum (Cable &amp; Internet)</a></li>
-        </ul>
-      </div>
- 
-      <div class="resource-group">
-        <h3>Community Resources</h3>
-        <ul>
-          <li><a href="https://mccrearylibrary.org/" target="_blank">McCreary County Public Library</a></li>
-          <li><a href="https://mccrearycountysheriff.com/" target="_blank">McCreary County Sheriff's Office</a></li>
-          <li><a href="https://maps.app.goo.gl/9arJ4RQeYAQQzcai9" target="_blank">McCreary County Health Department</a></li>
-          <li><a href="https://maps.app.goo.gl/Nq6kFbfXqrVhnAY5A" target="_blank">McCreary County EMS</a></li>
-          <li><a href="https://maps.app.goo.gl/7BTt4Y1FF1aviEdm7" target="_blank">Stearns Ranger District</a></li>
-          <li><a href="https://www.unitedcumberland.com/" target="_blank">United Cumberland Bank</a></li>
-          <li><a href="https://www.scottsolidwaste.com/contact-us" target="_blank">Scott Solid Waste</a></li>
-          <li><a href="https://maps.app.goo.gl/xzdj7oxkhSXHxRXi7" target="_blank">McCreary County Senior Citizens</a></li>
-        </ul>
-      </div>
- 
-      <div class="resource-group">
-        <h3>Healthcare</h3>
-        <ul>
-          <li><a href="https://maps.app.goo.gl/a78UALoPntqd11kw8" target="_blank">South Fork Medical</a></li>
-          <li><a href="https://maps.app.goo.gl/FERbXgDqcdTmNxqX7" target="_blank">Eastern Kentucky Health Care</a></li>
-          <li><a href="https://maps.app.goo.gl/MN4bUgA5remNhpEw6" target="_blank">First Choice Immediate Care</a></li>
-          <li><a href="https://maps.app.goo.gl/zouw8AubJErSWwXWA" target="_blank">Hope Primary &amp; Urgent Care</a></li>
-          <li><a href="https://maps.app.goo.gl/peu2coAmKAbYuAvp9" target="_blank">Cumberland Family Clinic</a></li>
-          <li><a href="https://maps.app.goo.gl/xBACzeHBnv2SuxhVA" target="_blank">Family Dental of Kentucky</a></li>
-          <li><a href="https://maps.app.goo.gl/1Yy4tzhuHG7WcshE9" target="_blank">Associates in Eyecare</a></li>
-          <li><a href="https://maps.app.goo.gl/FuwKZmJkNRPr5rvu6" target="_blank">Kroger Pharmacy</a></li>
-        </ul>
-      </div>
- 
-      <div class="resource-group">
-        <h3>Funeral Services</h3>
-        <ul>
-          <li><a href="https://www.strunkfuneralhome.net/" target="_blank">Hickman-Strunk Funeral Home</a></li>
-          <li><a href="https://www.mccrearyfh.com/" target="_blank">McCreary Funeral Home</a></li>
-          <li><a href="https://www.pineknotfuneralhome.com/obituaries" target="_blank">Pine Knot Funeral Home</a></li>
-        </ul>
-      </div>
- 
+  <div class="attr-grid">
+    <a href="https://www.google.com/maps/search/?api=1&query=Cumberland+Falls+State+Resort+Park+KY" target="_blank" class="attr-card reveal"><img src="images/Cumberland-Falls-Web.jpg" alt="Cumberland Falls"><div class="attr-info"><h4>Cumberland Falls</h4><p>The "Niagara of the South"</p></div></a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Natural+Arch+Scenic+Area+Kentucky" target="_blank" class="attr-card reveal d1"><img src="images/NatArch-Web.jpg" alt="Natural Arch"><div class="attr-info"><h4>Natural Arch</h4><p>Iconic geological wonder</p></div></a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Buzzard+Rock+McCreary+County+KY" target="_blank" class="attr-card reveal d2"><img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock"><div class="attr-info"><h4>Buzzard Rock</h4><p>Panoramic forest views</p></div></a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Devils+Jumps+McCreary+County+KY" target="_blank" class="attr-card reveal d3"><img src="images/Jumps.jpg" alt="Devils Jumps"><div class="attr-info"><h4>Devils Jumps</h4><p>Cliffside adventure trail</p></div></a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Eagle+Falls+Kentucky" target="_blank" class="attr-card reveal d1"><img src="images/EagleFalls-Web.jpg" alt="Eagle Falls"><div class="attr-info"><h4>Eagle Falls</h4><p>Hidden forest waterfall</p></div></a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Princess+Falls+Kentucky" target="_blank" class="attr-card reveal d2"><img src="images/Princess-Fass-Web.jpg" alt="Princess Falls"><div class="attr-info"><h4>Princess Falls</h4><p>Serene and picturesque</p></div></a>
+  </div>
+  <div class="map-embed reveal">
+    <iframe src="https://www.google.com/maps?q=McCreary+County,+Kentucky&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="McCreary County Map"></iframe>
+  </div>
+</div>
+</div>
+
+<!-- RESOURCES -->
+<div id="resources" style="background:var(--parchment)">
+<div class="outer">
+  <div class="section-label reveal">Directory</div>
+  <h2 class="section-title reveal">Community Resources</h2>
+  <p class="section-sub reveal">Helpful links and services for McCreary County residents.</p>
+  <div class="res-tabs reveal" id="resTabs">
+    <button class="res-tab active" data-panel="utilities">Utilities</button>
+    <button class="res-tab" data-panel="community">Community</button>
+    <button class="res-tab" data-panel="healthcare">Healthcare</button>
+    <button class="res-tab" data-panel="funeral">Funeral</button>
+  </div>
+  <div class="res-panel active" id="panel-utilities">
+    <div class="res-list">
+      <a href="https://www.mccrearywater.com/" target="_blank" class="res-link">McCreary County Water District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.skrecc.com/" target="_blank" class="res-link">South Kentucky RECC (Electric) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://lge-ku.com/" target="_blank" class="res-link">LG &amp; KU (Electric) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://highland.net/" target="_blank" class="res-link">Highland Telephone (Internet) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.spectrum.com/services/kentucky/stearns" target="_blank" class="res-link">Spectrum (Cable &amp; Internet) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
- 
-  <!-- CONTACT -->
-  <div class="section-card" id="contact">
-    <div class="section-header">
-      <i class="fa-solid fa-envelope"></i>
-      <h2>Contact Us</h2>
+  <div class="res-panel" id="panel-community">
+    <div class="res-list">
+      <a href="https://mccrearylibrary.org/" target="_blank" class="res-link">McCreary County Public Library <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://mccrearycountysheriff.com/" target="_blank" class="res-link">McCreary County Sheriff's Office <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/9arJ4RQeYAQQzcai9" target="_blank" class="res-link">McCreary County Health Department <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/Nq6kFbfXqrVhnAY5A" target="_blank" class="res-link">McCreary County EMS <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/7BTt4Y1FF1aviEdm7" target="_blank" class="res-link">Stearns Ranger District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.unitedcumberland.com/" target="_blank" class="res-link">United Cumberland Bank <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.scottsolidwaste.com/contact-us" target="_blank" class="res-link">Scott Solid Waste <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/xzdj7oxkhSXHxRXi7" target="_blank" class="res-link">McCreary County Senior Citizens <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
-    <div class="section-body">
-      <div class="office-info" style="margin-bottom:1.25rem;">
-        <p><i class="fa-solid fa-location-dot" style="color:var(--gold);margin-right:0.4rem;"></i> 1 North Main Street, Whitley City, KY 42653</p>
-        <p><i class="fa-solid fa-phone" style="color:var(--gold);margin-right:0.4rem;"></i> <a href="tel:6063762413">606-376-2413</a></p>
-        <p><i class="fa-solid fa-envelope" style="color:var(--gold);margin-right:0.4rem;"></i> <a href="mailto:info@mccrearycounty.com">info@mccrearycounty.com</a></p>
-      </div>
- 
-      <!-- ── FACEBOOK BANNER ── -->
-      <a class="fb-banner" href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" rel="noopener">
-        <div class="fb-icon-wrap">
-          <i class="fa-brands fa-facebook-f"></i>
-        </div>
-        <div class="fb-banner-text">
-          <strong>McCreary County Fiscal Court</strong>
-          <span>Follow us on Facebook for news &amp; announcements</span>
-        </div>
-        <i class="fa-solid fa-arrow-right fb-banner-arrow"></i>
-      </a>
- 
-      <h3 style="font-size:1rem;margin:1.25rem 0 0.75rem;font-family:'Segoe UI',sans-serif;">Send Us a Message</h3>
-      <form class="form-group" action="https://formsubmit.co/fiscalcourt@mccrearycounty.org" method="POST">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-        <input type="hidden" name="_subject" value="New Contact Form Submission - McCreary County Website">
+  </div>
+  <div class="res-panel" id="panel-healthcare">
+    <div class="res-list">
+      <a href="https://maps.app.goo.gl/a78UALoPntqd11kw8" target="_blank" class="res-link">South Fork Medical <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/FERbXgDqcdTmNxqX7" target="_blank" class="res-link">Eastern Kentucky Health Care <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/MN4bUgA5remNhpEw6" target="_blank" class="res-link">First Choice Immediate Care <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/zouw8AubJErSWwXWA" target="_blank" class="res-link">Hope Primary &amp; Urgent Care <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/peu2coAmKAbYuAvp9" target="_blank" class="res-link">Cumberland Family Clinic <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/xBACzeHBnv2SuxhVA" target="_blank" class="res-link">Family Dental of Kentucky <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/1Yy4tzhuHG7WcshE9" target="_blank" class="res-link">Associates in Eyecare <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/FuwKZmJkNRPr5rvu6" target="_blank" class="res-link">Kroger Pharmacy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+  </div>
+  <div class="res-panel" id="panel-funeral">
+    <div class="res-list">
+      <a href="https://www.strunkfuneralhome.net/" target="_blank" class="res-link">Hickman-Strunk Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.mccrearyfh.com/" target="_blank" class="res-link">McCreary Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.pineknotfuneralhome.com/obituaries" target="_blank" class="res-link">Pine Knot Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+<div class="outer">
+  <div class="section-label reveal">Reach Out</div>
+  <h2 class="section-title reveal">Contact Us</h2>
+  <p class="section-sub reveal">We're here to help. Reach out with questions, requests, or feedback.</p>
+  <div class="contact-wrap">
+    <div>
+      <div class="ci-card reveal"><div class="ci-icon"><i class="fa-solid fa-location-dot"></i></div><div><span class="ci-lbl">Address</span><span class="ci-val">1 North Main Street, Whitley City, KY 42653</span></div></div>
+      <div class="ci-card reveal d1"><div class="ci-icon"><i class="fa-solid fa-phone"></i></div><div><span class="ci-lbl">Phone</span><span class="ci-val"><a href="tel:6063762413">606-376-2413</a></span></div></div>
+      <div class="ci-card reveal d2"><div class="ci-icon"><i class="fa-solid fa-envelope"></i></div><div><span class="ci-lbl">Email</span><span class="ci-val"><a href="mailto:info@mccrearycounty.com">info@mccrearycounty.com</a></span></div></div>
+      <div class="ci-card reveal d3"><div class="ci-icon"><i class="fa-solid fa-clock"></i></div><div><span class="ci-lbl">Hours</span><span class="ci-val">Mon–Fri, 8:00 AM – 4:30 PM</span></div></div>
+    </div>
+    <div class="cform reveal d1">
+      <h3>Send a Message</h3>
+      <form class="frow" action="#" method="post">
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit"><i class="fa-solid fa-paper-plane" style="margin-right:0.4rem;"></i>Send Message</button>
+        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
       </form>
     </div>
   </div>
- 
-</div><!-- end page-section -->
- 
-<!-- ── FOOTER ── -->
+</div>
+</div>
+
+<!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
-    <div class="footer-col">
-      <h3>Contact</h3>
-      <p>1 North Main Street</p>
-      <p>Whitley City, KY 42653</p>
-      <p><a href="tel:6063762413">606-376-2413</a></p>
+  <div class="foot-in">
+    <div class="foot-logo">
+      <img src="images/McCrearyCountyFiscalCourt.png" alt="McCreary County Seal">
+      <span>McCreary County<br>Fiscal Court</span>
     </div>
-    <div class="footer-col">
-      <h3>Navigate</h3>
-      <a href="#about">About Us</a>
-      <a href="#officials">Officials</a>
-      <a href="#events">Events</a>
-      <a href="#records">Records</a>
-      <a href="#resources">Resources</a>
-      <a href="#contact">Contact</a>
+    <div class="foot-cols">
+      <div class="fc">
+        <h4>Contact</h4>
+        <p>1 North Main Street</p>
+        <p>Whitley City, KY 42653</p>
+        <a href="tel:6063762413">606-376-2413</a>
+        <a href="mailto:info@mccrearycounty.com">info@mccrearycounty.com</a>
+      </div>
+      <div class="fc">
+        <h4>Navigate</h4>
+        <a href="#about">About Us</a>
+        <a href="#officials">Officials</a>
+        <a href="#events">Events</a>
+        <a href="#records-section">Records</a>
+        <a href="#resources">Resources</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="fc">
+        <h4>Links</h4>
+        <a href="https://www.mccrearytourism.com" target="_blank">Tourism Website</a>
+        <a href="http://www.mccrearycountyclerk.com" target="_blank">County Clerk</a>
+        <a href="http://www.mccrearysheriff.com" target="_blank">Sheriff's Office</a>
+        <a href="https://mccrearylibrary.org/" target="_blank">Public Library</a>
+      </div>
     </div>
-    <div class="footer-col">
-      <h3>Explore</h3>
-      <a href="#tourism">Tourism</a>
-      <a href="https://www.mccrearytourism.com" target="_blank">Tourism Website</a>
-      <a href="http://www.mccrearycountyclerk.com" target="_blank">County Clerk</a>
-      <a href="http://www.mccrearysheriff.com" target="_blank">Sheriff's Office</a>
-      <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank"><i class="fa-brands fa-facebook-f" style="margin-right:0.3rem;"></i>Facebook</a>
+    <div class="foot-btm">
+      <p>&copy; 2025 McCreary County Fiscal Court &nbsp;·&nbsp; Whitley City, Kentucky &nbsp;·&nbsp; All rights reserved</p>
     </div>
   </div>
-  <p class="copyright">&copy; 2025 McCreary County Fiscal Court &nbsp;|&nbsp; Whitley City, KY</p>
 </footer>
- 
+
 <script>
-  // ── Hamburger ──
-  const toggle = document.getElementById('menuToggle');
-  const drawer = document.getElementById('navDrawer');
-  toggle.addEventListener('click', () => {
-    const open = drawer.classList.toggle('open');
-    toggle.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', open);
-    drawer.setAttribute('aria-hidden', !open);
+// Header scroll
+const hdr = document.getElementById('header');
+const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 60);
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+// Burger / Drawer
+const burger = document.getElementById('burger');
+const drawer = document.getElementById('drawer');
+burger.addEventListener('click', () => {
+  const open = drawer.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+  drawer.setAttribute('aria-hidden', !open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  drawer.classList.remove('open'); burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', false); drawer.setAttribute('aria-hidden', true);
+  document.body.style.overflow = '';
+}));
+
+// Hero slideshow
+(function(){
+  const slides = document.querySelectorAll('#heroSlides img');
+  const dc = document.getElementById('heroDots');
+  let cur = 0;
+  slides.forEach((_,i) => {
+    const d = document.createElement('button');
+    d.className = 'h-dot'+(i===0?' active':'');
+    d.setAttribute('aria-label','Slide '+(i+1));
+    d.addEventListener('click', () => go(i));
+    dc.appendChild(d);
   });
-  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    drawer.classList.remove('open');
-    toggle.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-    drawer.setAttribute('aria-hidden', true);
-  }));
-  document.addEventListener('click', e => {
-    if (!drawer.contains(e.target) && !toggle.contains(e.target)) {
-      drawer.classList.remove('open');
-      toggle.classList.remove('open');
-      toggle.setAttribute('aria-expanded', false);
-    }
+  const dots = dc.querySelectorAll('.h-dot');
+  function go(i){ slides[cur].classList.remove('active'); dots[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('active'); }
+  setInterval(() => go((cur+1)%slides.length), 5500);
+})();
+
+// Tourism slideshow
+(function(){
+  const imgs = document.querySelectorAll('#tourismHero .t-slides img');
+  const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jumps','Year of the Land'];
+  const cap = document.getElementById('tCaption');
+  let cur = 0;
+  function go(i){ imgs[cur].classList.remove('active'); cur=(i+imgs.length)%imgs.length; imgs[cur].classList.add('active'); if(cap) cap.textContent=caps[cur]; }
+  document.getElementById('tNext').addEventListener('click', () => go(cur+1));
+  document.getElementById('tPrev').addEventListener('click', () => go(cur-1));
+  setInterval(() => go(cur+1), 4800);
+})();
+
+// Accordion
+document.querySelectorAll('.acc-trigger').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const isActive = btn.classList.contains('active');
+    document.querySelectorAll('.acc-trigger').forEach(b => { b.classList.remove('active'); document.getElementById('acc-'+b.dataset.acc)?.classList.remove('open'); });
+    if (!isActive) { btn.classList.add('active'); document.getElementById('acc-'+btn.dataset.acc)?.classList.add('open'); }
   });
- 
-  // ── Hero slideshow ──
-  (function() {
-    const slides = document.querySelectorAll('#heroSlides img');
-    const dotsContainer = document.getElementById('heroDots');
-    let cur = 0;
-    slides.forEach((_, i) => {
-      const d = document.createElement('button');
-      d.className = 'hero-dot' + (i === 0 ? ' active' : '');
-      d.setAttribute('aria-label', 'Slide ' + (i+1));
-      d.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(d);
-    });
-    const dots = dotsContainer.querySelectorAll('.hero-dot');
-    function goTo(i) {
-      slides[cur].classList.remove('active');
-      dots[cur].classList.remove('active');
-      cur = i;
-      slides[cur].classList.add('active');
-      dots[cur].classList.add('active');
-    }
-    setInterval(() => goTo((cur + 1) % slides.length), 5000);
-  })();
- 
-  // ── Tourism slideshow ──
-  (function() {
-    const imgs = document.querySelectorAll('#tourismHero img');
-    let cur = 0;
-    document.getElementById('tNext').addEventListener('click', () => {
-      imgs[cur].classList.remove('active');
-      cur = (cur + 1) % imgs.length;
-      imgs[cur].classList.add('active');
-    });
-    document.getElementById('tPrev').addEventListener('click', () => {
-      imgs[cur].classList.remove('active');
-      cur = (cur - 1 + imgs.length) % imgs.length;
-      imgs[cur].classList.add('active');
-    });
-    setInterval(() => {
-      imgs[cur].classList.remove('active');
-      cur = (cur + 1) % imgs.length;
-      imgs[cur].classList.add('active');
-    }, 4500);
-  })();
- 
-  // ── Burn Ban Status ──
-  (async function() {
-    const bar = document.getElementById('burnBanBar');
-    const txt = document.getElementById('burnBanText');
-    try {
-      const res  = await fetch('https://api.allorigins.win/get?url=' +
-        encodeURIComponent('https://eec.ky.gov/Natural-Resources/Forestry/wildland-fire-management/pages/county-burn-bans.aspx'));
-      const data = await res.json();
-      const doc  = new DOMParser().parseFromString(data.contents || '', 'text/html');
-      const body = doc.body ? doc.body.innerText : '';
-      const lines = body.split('\n').map(l => l.trim()).filter(Boolean);
-      let found = false;
-      for (let i = 0; i < lines.length; i++) {
-        if (/McCreary/i.test(lines[i])) {
-          const ctx = lines.slice(Math.max(0, i - 2), i + 3).join(' ');
-          if (/burn ban in effect|ban active|burning banned/i.test(ctx)) {
-            bar.className = 'burn-ban-bar ban-active';
-            txt.textContent = 'Burn ban in effect — no open burning allowed in McCreary County';
-          } else if (/no burn ban|lifted|removed|no ban/i.test(ctx)) {
-            bar.className = 'burn-ban-bar ban-none';
-            txt.textContent = 'No active burn ban in McCreary County';
-          } else {
-            bar.className = 'burn-ban-bar ban-loading';
-            txt.textContent = 'Burn ban status unclear — check the KY Forestry link';
-          }
-          found = true;
-          break;
-        }
-      }
-      if (!found) {
-        bar.className = 'burn-ban-bar ban-none';
-        txt.textContent = 'No active burn ban listed for McCreary County';
-      }
-    } catch(e) {
-      bar.className = 'burn-ban-bar ban-loading';
-      txt.textContent = 'Could not load burn ban status — visit KY Forestry link to check';
-    }
-  })();
+});
+
+// Resource tabs
+document.querySelectorAll('.res-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.res-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.res-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-'+tab.dataset.panel)?.classList.add('active');
+  });
+});
+
+// Scroll reveal
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
+}, {threshold:0.1, rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+// Officials stagger
+const co = new IntersectionObserver(entries => {
+  entries.forEach((e,idx) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), idx*48); co.unobserve(e.target); } });
+}, {threshold:0.06, rootMargin:'0px 0px -24px 0px'});
+document.querySelectorAll('.ocard').forEach(c => co.observe(c));
 </script>
 </body>
 </html>
