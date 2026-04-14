@@ -24,6 +24,7 @@
   --radius-md:12px;
   --radius-lg:20px;
   --header-h:68px;
+  --banner-h:42px;
   --ff-display:'Playfair Display',Georgia,serif;
   --ff-body:'DM Sans','Segoe UI',sans-serif;
 }
@@ -91,7 +92,7 @@ header.scrolled{
 .drawer-fb{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)!important}
 .drawer-fb i{font-size:1rem;color:#8ab4f8;margin-right:0.5rem}
 
-/* BURN BAN BANNER */
+/* BURN BAN BANNER — fixed directly below the header */
 #burn-ban-bar{
   background:var(--forest);
   padding:0.6rem 1.25rem;
@@ -99,7 +100,12 @@ header.scrolled{
   gap:0.65rem;
   flex-wrap:wrap;
   font-size:0.8rem;
-  min-height:42px;
+  min-height:var(--banner-h);
+  /* Fixed positioning pinned just below the header */
+  position:fixed;
+  top:var(--header-h);
+  left:0;right:0;
+  z-index:998;
 }
 #burn-ban-bar .bb-label{color:var(--gold-light);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:0.7rem;white-space:nowrap}
 #burn-ban-bar .bb-status{font-weight:500;color:#fff;display:flex;align-items:center;gap:0.4rem}
@@ -111,10 +117,11 @@ header.scrolled{
 #burn-ban-bar .bb-source a{color:rgba(255,255,255,0.4);text-decoration:underline}
 @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
 
-/* HERO */
+/* HERO — push down by header + banner height */
 .hero{
   position:relative;height:100svh;min-height:500px;
   overflow:hidden;display:flex;align-items:flex-end;
+  padding-top:calc(var(--header-h) + var(--banner-h));
 }
 .hero-slides{position:absolute;inset:0}
 .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease}
@@ -795,7 +802,6 @@ document.querySelectorAll('.ocard').forEach(c => co.observe(c));
 
 // =========================================================
 // BURN BAN STATUS — via Anthropic API with web_search tool
-// Uses Claude to fetch and parse the KY EEC burn ban page
 // =========================================================
 (async function fetchBurnBan() {
   const dot = document.getElementById('bbDot');
@@ -828,17 +834,14 @@ No markdown, no explanation, just the raw JSON object.`,
     if (!response.ok) throw new Error('API error ' + response.status);
     const data = await response.json();
 
-    // Find the final text block (after tool use)
     let resultText = '';
     for (const block of data.content) {
       if (block.type === 'text') resultText = block.text;
     }
 
-    // Parse JSON from response
     const clean = resultText.replace(/```json|```/g, '').trim();
     let result;
     try { result = JSON.parse(clean); } catch(e) {
-      // Fallback: look for keywords
       const lower = resultText.toLowerCase();
       if (lower.includes('"active": true') || lower.includes('"active":true')) {
         result = { active: true, details: 'Active burn ban in effect' };
