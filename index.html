@@ -171,21 +171,70 @@ header.scrolled{
 /* OFFICIALS */
 #officials{background:var(--parchment)}
 .officials-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.8rem}
-.ocard{background:#fff;border-radius:var(--radius-md);padding:1rem 0.8rem;display:flex;flex-direction:column;align-items:center;text-align:center;border:1px solid rgba(0,0,0,0.06);transition:transform 0.25s,box-shadow 0.25s;opacity:0;transform:translateY(18px)}
+
+/* OFFICIAL CARD */
+.ocard{
+  background:#fff;
+  border-radius:var(--radius-md);
+  padding:1rem 0.8rem;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  border:1px solid rgba(0,0,0,0.06);
+  transition:transform 0.25s,box-shadow 0.25s;
+  opacity:0;transform:translateY(18px);
+  position:relative;
+}
 .ocard.visible{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,box-shadow 0.25s}
-.ocard:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,0.1)}
+.ocard:hover{transform:translateY(-4px)!important;box-shadow:0 10px 28px rgba(0,0,0,0.1)}
 .ocard-img{width:62px;height:62px;border-radius:50%;object-fit:cover;margin-bottom:0.6rem;border:2px solid var(--parchment);box-shadow:0 2px 8px rgba(0,0,0,0.12)}
 .ocard-name{font-family:var(--ff-display);font-size:0.81rem;font-weight:700;color:var(--forest);margin-bottom:0.18rem;line-height:1.25}
 .ocard-role{font-size:0.67rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--moss);margin-bottom:0.45rem}
 .ocard-contact{font-size:0.69rem;color:#666;line-height:1.65}
 .ocard-contact a{color:var(--forest-mid)}
 
+/* OFFICIAL CARD TOOLTIP */
+.ocard-tooltip{
+  position:absolute;
+  bottom:calc(100% + 10px);
+  left:50%;
+  transform:translateX(-50%) translateY(6px);
+  width:210px;
+  background:var(--forest);
+  color:rgba(255,255,255,0.88);
+  font-size:0.75rem;
+  line-height:1.6;
+  padding:0.7rem 0.9rem;
+  border-radius:10px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity 0.18s ease,transform 0.18s ease;
+  z-index:200;
+  text-align:left;
+  box-shadow:0 6px 20px rgba(0,0,0,0.28);
+  white-space:normal;
+}
+.ocard-tooltip::after{
+  content:'';
+  position:absolute;
+  top:100%;left:50%;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-top-color:var(--forest);
+}
+.ocard-tooltip .tt-title{
+  display:block;
+  font-size:0.67rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--gold-light);font-weight:500;margin-bottom:0.32rem;
+}
+.ocard:hover .ocard-tooltip,
+.ocard.tip-open .ocard-tooltip{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
 /* =====================================================
-   EVENTS — Redesigned (no hardcoded dates)
+   EVENTS
    ===================================================== */
 #events{background:var(--cream)}
-
-/* Category cards grid */
 .evt-categories{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2.5rem}
 .evt-cat{background:#fff;border-radius:var(--radius-md);padding:1.1rem 1rem;border:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;gap:0.55rem}
 .evt-cat-header{display:flex;align-items:center;gap:0.6rem}
@@ -195,52 +244,21 @@ header.scrolled{
 .evt-cat-items{display:flex;flex-direction:column;gap:0.3rem;padding-top:0.2rem}
 .evt-cat-item{display:flex;align-items:flex-start;gap:0.45rem;font-size:0.76rem;color:#555;line-height:1.5}
 .evt-cat-item::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--sage);flex-shrink:0;margin-top:0.42rem}
-
-/* Recurring callout */
 .evt-recurring{background:var(--forest);border-radius:var(--radius-md);padding:1.2rem 1.25rem;margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 .evt-recurring-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .evt-recurring-icon i{font-size:1rem;color:var(--gold-light)}
 .evt-recurring-text{flex:1;min-width:0}
 .evt-recurring-text strong{display:block;color:#fff;font-size:0.88rem;font-weight:500;margin-bottom:0.18rem}
 .evt-recurring-text span{font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.5}
-
-/* GOOGLE CALENDAR EMBED */
-.calendar-wrap{
-  border-radius:var(--radius-lg);
-  overflow:hidden;
-  border:1px solid rgba(0,0,0,0.09);
-  background:#fff;
-  box-shadow:0 4px 24px rgba(0,0,0,0.07);
-}
-.calendar-header{
-  display:flex;align-items:center;gap:0.65rem;
-  background:var(--forest);
-  padding:0.9rem 1.25rem;
-}
+.calendar-wrap{border-radius:var(--radius-lg);overflow:hidden;border:1px solid rgba(0,0,0,0.09);background:#fff;box-shadow:0 4px 24px rgba(0,0,0,0.07)}
+.calendar-header{display:flex;align-items:center;gap:0.65rem;background:var(--forest);padding:0.9rem 1.25rem}
 .calendar-header i{color:var(--gold-light);font-size:0.95rem}
-.calendar-header span{
-  font-size:0.78rem;font-weight:500;
-  letter-spacing:0.1em;text-transform:uppercase;
-  color:rgba(255,255,255,0.85);
-}
-.calendar-header a{
-  margin-left:auto;
-  display:inline-flex;align-items:center;gap:0.35rem;
-  font-size:0.71rem;color:rgba(255,255,255,0.55);
-  transition:color 0.2s;white-space:nowrap;
-}
+.calendar-header span{font-size:0.78rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+.calendar-header a{margin-left:auto;display:inline-flex;align-items:center;gap:0.35rem;font-size:0.71rem;color:rgba(255,255,255,0.55);transition:color 0.2s;white-space:nowrap}
 .calendar-header a:hover{color:var(--gold-light)}
 .calendar-header a i{font-size:0.62rem;color:inherit}
-.calendar-iframe-wrap{
-  position:relative;
-  width:100%;
-  padding-top:62%;
-}
-.calendar-iframe-wrap iframe{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  border:0;display:block;
-}
+.calendar-iframe-wrap{position:relative;width:100%;padding-top:62%}
+.calendar-iframe-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 @media(min-width:768px){
   .calendar-iframe-wrap{padding-top:0;height:520px}
   .calendar-iframe-wrap iframe{position:static;width:100%;height:100%}
@@ -259,7 +277,7 @@ header.scrolled{
 .rec-contact{display:grid;gap:0.5rem;margin-top:1.5rem;padding:1.2rem;background:rgba(255,255,255,0.05);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,0.1)}
 .rc-row{display:flex;gap:0.7rem;align-items:flex-start;font-size:0.84rem}
 .rc-row .lbl{color:var(--gold-light);font-weight:500;min-width:54px;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.05em;padding-top:0.1rem}
-.rc-row span, .rc-row a{color:rgba(255,255,255,0.8)}
+.rc-row span,.rc-row a{color:rgba(255,255,255,0.8)}
 .btn-gold{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:var(--ink);font-weight:500;font-size:0.84rem;letter-spacing:0.03em;padding:0.78rem 1.5rem;border-radius:30px;margin-top:1.25rem;transition:background 0.2s,transform 0.15s}
 .btn-gold:hover{background:var(--gold-light)}
 .btn-gold:active{transform:scale(0.97)}
@@ -328,7 +346,7 @@ header.scrolled{
 .rfrow button:hover{background:var(--gold-light)}
 .rfrow button:active{transform:scale(0.97)}
 
-/* SOCIAL / FACEBOOK SECTION */
+/* SOCIAL */
 #social{background:var(--parchment)}
 .social-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border-radius:var(--radius-lg);padding:2.2rem 1.5rem;border:1px solid rgba(0,0,0,0.07);max-width:520px;margin:0 auto}
 .fb-icon-wrap{width:62px;height:62px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
@@ -514,41 +532,186 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <h2 class="section-title reveal">County Officials</h2>
   <p class="section-sub reveal">Elected and appointed officials working together for McCreary County residents.</p>
   <div class="officials-grid" id="officialsGrid">
-    <div class="ocard"><img class="ocard-img" src="images/Jimmie-Bevo-Greene.jpg" alt="Jimmie W Greene II"><div class="ocard-name">Jimmie W Greene, II</div><div class="ocard-role">Judge-Executive</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:bgreene@mccrearycounty.com">bgreene@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Bill-Hale.png" alt="Bill Hale"><div class="ocard-name">Bill Hale</div><div class="ocard-role">Magistrate – District 1</div><div class="ocard-contact"><a href="tel:6065153315">606-515-3315</a><br><a href="mailto:bill.hale@jrninc.com">bill.hale@jrninc.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Bill-Taylor.png" alt="Bill Taylor"><div class="ocard-name">Bill Taylor</div><div class="ocard-role">Magistrate – District 2</div><div class="ocard-contact"><a href="tel:6063108350">606-310-8350</a><br><a href="mailto:w.taylor@highland.net">w.taylor@highland.net</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Bobby-Strunk.png" alt="Bobby Strunk"><div class="ocard-name">Bobby Strunk</div><div class="ocard-role">Magistrate – District 3</div><div class="ocard-contact"><a href="tel:6063100266">606-310-0266</a><br><a href="mailto:bobsbodyshop23@gmail.com">bobsbodyshop23@gmail.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Randy-Maxwell.png" alt="Randy Maxwell"><div class="ocard-name">Randy Maxwell</div><div class="ocard-role">Magistrate – District 4</div><div class="ocard-contact"><a href="tel:6063100746">606-310-0746</a><br><a href="mailto:randymaxwell1965@gmail.com">randymaxwell1965@gmail.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Eric-Haynes.png" alt="Eric Haynes"><div class="ocard-name">Eric Haynes</div><div class="ocard-role">County Clerk</div><div class="ocard-contact"><a href="tel:6063762411">606-376-2411</a><br><a href="mailto:eric.haynes@ky.gov">eric.haynes@ky.gov</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/David-Sampson.png" alt="David Sampson"><div class="ocard-name">David Sampson</div><div class="ocard-role">Sheriff</div><div class="ocard-contact"><a href="tel:6063762322">606-376-2322</a><br><a href="http://www.mccrearysheriff.com" target="_blank">mccrearysheriff.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Austin-Price.png" alt="Austin Price"><div class="ocard-name">Austin Price</div><div class="ocard-role">County Attorney</div><div class="ocard-contact"><a href="tel:6063762333">606-376-2333</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Jessie-Hatfield.png" alt="Jessie Hatfield"><div class="ocard-name">Jessie Hatfield</div><div class="ocard-role">County Jailer</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Timothy-Corder.png" alt="Timothy Corder"><div class="ocard-name">Timothy "Tim" Corder</div><div class="ocard-role">County Coroner</div><div class="ocard-contact"><a href="tel:6063769117">606-376-9117</a><br><a href="mailto:mccrearycountycoroner@gmail.com">coroner@gmail.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Dwight-Ross.png" alt="Dwight Ross"><div class="ocard-name">Dwight Ross</div><div class="ocard-role">PVA</div><div class="ocard-contact"><a href="tel:6063762514">606-376-2514</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Debbie-Gilreath.png" alt="Debbie Gilreath"><div class="ocard-name">Debbie Gilreath</div><div class="ocard-role">Finance &amp; HR Director</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:debbie@mccrearycounty.com">debbie@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Joshua-Stephens.png" alt="Josh Stephens"><div class="ocard-name">Joshua Stephens</div><div class="ocard-role">Economic Development Dir.</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:Joshua@mccrearycounty.com">Joshua@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Tony-Kidd.png" alt="Tony Kidd"><div class="ocard-name">Tony Kidd</div><div class="ocard-role">Road Dept. Supervisor</div><div class="ocard-contact"><a href="tel:6063768796">606-376-8796</a><br><a href="mailto:tony@mccrearycounty.com">tony@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Stephen-McKinney.png" alt="Stephen McKinney"><div class="ocard-name">Stephen McKinney</div><div class="ocard-role">Emergency Mgmt. Dir.</div><div class="ocard-contact"><a href="tel:6063760267">606-376-0267</a><br><a href="mailto:stephen@mccrearycounty.com">stephen@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Michelle-Perry.png" alt="Michelle Perry"><div class="ocard-name">Michelle Perry</div><div class="ocard-role">Tourism Director</div><div class="ocard-contact"><a href="tel:6063763008">606-376-3008</a><br><a href="mailto:tourism@mccrearycounty.com">tourism@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Jimmy-Barnett.png" alt="Jimmy Barnett"><div class="ocard-name">Jimmy Barnett</div><div class="ocard-role">EMS / 911 Director</div><div class="ocard-contact"><a href="tel:6063765063">606-376-5063</a><br><a href="mailto:jimmy@mccrearycounty.com">jimmy@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Melissa-Vanover.png" alt="Melissa Vanover"><div class="ocard-name">Melissa Vanover</div><div class="ocard-role">Park Manager</div><div class="ocard-contact"><a href="tel:6063767275">606-376-7275</a><br><a href="mailto:melissa@mccrearycounty.com">melissa@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Brenda-Blevins.png" alt="Brenda Blevins"><div class="ocard-name">Brenda Blevins</div><div class="ocard-role">ABC Administrator</div><div class="ocard-contact"><a href="tel:6063762337">606-376-2337</a><br><a href="mailto:mccrearyabc@outlook.com">mccrearyabc@outlook.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Stephanie-Tucker.png" alt="Stephanie Tucker"><div class="ocard-name">Stephanie Tucker</div><div class="ocard-role">Occupational Tax Admin.</div><div class="ocard-contact"><a href="tel:6063761322">606-376-1322</a><br><a href="mailto:stephanie@mccrearycounty.com">stephanie@mccrearycounty.com</a></div></div>
-    <div class="ocard"><img class="ocard-img" src="images/Greg-Smith.png" alt="Greg Smith"><div class="ocard-name">Greg Smith</div><div class="ocard-role">Animal Control</div><div class="ocard-contact"><a href="tel:6063108667">606-310-8667</a><br><a href="mailto:animalcontrol@mccrearycounty.com">animalcontrol@mccrearycounty.com</a></div></div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Jimmie-Bevo-Greene.jpg" alt="Jimmie W Greene II">
+      <div class="ocard-name">Jimmie W Greene, II</div>
+      <div class="ocard-role">Judge-Executive</div>
+      <div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:bgreene@mccrearycounty.com">bgreene@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>County-wide policy decisions, budget questions, executive directives, and major community concerns requiring top-level attention.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Bill-Hale.png" alt="Bill Hale">
+      <div class="ocard-name">Bill Hale</div>
+      <div class="ocard-role">Magistrate – District 1</div>
+      <div class="ocard-contact"><a href="tel:6065153315">606-515-3315</a><br><a href="mailto:bill.hale@jrninc.com">bill.hale@jrninc.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>District 1 road conditions, local infrastructure issues, neighborhood concerns, and Fiscal Court representation for your area.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Bill-Taylor.png" alt="Bill Taylor">
+      <div class="ocard-name">Bill Taylor</div>
+      <div class="ocard-role">Magistrate – District 2</div>
+      <div class="ocard-contact"><a href="tel:6063108350">606-310-8350</a><br><a href="mailto:w.taylor@highland.net">w.taylor@highland.net</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>District 2 road conditions, local infrastructure issues, neighborhood concerns, and Fiscal Court representation for your area.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Bobby-Strunk.png" alt="Bobby Strunk">
+      <div class="ocard-name">Bobby Strunk</div>
+      <div class="ocard-role">Magistrate – District 3</div>
+      <div class="ocard-contact"><a href="tel:6063100266">606-310-0266</a><br><a href="mailto:bobsbodyshop23@gmail.com">bobsbodyshop23@gmail.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>District 3 road conditions, local infrastructure issues, neighborhood concerns, and Fiscal Court representation for your area.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Randy-Maxwell.png" alt="Randy Maxwell">
+      <div class="ocard-name">Randy Maxwell</div>
+      <div class="ocard-role">Magistrate – District 4</div>
+      <div class="ocard-contact"><a href="tel:6063100746">606-310-0746</a><br><a href="mailto:randymaxwell1965@gmail.com">randymaxwell1965@gmail.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>District 4 road conditions, local infrastructure issues, neighborhood concerns, and Fiscal Court representation for your area.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Eric-Haynes.png" alt="Eric Haynes">
+      <div class="ocard-name">Eric Haynes</div>
+      <div class="ocard-role">County Clerk</div>
+      <div class="ocard-contact"><a href="tel:6063762411">606-376-2411</a><br><a href="mailto:eric.haynes@ky.gov">eric.haynes@ky.gov</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Vehicle registration, marriage licenses, deeds &amp; property records, elections &amp; voter registration, and official document recording.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/David-Sampson.png" alt="David Sampson">
+      <div class="ocard-name">David Sampson</div>
+      <div class="ocard-role">Sheriff</div>
+      <div class="ocard-contact"><a href="tel:6063762322">606-376-2322</a><br><a href="http://www.mccrearysheriff.com" target="_blank">mccrearysheriff.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Law enforcement, criminal complaints, civil process serving, warrants, and general public safety concerns throughout the county.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Austin-Price.png" alt="Austin Price">
+      <div class="ocard-name">Austin Price</div>
+      <div class="ocard-role">County Attorney</div>
+      <div class="ocard-contact"><a href="tel:6063762333">606-376-2333</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Legal matters involving the county, ordinance and legal questions, contracts, and county government legal counsel.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Jessie-Hatfield.png" alt="Jessie Hatfield">
+      <div class="ocard-name">Jessie Hatfield</div>
+      <div class="ocard-role">County Jailer</div>
+      <div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Inmate information and visitation, jail-related inquiries, and detention facility concerns.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Timothy-Corder.png" alt="Timothy Corder">
+      <div class="ocard-name">Timothy "Tim" Corder</div>
+      <div class="ocard-role">County Coroner</div>
+      <div class="ocard-contact"><a href="tel:6063769117">606-376-9117</a><br><a href="mailto:mccrearycountycoroner@gmail.com">coroner@gmail.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Death investigations, cause of death inquiries, next-of-kin notifications, and death certificate questions.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Dwight-Ross.png" alt="Dwight Ross">
+      <div class="ocard-name">Dwight Ross</div>
+      <div class="ocard-role">PVA</div>
+      <div class="ocard-contact"><a href="tel:6063762514">606-376-2514</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Property assessments, tax appeals, homestead exemptions, and property value questions or disputes.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Debbie-Gilreath.png" alt="Debbie Gilreath">
+      <div class="ocard-name">Debbie Gilreath</div>
+      <div class="ocard-role">Finance &amp; HR Director</div>
+      <div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:debbie@mccrearycounty.com">debbie@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>County budget and financial inquiries, payroll, employee HR matters, and financial records requests.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Joshua-Stephens.png" alt="Josh Stephens">
+      <div class="ocard-name">Joshua Stephens</div>
+      <div class="ocard-role">Economic Development Dir.</div>
+      <div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:Joshua@mccrearycounty.com">Joshua@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Business development, grants and funding opportunities, new business inquiries, and county economic growth initiatives.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Tony-Kidd.png" alt="Tony Kidd">
+      <div class="ocard-name">Tony Kidd</div>
+      <div class="ocard-role">Road Dept. Supervisor</div>
+      <div class="ocard-contact"><a href="tel:6063768796">606-376-8796</a><br><a href="mailto:tony@mccrearycounty.com">tony@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Road repairs, pothole reports, drainage issues, road signage, and county road maintenance requests.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Stephen-McKinney.png" alt="Stephen McKinney">
+      <div class="ocard-name">Stephen McKinney</div>
+      <div class="ocard-role">Emergency Mgmt. Dir.</div>
+      <div class="ocard-contact"><a href="tel:6063760267">606-376-0267</a><br><a href="mailto:stephen@mccrearycounty.com">stephen@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Disaster preparedness, emergency response coordination, hazard mitigation planning, and community safety programs.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Michelle-Perry.png" alt="Michelle Perry">
+      <div class="ocard-name">Michelle Perry</div>
+      <div class="ocard-role">Tourism Director</div>
+      <div class="ocard-contact"><a href="tel:6063763008">606-376-3008</a><br><a href="mailto:tourism@mccrearycounty.com">tourism@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Tourism promotion, visitor information, county event coordination, and recreation and hospitality partnerships.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Jimmy-Barnett.png" alt="Jimmy Barnett">
+      <div class="ocard-name">Jimmy Barnett</div>
+      <div class="ocard-role">EMS / 911 Director</div>
+      <div class="ocard-contact"><a href="tel:6063765063">606-376-5063</a><br><a href="mailto:jimmy@mccrearycounty.com">jimmy@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>EMS services, ambulance response concerns, 911 system questions, and emergency communications issues.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Melissa-Vanover.png" alt="Melissa Vanover">
+      <div class="ocard-name">Melissa Vanover</div>
+      <div class="ocard-role">Park Manager</div>
+      <div class="ocard-contact"><a href="tel:6063767275">606-376-7275</a><br><a href="mailto:melissa@mccrearycounty.com">melissa@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Park facility reservations, shelter rentals, park maintenance, and Sandhill Park event coordination.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Brenda-Blevins.png" alt="Brenda Blevins">
+      <div class="ocard-name">Brenda Blevins</div>
+      <div class="ocard-role">ABC Administrator</div>
+      <div class="ocard-contact"><a href="tel:6063762337">606-376-2337</a><br><a href="mailto:mccrearyabc@outlook.com">mccrearyabc@outlook.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Alcohol beverage licensing, ABC permit applications, and alcohol regulatory compliance questions.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Stephanie-Tucker.png" alt="Stephanie Tucker">
+      <div class="ocard-name">Stephanie Tucker</div>
+      <div class="ocard-role">Occupational Tax Admin.</div>
+      <div class="ocard-contact"><a href="tel:6063761322">606-376-1322</a><br><a href="mailto:stephanie@mccrearycounty.com">stephanie@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Occupational tax filings, business license fees, payroll tax questions, and tax compliance matters.</div>
+    </div>
+
+    <div class="ocard">
+      <img class="ocard-img" src="images/Greg-Smith.png" alt="Greg Smith">
+      <div class="ocard-name">Greg Smith</div>
+      <div class="ocard-role">Animal Control</div>
+      <div class="ocard-contact"><a href="tel:6063108667">606-310-8667</a><br><a href="mailto:animalcontrol@mccrearycounty.com">animalcontrol@mccrearycounty.com</a></div>
+      <div class="ocard-tooltip"><span class="tt-title">Contact for</span>Stray animal reports, animal cruelty complaints, lost and found pets, dangerous animal concerns, and wildlife issues.</div>
+    </div>
+
   </div>
 </div>
 </div>
 
-<!-- =====================================================
-     EVENTS — Redesigned, no hardcoded dates
-     ===================================================== -->
+<!-- EVENTS -->
 <div id="events">
 <div class="outer">
   <div class="section-label reveal">Stay Informed</div>
   <h2 class="section-title reveal">Events &amp; Meetings</h2>
   <p class="section-sub reveal">McCreary County hosts a variety of recurring civic, community, and seasonal events throughout the year. Check the calendar below for specific upcoming dates.</p>
 
-  <!-- Fiscal Court meeting callout -->
   <div class="evt-recurring reveal">
     <div class="evt-recurring-icon"><i class="fa-solid fa-gavel"></i></div>
     <div class="evt-recurring-text">
@@ -557,9 +720,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
   </div>
 
-  <!-- Category cards -->
   <div class="evt-categories reveal">
-
     <div class="evt-cat">
       <div class="evt-cat-header">
         <div class="evt-cat-icon"><i class="fa-solid fa-landmark"></i></div>
@@ -573,7 +734,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <div class="evt-cat-item">Voter Registration &amp; Election Info Events</div>
       </div>
     </div>
-
     <div class="evt-cat">
       <div class="evt-cat-header">
         <div class="evt-cat-icon"><i class="fa-solid fa-people-group"></i></div>
@@ -586,7 +746,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <div class="evt-cat-item">Volunteer Recognition Event</div>
       </div>
     </div>
-
     <div class="evt-cat">
       <div class="evt-cat-header">
         <div class="evt-cat-icon"><i class="fa-solid fa-tree"></i></div>
@@ -600,7 +759,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <div class="evt-cat-item">Summer Concert in the Park Series</div>
       </div>
     </div>
-
     <div class="evt-cat">
       <div class="evt-cat-header">
         <div class="evt-cat-icon"><i class="fa-solid fa-briefcase"></i></div>
@@ -613,10 +771,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
         <div class="evt-cat-item">Infrastructure Project Open Houses</div>
       </div>
     </div>
-
   </div>
 
-  <!-- GOOGLE CALENDAR -->
   <div class="calendar-wrap reveal">
     <div class="calendar-header">
       <i class="fa-regular fa-calendar-days"></i>
@@ -636,7 +792,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       </iframe>
     </div>
   </div>
-
 </div>
 </div>
 
@@ -656,8 +811,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <div class="rc-row"><span class="lbl">Phone</span><a href="tel:6063762413">606-376-2413</a></div>
     <div class="rc-row"><span class="lbl">Email</span><a href="mailto:records@mccrearycounty.com">records@mccrearycounty.com</a></div>
   </div>
-
-  <!-- RECORDS REQUEST FORM -->
   <div class="records-form reveal">
     <h3><i class="fa-solid fa-file-magnifying-glass" style="margin-right:0.5rem;color:var(--gold)"></i>Submit a Records Request</h3>
     <form class="rfrow"
@@ -685,7 +838,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       <button type="submit"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
     </form>
   </div>
-
 </div>
 </div>
 
@@ -942,11 +1094,26 @@ const ro = new IntersectionObserver(entries => {
 }, {threshold:0.1, rootMargin:'0px 0px -36px 0px'});
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-// Officials stagger
+// Officials stagger reveal
 const co = new IntersectionObserver(entries => {
   entries.forEach((e,idx) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), idx*48); co.unobserve(e.target); } });
 }, {threshold:0.06, rootMargin:'0px 0px -24px 0px'});
 document.querySelectorAll('.ocard').forEach(c => co.observe(c));
+
+// Tooltip tap toggle for mobile
+document.querySelectorAll('.ocard').forEach(card => {
+  card.addEventListener('click', function(e) {
+    const isOpen = this.classList.contains('tip-open');
+    document.querySelectorAll('.ocard').forEach(c => c.classList.remove('tip-open'));
+    if (!isOpen) this.classList.add('tip-open');
+  });
+});
+// Close tooltip when tapping outside on mobile
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.ocard')) {
+    document.querySelectorAll('.ocard').forEach(c => c.classList.remove('tip-open'));
+  }
+});
 
 // =========================================================
 // BURN BAN STATUS — via Anthropic API with web_search tool
