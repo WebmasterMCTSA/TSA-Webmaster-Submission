@@ -180,24 +180,32 @@ header.scrolled{
 .ocard-contact{font-size:0.69rem;color:#666;line-height:1.65}
 .ocard-contact a{color:var(--forest-mid)}
 
-/* EVENTS */
+/* =====================================================
+   EVENTS — Redesigned (no hardcoded dates)
+   ===================================================== */
 #events{background:var(--cream)}
-.acc-item{border-radius:var(--radius-md);overflow:hidden;margin-bottom:0.5rem;background:#fff;border:1px solid rgba(0,0,0,0.07)}
-.acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:0.95rem 1.1rem;background:none;font-family:var(--ff-body);font-size:0.88rem;font-weight:500;color:var(--forest);text-align:left;gap:0.5rem;transition:background 0.2s;min-height:52px}
-.acc-trigger:hover{background:rgba(0,0,0,0.025)}
-.acc-trigger.active{background:var(--forest);color:#fff}
-.acc-icon{width:26px;height:26px;border-radius:50%;background:var(--parchment);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.68rem;color:var(--forest);transition:transform 0.3s,background 0.2s}
-.acc-trigger.active .acc-icon{background:rgba(255,255,255,0.15);color:#fff;transform:rotate(45deg)}
-.acc-body{max-height:0;overflow:hidden;transition:max-height 0.35s cubic-bezier(0.4,0,0.2,1)}
-.acc-body.open{max-height:900px}
-.acc-event{padding:0.82rem 1.1rem;border-top:1px solid rgba(0,0,0,0.05);display:flex;flex-direction:column;gap:0.18rem}
-.acc-event:first-child{border-top:none}
-.evt-name{font-size:0.84rem;font-weight:500;color:var(--forest)}
-.evt-detail{font-size:0.76rem;color:#777;line-height:1.5}
+
+/* Category cards grid */
+.evt-categories{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:2.5rem}
+.evt-cat{background:#fff;border-radius:var(--radius-md);padding:1.1rem 1rem;border:1px solid rgba(0,0,0,0.07);display:flex;flex-direction:column;gap:0.55rem}
+.evt-cat-header{display:flex;align-items:center;gap:0.6rem}
+.evt-cat-icon{width:34px;height:34px;border-radius:9px;background:var(--forest);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.evt-cat-icon i{font-size:0.82rem;color:var(--gold-light)}
+.evt-cat-title{font-family:var(--ff-display);font-size:0.9rem;font-weight:700;color:var(--forest);line-height:1.2}
+.evt-cat-items{display:flex;flex-direction:column;gap:0.3rem;padding-top:0.2rem}
+.evt-cat-item{display:flex;align-items:flex-start;gap:0.45rem;font-size:0.76rem;color:#555;line-height:1.5}
+.evt-cat-item::before{content:'';display:block;width:5px;height:5px;border-radius:50%;background:var(--sage);flex-shrink:0;margin-top:0.42rem}
+
+/* Recurring callout */
+.evt-recurring{background:var(--forest);border-radius:var(--radius-md);padding:1.2rem 1.25rem;margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.evt-recurring-icon{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.evt-recurring-icon i{font-size:1rem;color:var(--gold-light)}
+.evt-recurring-text{flex:1;min-width:0}
+.evt-recurring-text strong{display:block;color:#fff;font-size:0.88rem;font-weight:500;margin-bottom:0.18rem}
+.evt-recurring-text span{font-size:0.78rem;color:rgba(255,255,255,0.6);line-height:1.5}
 
 /* GOOGLE CALENDAR EMBED */
 .calendar-wrap{
-  margin-top:2.5rem;
   border-radius:var(--radius-lg);
   overflow:hidden;
   border:1px solid rgba(0,0,0,0.09);
@@ -371,11 +379,15 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   .about-grid{grid-template-columns:1.1fr 1fr;align-items:start}
   .officials-grid{grid-template-columns:repeat(3,1fr)}
   .ocard-img{width:76px;height:76px}
+  .evt-categories{grid-template-columns:repeat(2,1fr)}
   .t-hero-wrap{height:360px}
   .attr-grid{grid-template-columns:repeat(3,1fr)}
   .contact-wrap{grid-template-columns:1fr 1.35fr;align-items:start}
   .foot-cols{grid-template-columns:repeat(3,1fr)}
   .fb-header-btn{display:flex}
+}
+@media(min-width:900px){
+  .evt-categories{grid-template-columns:repeat(4,1fr)}
 }
 @media(max-width:767px){
   .fb-header-btn{display:none}
@@ -527,58 +539,88 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 </div>
 </div>
 
-<!-- EVENTS -->
+<!-- =====================================================
+     EVENTS — Redesigned, no hardcoded dates
+     ===================================================== -->
 <div id="events">
 <div class="outer">
   <div class="section-label reveal">Stay Informed</div>
   <h2 class="section-title reveal">Events &amp; Meetings</h2>
-  <p class="section-sub reveal">From monthly Fiscal Court sessions to community festivals — here's what's happening in McCreary County.</p>
-  <div class="reveal">
-    <div class="acc-item">
-      <button class="acc-trigger active" data-acc="gov">Government &amp; Civic<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
-      <div class="acc-body open" id="acc-gov">
-        <div class="acc-event"><span class="evt-name">Fiscal Court Meeting</span><span class="evt-detail">Second Thursday of every month · 6:00 PM · Fiscal Courtroom, Whitley City</span></div>
-        <div class="acc-event"><span class="evt-name">Public Hearings</span><span class="evt-detail">Budget, zoning &amp; ordinance discussions — announced as needed</span></div>
-        <div class="acc-event"><span class="evt-name">Town Hall Meetings</span><span class="evt-detail">Informal Q&amp;A with the Judge/Executive and Magistrates</span></div>
-        <div class="acc-event"><span class="evt-name">Budget Workshops</span><span class="evt-detail">Learn how county funds are allocated to local programs</span></div>
-        <div class="acc-event"><span class="evt-name">Election Information Events</span><span class="evt-detail">Voter registration and election education sessions</span></div>
+  <p class="section-sub reveal">McCreary County hosts a variety of recurring civic, community, and seasonal events throughout the year. Check the calendar below for specific upcoming dates.</p>
+
+  <!-- Fiscal Court meeting callout -->
+  <div class="evt-recurring reveal">
+    <div class="evt-recurring-icon"><i class="fa-solid fa-gavel"></i></div>
+    <div class="evt-recurring-text">
+      <strong>Fiscal Court Meetings — Second Thursday of Every Month · 6:00 PM</strong>
+      <span>Held in the Fiscal Courtroom, Whitley City. Open to the public. Agenda items include budget reviews, ordinances, resolutions, and community business.</span>
+    </div>
+  </div>
+
+  <!-- Category cards -->
+  <div class="evt-categories reveal">
+
+    <div class="evt-cat">
+      <div class="evt-cat-header">
+        <div class="evt-cat-icon"><i class="fa-solid fa-landmark"></i></div>
+        <div class="evt-cat-title">Government &amp; Civic</div>
+      </div>
+      <div class="evt-cat-items">
+        <div class="evt-cat-item">Monthly Fiscal Court Meetings</div>
+        <div class="evt-cat-item">Public Hearings — budget, zoning &amp; ordinances</div>
+        <div class="evt-cat-item">Town Hall Q&amp;A Sessions</div>
+        <div class="evt-cat-item">Annual Budget Workshops</div>
+        <div class="evt-cat-item">Voter Registration &amp; Election Info Events</div>
       </div>
     </div>
-    <div class="acc-item">
-      <button class="acc-trigger" data-acc="comm">Community &amp; Public Services<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
-      <div class="acc-body" id="acc-comm">
-        <div class="acc-event"><span class="evt-name">Community Cleanup Day</span><span class="evt-detail">May 15, 2025 · 9:00 AM–3:00 PM · Various County Locations</span></div>
-        <div class="acc-event"><span class="evt-name">Recycling Drop-Off Day</span><span class="evt-detail">First Saturday monthly · County Transfer Station</span></div>
-        <div class="acc-event"><span class="evt-name">Veterans Appreciation Ceremony</span><span class="evt-detail">November 11, 2025 · Courthouse Lawn</span></div>
-        <div class="acc-event"><span class="evt-name">Volunteer Recognition Event</span><span class="evt-detail">Honoring community volunteers and organizations</span></div>
+
+    <div class="evt-cat">
+      <div class="evt-cat-header">
+        <div class="evt-cat-icon"><i class="fa-solid fa-people-group"></i></div>
+        <div class="evt-cat-title">Community &amp; Public Services</div>
+      </div>
+      <div class="evt-cat-items">
+        <div class="evt-cat-item">Annual Community Cleanup Day</div>
+        <div class="evt-cat-item">Monthly Recycling Drop-Off Days</div>
+        <div class="evt-cat-item">Veterans Appreciation Ceremony</div>
+        <div class="evt-cat-item">Volunteer Recognition Event</div>
       </div>
     </div>
-    <div class="acc-item">
-      <button class="acc-trigger" data-acc="rec">Recreation &amp; Tourism<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
-      <div class="acc-body" id="acc-rec">
-        <div class="acc-event"><span class="evt-name">McCreary County Fair</span><span class="evt-detail">August 10–14, 2025 · McCreary County Fairgrounds</span></div>
-        <div class="acc-event"><span class="evt-name">Historical Walking Tour</span><span class="evt-detail">September 5, 2025 · 10:00 AM · Downtown Whitley City</span></div>
-        <div class="acc-event"><span class="evt-name">Fall Heritage Festival</span><span class="evt-detail">October 12, 2025 · Sandhill Park</span></div>
-        <div class="acc-event"><span class="evt-name">Christmas Parade &amp; Tree Lighting</span><span class="evt-detail">December 6, 2025 · Courthouse Square</span></div>
-        <div class="acc-event"><span class="evt-name">Concert in the Park Series</span><span class="evt-detail">Summer evenings · Local artists and food vendors</span></div>
+
+    <div class="evt-cat">
+      <div class="evt-cat-header">
+        <div class="evt-cat-icon"><i class="fa-solid fa-tree"></i></div>
+        <div class="evt-cat-title">Recreation &amp; Tourism</div>
+      </div>
+      <div class="evt-cat-items">
+        <div class="evt-cat-item">McCreary County Fair</div>
+        <div class="evt-cat-item">Historical Walking Tour — Downtown Whitley City</div>
+        <div class="evt-cat-item">Fall Heritage Festival at Sandhill Park</div>
+        <div class="evt-cat-item">Christmas Parade &amp; Tree Lighting</div>
+        <div class="evt-cat-item">Summer Concert in the Park Series</div>
       </div>
     </div>
-    <div class="acc-item">
-      <button class="acc-trigger" data-acc="econ">Economic &amp; Development<div class="acc-icon"><i class="fa-solid fa-plus"></i></div></button>
-      <div class="acc-body" id="acc-econ">
-        <div class="acc-event"><span class="evt-name">Small Business Roundtable</span><span class="evt-detail">Quarterly networking for local entrepreneurs</span></div>
-        <div class="acc-event"><span class="evt-name">Grant &amp; Funding Workshop</span><span class="evt-detail">Learn about available county and state assistance programs</span></div>
-        <div class="acc-event"><span class="evt-name">Job &amp; Resource Fair</span><span class="evt-detail">June 20, 2025 · McCreary Central High School Gym</span></div>
-        <div class="acc-event"><span class="evt-name">Infrastructure Project Updates</span><span class="evt-detail">Open house discussions for upcoming county improvements</span></div>
+
+    <div class="evt-cat">
+      <div class="evt-cat-header">
+        <div class="evt-cat-icon"><i class="fa-solid fa-briefcase"></i></div>
+        <div class="evt-cat-title">Economic &amp; Development</div>
+      </div>
+      <div class="evt-cat-items">
+        <div class="evt-cat-item">Quarterly Small Business Roundtable</div>
+        <div class="evt-cat-item">Grant &amp; Funding Workshops</div>
+        <div class="evt-cat-item">Annual Job &amp; Resource Fair</div>
+        <div class="evt-cat-item">Infrastructure Project Open Houses</div>
       </div>
     </div>
+
   </div>
 
   <!-- GOOGLE CALENDAR -->
   <div class="calendar-wrap reveal">
     <div class="calendar-header">
       <i class="fa-regular fa-calendar-days"></i>
-      <span>County Calendar</span>
+      <span>County Calendar — Specific Dates &amp; Times</span>
       <a href="https://calendar.google.com/calendar/embed?src=c_2f3a3e87aea482189ad32c2c876b6e626675d98d5f02e94fd8fdeb501a85c01a%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" rel="noopener noreferrer">
         Open in Google Calendar <i class="fa-solid fa-arrow-up-right-from-square"></i>
       </a>
@@ -618,22 +660,14 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <!-- RECORDS REQUEST FORM -->
   <div class="records-form reveal">
     <h3><i class="fa-solid fa-file-magnifying-glass" style="margin-right:0.5rem;color:var(--gold)"></i>Submit a Records Request</h3>
-    <!--
-      FORMSUBMIT SETUP FOR RECORDS REQUEST:
-      Replace YOUR_RECORDS_EMAIL below with the actual destination email (e.g. records@mccrearycounty.com).
-      On first submission FormSubmit will send a confirmation email to activate the endpoint.
-    -->
     <form class="rfrow"
           action="https://formsubmit.co/records@mccrearycounty.com"
           method="POST">
-      <!-- FormSubmit configuration fields -->
       <input type="hidden" name="_subject" value="Open Records Request – McCreary County Fiscal Court">
       <input type="hidden" name="_next" value="https://mccrearycounty.com/records-thank-you.html">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
-      <!-- Honeypot spam filter -->
       <input type="text" name="_honey" style="display:none">
-
       <input type="text" name="full_name" placeholder="Your Full Name" required autocomplete="name">
       <input type="email" name="email" placeholder="Your Email Address" required autocomplete="email">
       <input type="tel" name="phone" placeholder="Phone Number (optional)" autocomplete="tel">
@@ -721,6 +755,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       <a href="https://www.unitedcumberland.com/" target="_blank" class="res-link">United Cumberland Bank <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://www.scottsolidwaste.com/contact-us" target="_blank" class="res-link">Scott Solid Waste <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/xzdj7oxkhSXHxRXi7" target="_blank" class="res-link">McCreary County Senior Citizens <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.mccrearyjournal.com/" target="_blank" class="res-link">McCreary County Journal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
   <div class="res-panel" id="panel-healthcare">
@@ -735,7 +770,6 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       <a href="https://maps.app.goo.gl/FuwKZmJkNRPr5rvu6" target="_blank" class="res-link">Kroger Pharmacy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
-  <!-- FIXED: data-panel="memorial" matches id="panel-memorial" -->
   <div class="res-panel" id="panel-memorial">
     <div class="res-list">
       <a href="https://www.strunkfuneralhome.net/" target="_blank" class="res-link">Hickman-Strunk Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
@@ -779,22 +813,14 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
     <div class="cform reveal d1">
       <h3>Send a Message</h3>
-      <!--
-        FORMSUBMIT SETUP FOR CONTACT FORM:
-        Replace YOUR_CONTACT_EMAIL below with the actual destination email (e.g. info@mccrearycounty.com).
-        On first submission FormSubmit will send a confirmation email to activate the endpoint.
-      -->
       <form class="frow"
             action="https://formsubmit.co/info@mccrearycounty.com"
             method="POST">
-        <!-- FormSubmit configuration fields -->
         <input type="hidden" name="_subject" value="Website Message – McCreary County Fiscal Court">
         <input type="hidden" name="_next" value="https://mccrearycounty.com/thank-you.html">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <!-- Honeypot spam filter -->
         <input type="text" name="_honey" style="display:none">
-
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
@@ -899,15 +925,6 @@ drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   document.getElementById('tPrev').addEventListener('click', () => go(cur-1));
   setInterval(() => go(cur+1), 4800);
 })();
-
-// Accordion
-document.querySelectorAll('.acc-trigger').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const isActive = btn.classList.contains('active');
-    document.querySelectorAll('.acc-trigger').forEach(b => { b.classList.remove('active'); document.getElementById('acc-'+b.dataset.acc)?.classList.remove('open'); });
-    if (!isActive) { btn.classList.add('active'); document.getElementById('acc-'+btn.dataset.acc)?.classList.add('open'); }
-  });
-});
 
 // Resource tabs
 document.querySelectorAll('.res-tab').forEach(tab => {
