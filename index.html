@@ -92,7 +92,7 @@ header.scrolled{
 .drawer-fb{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)!important}
 .drawer-fb i{font-size:1rem;color:#8ab4f8;margin-right:0.5rem}
 
-/* BURN BAN BANNER — fixed directly below the header */
+/* BURN BAN BANNER */
 #burn-ban-bar{
   background:var(--forest);
   padding:0.6rem 1.25rem;
@@ -101,7 +101,6 @@ header.scrolled{
   flex-wrap:wrap;
   font-size:0.8rem;
   min-height:var(--banner-h);
-  /* Fixed positioning pinned just below the header */
   position:fixed;
   top:var(--header-h);
   left:0;right:0;
@@ -117,7 +116,7 @@ header.scrolled{
 #burn-ban-bar .bb-source a{color:rgba(255,255,255,0.4);text-decoration:underline}
 @keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
 
-/* HERO — push down by header + banner height */
+/* HERO */
 .hero{
   position:relative;height:100svh;min-height:500px;
   overflow:hidden;display:flex;align-items:flex-end;
@@ -195,6 +194,49 @@ header.scrolled{
 .acc-event:first-child{border-top:none}
 .evt-name{font-size:0.84rem;font-weight:500;color:var(--forest)}
 .evt-detail{font-size:0.76rem;color:#777;line-height:1.5}
+
+/* GOOGLE CALENDAR EMBED */
+.calendar-wrap{
+  margin-top:2.5rem;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid rgba(0,0,0,0.09);
+  background:#fff;
+  box-shadow:0 4px 24px rgba(0,0,0,0.07);
+}
+.calendar-header{
+  display:flex;align-items:center;gap:0.65rem;
+  background:var(--forest);
+  padding:0.9rem 1.25rem;
+}
+.calendar-header i{color:var(--gold-light);font-size:0.95rem}
+.calendar-header span{
+  font-size:0.78rem;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:rgba(255,255,255,0.85);
+}
+.calendar-header a{
+  margin-left:auto;
+  display:inline-flex;align-items:center;gap:0.35rem;
+  font-size:0.71rem;color:rgba(255,255,255,0.55);
+  transition:color 0.2s;white-space:nowrap;
+}
+.calendar-header a:hover{color:var(--gold-light)}
+.calendar-header a i{font-size:0.62rem;color:inherit}
+.calendar-iframe-wrap{
+  position:relative;
+  width:100%;
+  padding-top:62%;
+}
+.calendar-iframe-wrap iframe{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  border:0;display:block;
+}
+@media(min-width:768px){
+  .calendar-iframe-wrap{padding-top:0;height:520px}
+  .calendar-iframe-wrap iframe{position:static;width:100%;height:100%}
+}
 
 /* RECORDS */
 #records-section{background:var(--forest);padding:4rem 1.25rem}
@@ -517,6 +559,28 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       </div>
     </div>
   </div>
+
+  <!-- GOOGLE CALENDAR -->
+  <div class="calendar-wrap reveal">
+    <div class="calendar-header">
+      <i class="fa-regular fa-calendar-days"></i>
+      <span>County Calendar</span>
+      <a href="https://calendar.google.com/calendar/embed?src=c_2f3a3e87aea482189ad32c2c876b6e626675d98d5f02e94fd8fdeb501a85c01a%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" rel="noopener noreferrer">
+        Open in Google Calendar <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </a>
+    </div>
+    <div class="calendar-iframe-wrap">
+      <iframe
+        src="https://calendar.google.com/calendar/embed?src=c_2f3a3e87aea482189ad32c2c876b6e626675d98d5f02e94fd8fdeb501a85c01a%40group.calendar.google.com&ctz=America%2FNew_York"
+        style="border:0"
+        frameborder="0"
+        scrolling="no"
+        title="McCreary County Fiscal Court Calendar"
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+
 </div>
 </div>
 
