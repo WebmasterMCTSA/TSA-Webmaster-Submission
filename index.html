@@ -306,6 +306,20 @@ header.scrolled{
 .frow button:hover{background:var(--forest-mid)}
 .frow button:active{transform:scale(0.97)}
 
+/* RECORDS REQUEST FORM */
+.records-form{background:rgba(255,255,255,0.06);border-radius:var(--radius-lg);padding:1.5rem;border:1px solid rgba(255,255,255,0.12);margin-top:1.5rem}
+.records-form h3{font-family:var(--ff-display);font-size:1.1rem;color:var(--cream);margin-bottom:1rem}
+.rfrow{display:flex;flex-direction:column;gap:0.7rem}
+.rfrow input,.rfrow textarea,.rfrow select{width:100%;padding:0.82rem 0.95rem;border:1px solid rgba(255,255,255,0.18);border-radius:var(--radius-sm);font-family:var(--ff-body);font-size:0.9rem;background:rgba(255,255,255,0.07);color:#fff;transition:border-color 0.2s,background 0.2s;outline:none}
+.rfrow input::placeholder,.rfrow textarea::placeholder{color:rgba(255,255,255,0.4)}
+.rfrow input:focus,.rfrow textarea:focus,.rfrow select:focus{border-color:var(--gold);background:rgba(255,255,255,0.1)}
+.rfrow select{color:rgba(255,255,255,0.85)}
+.rfrow select option{background:var(--forest);color:#fff}
+.rfrow textarea{resize:vertical;min-height:100px}
+.rfrow button{display:inline-flex;align-items:center;gap:0.5rem;background:var(--gold);color:var(--ink);font-family:var(--ff-body);font-weight:500;font-size:0.88rem;padding:0.85rem 1.65rem;border-radius:30px;transition:background 0.2s,transform 0.15s;align-self:flex-start;border:none;cursor:pointer}
+.rfrow button:hover{background:var(--gold-light)}
+.rfrow button:active{transform:scale(0.97)}
+
 /* SOCIAL / FACEBOOK SECTION */
 #social{background:var(--parchment)}
 .social-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border-radius:var(--radius-lg);padding:2.2rem 1.5rem;border:1px solid rgba(0,0,0,0.07);max-width:520px;margin:0 auto}
@@ -591,7 +605,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <h2 class="section-title reveal" style="color:var(--cream)">Court Records</h2>
   <p class="records-desc reveal">The Fiscal Court maintains records under Kentucky state law — including meeting minutes, ordinances, resolutions, and official documents. All records are available upon written request.</p>
   <div class="reveal">
-    <div class="r-step"><div class="r-num">1</div><div class="r-text">Submit a written request via mail or email to the Fiscal Court office</div></div>
+    <div class="r-step"><div class="r-num">1</div><div class="r-text">Submit a written request via the form below or by mail to the Fiscal Court office</div></div>
     <div class="r-step"><div class="r-num">2</div><div class="r-text">Provide the specific record name, date, or topic for accurate processing</div></div>
     <div class="r-step"><div class="r-num">3</div><div class="r-text">Some records may require a nominal copying fee per Kentucky law</div></div>
   </div>
@@ -600,7 +614,44 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <div class="rc-row"><span class="lbl">Phone</span><a href="tel:6063762413">606-376-2413</a></div>
     <div class="rc-row"><span class="lbl">Email</span><a href="mailto:records@mccrearycounty.com">records@mccrearycounty.com</a></div>
   </div>
-  <a href="#contact" class="btn-gold reveal"><i class="fa-solid fa-paper-plane"></i> Submit a Request</a>
+
+  <!-- RECORDS REQUEST FORM -->
+  <div class="records-form reveal">
+    <h3><i class="fa-solid fa-file-magnifying-glass" style="margin-right:0.5rem;color:var(--gold)"></i>Submit a Records Request</h3>
+    <!--
+      FORMSUBMIT SETUP FOR RECORDS REQUEST:
+      Replace YOUR_RECORDS_EMAIL below with the actual destination email (e.g. records@mccrearycounty.com).
+      On first submission FormSubmit will send a confirmation email to activate the endpoint.
+    -->
+    <form class="rfrow"
+          action="https://formsubmit.co/records@mccrearycounty.com"
+          method="POST">
+      <!-- FormSubmit configuration fields -->
+      <input type="hidden" name="_subject" value="Open Records Request – McCreary County Fiscal Court">
+      <input type="hidden" name="_next" value="https://mccrearycounty.com/records-thank-you.html">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <!-- Honeypot spam filter -->
+      <input type="text" name="_honey" style="display:none">
+
+      <input type="text" name="full_name" placeholder="Your Full Name" required autocomplete="name">
+      <input type="email" name="email" placeholder="Your Email Address" required autocomplete="email">
+      <input type="tel" name="phone" placeholder="Phone Number (optional)" autocomplete="tel">
+      <select name="record_type" required>
+        <option value="" disabled selected>Type of Record Requested</option>
+        <option value="Meeting Minutes">Meeting Minutes</option>
+        <option value="Ordinance / Resolution">Ordinance / Resolution</option>
+        <option value="Budget / Financial Records">Budget / Financial Records</option>
+        <option value="Contracts / Agreements">Contracts / Agreements</option>
+        <option value="Personnel Records">Personnel Records</option>
+        <option value="Other">Other</option>
+      </select>
+      <input type="text" name="record_date_or_period" placeholder="Approximate Date or Time Period of Record">
+      <textarea name="description" rows="4" placeholder="Please describe the record(s) you are requesting in detail…" required></textarea>
+      <button type="submit"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+    </form>
+  </div>
+
 </div>
 </div>
 
@@ -649,7 +700,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <button class="res-tab active" data-panel="utilities">Utilities</button>
     <button class="res-tab" data-panel="community">Community</button>
     <button class="res-tab" data-panel="healthcare">Healthcare</button>
-    <button class="res-tab" data-panel="">Memorial Services</button>
+    <button class="res-tab" data-panel="memorial">Memorial Services</button>
   </div>
   <div class="res-panel active" id="panel-utilities">
     <div class="res-list">
@@ -684,7 +735,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       <a href="https://maps.app.goo.gl/FuwKZmJkNRPr5rvu6" target="_blank" class="res-link">Kroger Pharmacy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
-  <div class="res-panel" id="panel-Memorial Services">
+  <!-- FIXED: data-panel="memorial" matches id="panel-memorial" -->
+  <div class="res-panel" id="panel-memorial">
     <div class="res-list">
       <a href="https://www.strunkfuneralhome.net/" target="_blank" class="res-link">Hickman-Strunk Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://www.mccrearyfh.com/" target="_blank" class="res-link">McCreary Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
@@ -727,7 +779,22 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
     <div class="cform reveal d1">
       <h3>Send a Message</h3>
-      <form class="frow" action="#" method="post">
+      <!--
+        FORMSUBMIT SETUP FOR CONTACT FORM:
+        Replace YOUR_CONTACT_EMAIL below with the actual destination email (e.g. info@mccrearycounty.com).
+        On first submission FormSubmit will send a confirmation email to activate the endpoint.
+      -->
+      <form class="frow"
+            action="https://formsubmit.co/info@mccrearycounty.com"
+            method="POST">
+        <!-- FormSubmit configuration fields -->
+        <input type="hidden" name="_subject" value="Website Message – McCreary County Fiscal Court">
+        <input type="hidden" name="_next" value="https://mccrearycounty.com/thank-you.html">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <!-- Honeypot spam filter -->
+        <input type="text" name="_honey" style="display:none">
+
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
