@@ -302,6 +302,13 @@ header.scrolled{
 .map-embed{border-radius:var(--radius-lg);overflow:hidden;margin-top:1.4rem;height:270px}
 .map-embed iframe{width:100%;height:100%;border:0}
 
+/* TOURISM LINKS */
+.tourism-links{display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.tourism-link-btn{display:inline-flex;align-items:center;gap:0.5rem;background:var(--forest);color:#fff;font-size:0.83rem;font-weight:500;padding:0.72rem 1.25rem;border-radius:30px;transition:background 0.2s,transform 0.15s;border:1px solid rgba(255,255,255,0.1)}
+.tourism-link-btn:hover{background:var(--forest-mid)}
+.tourism-link-btn:active{transform:scale(0.97)}
+.tourism-link-btn i{font-size:0.8rem;color:var(--gold-light)}
+
 /* RESOURCES */
 #resources{background:var(--parchment)}
 .res-tabs{display:flex;gap:0.35rem;flex-wrap:wrap;margin-bottom:1.4rem}
@@ -870,6 +877,17 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <a href="https://www.google.com/maps/search/?api=1&query=Eagle+Falls+Kentucky" target="_blank" class="attr-card reveal d1"><img src="images/EagleFalls-Web.jpg" alt="Eagle Falls"><div class="attr-info"><h4>Eagle Falls</h4><p>Hidden forest waterfall</p></div></a>
     <a href="https://www.google.com/maps/search/?api=1&query=Princess+Falls+Kentucky" target="_blank" class="attr-card reveal d2"><img src="images/Princess-Fass-Web.jpg" alt="Princess Falls"><div class="attr-info"><h4>Princess Falls</h4><p>Serene and picturesque</p></div></a>
   </div>
+
+  <!-- TOURISM EXTERNAL LINKS -->
+  <div class="tourism-links reveal">
+    <a href="https://www.mccrearytourism.com" target="_blank" rel="noopener noreferrer" class="tourism-link-btn">
+      <i class="fa-solid fa-globe"></i> McCreary Tourism Website
+    </a>
+    <a href="https://www.komoot.com/guide/1834864/hiking-in-mccreary-county" target="_blank" rel="noopener noreferrer" class="tourism-link-btn">
+      <i class="fa-solid fa-person-hiking"></i> Hiking Guide (Komoot)
+    </a>
+  </div>
+
   <div class="map-embed reveal">
     <iframe src="https://www.google.com/maps?q=McCreary+County,+Kentucky&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="McCreary County Map"></iframe>
   </div>
@@ -885,6 +903,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <div class="res-tabs reveal" id="resTabs">
     <button class="res-tab active" data-panel="utilities">Utilities</button>
     <button class="res-tab" data-panel="community">Community</button>
+    <button class="res-tab" data-panel="fire">Fire &amp; Rescue</button>
     <button class="res-tab" data-panel="healthcare">Healthcare</button>
     <button class="res-tab" data-panel="memorial">Memorial Services</button>
   </div>
@@ -908,6 +927,15 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       <a href="https://www.scottsolidwaste.com/contact-us" target="_blank" class="res-link">Scott Solid Waste <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/xzdj7oxkhSXHxRXi7" target="_blank" class="res-link">McCreary County Senior Citizens <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://www.mccrearyjournal.com/" target="_blank" class="res-link">McCreary County Journal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    </div>
+  </div>
+  <div class="res-panel" id="panel-fire">
+    <div class="res-list">
+      <a href="https://usfiredept.com/south-mccreary-fire-and-rescue-21443.html" target="_blank" class="res-link">South McCreary Fire &amp; Rescue <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://usfiredept.com/west-mccreary-volunteer-fire-department-24859.html" target="_blank" class="res-link">West McCreary Volunteer Fire Department <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://usfiredept.com/whitley-city-fire-department-25265.html" target="_blank" class="res-link">Whitley City Fire Department <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://usfiredept.com/north-mccreary-fire-protection-district-16629.html" target="_blank" class="res-link">North McCreary Fire Protection District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://usfiredept.com/eagle-sawyer-fire-protection-district-6756.html" target="_blank" class="res-link">Eagle-Sawyer Fire Protection District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
   <div class="res-panel" id="panel-healthcare">
