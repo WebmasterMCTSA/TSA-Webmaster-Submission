@@ -20,7 +20,1488 @@
   --parchment:#ede8dc;
   --gold:#c8973a;
   --gold-light:#e0b96a;
-  --radius-sm:6px;
+  --radius-sm:6px;<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>McCreary Central High School | A Great Place to Learn</title>
+  <meta name="description" content="A refreshed McCreary Central High School homepage concept using real MCHS Google Site content, Raider resources, academics, extracurriculars, reports, spotlights, and social media sections." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #9e1b1b;
+      --red-dark: #751313;
+      --charcoal: #1a1a1a;
+      --cream: #fdfbf7;
+      --gold: #ffb81c;
+      --muted: #6b625b;
+      --line: #1a1a1a;
+      --facebook: #1877f2;
+      --youtube: #ff0000;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { max-width: 100%; display: block; }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 48px;
+      background: var(--cream);
+      border-bottom: 3px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    .mark {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      background: var(--red);
+      color: white;
+      border: 3px solid var(--line);
+      box-shadow: 5px 5px 0 var(--charcoal);
+      font-size: 24px;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--red);
+      font-size: 12px;
+      letter-spacing: .18em;
+      margin-top: -3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .nav-links a:hover { color: var(--red); }
+
+    .nav-cta {
+      padding: 14px 18px;
+      background: var(--charcoal);
+      color: white;
+      border: 3px solid var(--line);
+      box-shadow: 4px 4px 0 var(--charcoal);
+    }
+
+    .hero {
+      min-height: 790px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: end;
+      border-bottom: 4px solid var(--line);
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.35), rgba(158,27,27,.76)),
+        radial-gradient(circle at 20% 25%, rgba(255,184,28,.28), transparent 28%),
+        linear-gradient(135deg, #303030, #9e1b1b 60%, #c4a96d);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: .35;
+    }
+
+    .hero-shape {
+      position: absolute;
+      top: 0;
+      right: 16%;
+      width: 55%;
+      height: 100%;
+      background: rgba(158,27,27,.82);
+      transform: skewX(-14deg);
+      transform-origin: top right;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 48px;
+      align-items: end;
+      padding: 80px 48px 96px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--charcoal);
+      border: 3px solid var(--line);
+      box-shadow: 5px 5px 0 var(--charcoal);
+      padding: 8px 18px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      font-size: 13px;
+      margin-bottom: 28px;
+    }
+
+    h1, h2, h3, h4 { font-family: "Outfit", sans-serif; margin: 0; line-height: .92; }
+
+    h1 {
+      color: white;
+      font-size: clamp(72px, 12vw, 162px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.08em;
+      margin-bottom: 34px;
+    }
+
+    .stroke {
+      color: transparent;
+      -webkit-text-stroke: 2px white;
+    }
+
+    .hero p {
+      max-width: 660px;
+      color: rgba(255,255,255,.92);
+      font-size: 24px;
+      font-weight: 700;
+      border-left: 5px solid var(--gold);
+      padding-left: 24px;
+      margin-bottom: 34px;
+    }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 16px; }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 58px;
+      padding: 0 28px;
+      border: 3px solid var(--line);
+      box-shadow: 6px 6px 0 var(--charcoal);
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      transition: .2s ease;
+    }
+
+    .button:hover { transform: translateY(3px); box-shadow: 2px 2px 0 var(--charcoal); }
+    .button.red { background: var(--red); color: white; }
+    .button.light { background: white; color: var(--charcoal); }
+    .button.dark { background: var(--charcoal); color: white; }
+    .button.gold { background: var(--gold); color: var(--charcoal); }
+    .button.fb { background: var(--facebook); color: white; }
+    .button.yt { background: var(--youtube); color: white; }
+
+    .events-card {
+      background: var(--cream);
+      border: 4px solid var(--line);
+      box-shadow: 12px 12px 0 var(--charcoal);
+      padding: 32px;
+      margin-bottom: -32px;
+    }
+
+    .events-card h3 { font-size: 34px; font-weight: 900; text-transform: uppercase; margin-bottom: 22px; }
+    .events-card h3 span { color: var(--red); }
+
+    .event {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 16px;
+      align-items: center;
+      border-bottom: 2px solid rgba(26,26,26,.12);
+      padding: 14px 0;
+    }
+
+    .event:last-child { border-bottom: 0; }
+
+    .date {
+      background: var(--gold);
+      border: 3px solid var(--line);
+      text-align: center;
+      padding: 7px 4px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .date small { display: block; font-size: 11px; }
+    .event strong { display: block; font-weight: 900; }
+    .event span { color: var(--muted); font-weight: 700; font-size: 14px; }
+
+    section { padding: 96px 48px; }
+    .container { max-width: 1280px; margin: 0 auto; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 48px;
+      align-items: start;
+      margin-bottom: 54px;
+    }
+
+    .section-head h2, .center-head h2 {
+      font-size: clamp(50px, 7vw, 92px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.06em;
+    }
+
+    .section-head h2 span, .center-head h2 span { color: var(--red); }
+    .section-head p, .center-head p { color: var(--muted); font-size: 20px; font-weight: 700; }
+    .center-head { max-width: 840px; text-align: center; margin: 0 auto 60px; }
+
+    .tilt-card {
+      background: white;
+      border: 4px solid var(--line);
+      box-shadow: 9px 9px 0 var(--charcoal);
+      padding: 28px;
+      transform: rotate(2deg);
+    }
+
+    .grid { display: grid; gap: 28px; }
+    .grid.three { grid-template-columns: repeat(3, 1fr); }
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+
+    .resource-card, .program-card, .spotlight-card, .social-widget {
+      background: white;
+      border: 4px solid var(--line);
+      box-shadow: 8px 8px 0 var(--charcoal);
+      transition: .25s ease;
+      overflow: hidden;
+    }
+
+    a.resource-card { display: block; }
+
+    .resource-card:hover, .program-card:hover, .spotlight-card:hover, .social-widget:hover {
+      transform: translateY(-8px);
+      box-shadow: 12px 12px 0 var(--charcoal);
+    }
+
+    .card-top {
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px;
+      border-bottom: 4px solid var(--line);
+      color: white;
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      font-size: 40px;
+    }
+
+    .card-top.red { background: var(--red); }
+    .card-top.dark { background: var(--charcoal); }
+    .card-top.gold { background: var(--gold); color: var(--charcoal); }
+
+    .card-body { padding: 28px; }
+    .card-body h3 { font-size: 28px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
+    .card-body p { color: var(--muted); font-weight: 700; margin: 0; }
+
+    .calendar-section { background: var(--cream); }
+    .calendar-frame {
+      background: white;
+      border: 4px solid var(--line);
+      box-shadow: 12px 12px 0 var(--charcoal);
+      overflow: hidden;
+    }
+    .calendar-frame iframe {
+      width: 100%;
+      height: 600px;
+      border: 0;
+      display: block;
+    }
+
+    .academics { background: white; }
+
+    .support-card {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--cream);
+      border: 4px solid var(--line);
+      box-shadow: 12px 12px 0 var(--charcoal);
+      overflow: hidden;
+    }
+
+    .support-card > div { padding: 48px; }
+    .support-card h3 { font-size: 52px; font-weight: 900; text-transform: uppercase; margin-bottom: 20px; }
+    .support-card h3 span { color: var(--red); }
+    .support-list { display: grid; gap: 12px; margin: 28px 0; font-weight: 900; }
+    .support-list span::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--red); border-radius: 999px; margin-right: 12px; }
+    .support-image { min-height: 360px; background: linear-gradient(135deg, rgba(158,27,27,.75), rgba(26,26,26,.55)), radial-gradient(circle at 20% 30%, #ffb81c, transparent 24%), #7e2020; border-left: 4px solid var(--line); }
+
+    .athletics {
+      background: var(--charcoal);
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .athletics::before, .athletics::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      filter: blur(65px);
+      opacity: .22;
+    }
+
+    .athletics::before { background: var(--red); right: -120px; top: -120px; }
+    .athletics::after { background: var(--gold); left: -120px; bottom: -120px; }
+
+    .athletics-inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .photo-block {
+      min-height: 430px;
+      border: 4px solid var(--line);
+      box-shadow: 10px 10px 0 var(--gold);
+      background: linear-gradient(135deg, rgba(255,184,28,.75), rgba(158,27,27,.75)), radial-gradient(circle at 70% 25%, white, transparent 18%), #702020;
+      position: relative;
+    }
+
+    .stat {
+      position: absolute;
+      right: -28px;
+      bottom: -28px;
+      background: var(--red);
+      color: white;
+      border: 4px solid var(--line);
+      box-shadow: 8px 8px 0 var(--charcoal);
+      padding: 22px;
+      transform: rotate(3deg);
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .stat strong { display: block; font-size: 44px; line-height: 1; }
+    .athletics h2 { font-size: clamp(54px, 8vw, 96px); text-transform: uppercase; font-weight: 900; letter-spacing: -.06em; margin-bottom: 28px; }
+    .athletics h2 span { color: transparent; -webkit-text-stroke: 1px white; }
+    .athletics p { color: rgba(255,255,255,.82); font-size: 20px; font-weight: 700; max-width: 560px; }
+
+    .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 34px 0; }
+    .value { display: flex; align-items: center; gap: 12px; font-family: "Outfit", sans-serif; font-weight: 900; text-transform: uppercase; }
+    .value b { width: 44px; height: 44px; display: grid; place-items: center; background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.22); color: var(--gold); }
+
+    .updates { position: relative; overflow: hidden; }
+    .updates::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(90deg, rgba(0,0,0,.05) 1px, transparent 1px), linear-gradient(rgba(0,0,0,.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: .5;
+      pointer-events: none;
+    }
+
+    .updates .container { position: relative; z-index: 2; }
+    .updates-top { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: start; margin-bottom: 56px; }
+    .updates h2 { font-size: clamp(50px, 7vw, 88px); text-transform: uppercase; font-weight: 900; letter-spacing: -.06em; margin-bottom: 24px; }
+    .updates h2 span { color: var(--red); }
+
+    .message-card {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 24px;
+      background: white;
+      border: 4px solid var(--line);
+      box-shadow: 10px 10px 0 var(--charcoal);
+      padding: 32px;
+    }
+
+    .avatar {
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      background: var(--charcoal);
+      color: white;
+      border: 4px solid var(--line);
+      box-shadow: 5px 5px 0 var(--red);
+      font-family: "Outfit", sans-serif;
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .message-card h3 { font-size: 36px; text-transform: uppercase; font-weight: 900; margin-bottom: 12px; }
+    .message-card p, .report-card p, .bulletin-card p { color: var(--muted); font-weight: 700; }
+
+    .report-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .report-card, .bulletin-card { border: 4px solid var(--line); box-shadow: 8px 8px 0 var(--charcoal); padding: 32px; }
+    .report-card { background: var(--gold); }
+    .bulletin-card { background: var(--charcoal); color: white; box-shadow: 8px 8px 0 var(--red); }
+    .bulletin-card p { color: rgba(255,255,255,.75); }
+    .report-card h3, .bulletin-card h3 { font-size: 34px; text-transform: uppercase; font-weight: 900; margin-bottom: 14px; }
+    .big-icon { font-family: "Outfit", sans-serif; font-size: 48px; font-weight: 900; margin-bottom: 18px; }
+
+    .spotlight-card .spot-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px;
+      border-bottom: 4px solid var(--line);
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .spot-head.gold { background: var(--gold); color: var(--charcoal); }
+    .spot-head.red { background: var(--red); color: white; }
+    .spot-body { display: grid; grid-template-columns: 98px 1fr; gap: 22px; padding: 28px; }
+    .initials { width: 94px; height: 94px; display: grid; place-items: center; background: var(--cream); border: 4px solid var(--line); box-shadow: 4px 4px 0 var(--charcoal); color: var(--red); font-family: "Outfit", sans-serif; font-size: 32px; font-weight: 900; }
+    .spot-body h3 { font-size: 32px; text-transform: uppercase; font-weight: 900; margin-bottom: 4px; }
+    .spot-body strong { color: var(--red); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; }
+    .spot-body p { color: var(--muted); font-weight: 700; }
+
+    .social-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 30px; margin-top: 56px; }
+    .fb-feed { background: var(--facebook); color: white; border: 4px solid var(--line); box-shadow: 12px 12px 0 var(--charcoal); padding: 36px; position: relative; overflow: hidden; }
+    .fb-feed::after { content: "f"; position: absolute; top: -85px; right: -20px; color: rgba(255,255,255,.12); font-family: Arial, sans-serif; font-size: 280px; font-weight: 900; }
+    .social-title { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; position: relative; z-index: 2; }
+    .social-logo { width: 64px; height: 64px; display: grid; place-items: center; background: white; color: var(--facebook); border: 4px solid var(--line); box-shadow: 5px 5px 0 var(--charcoal); font-family: Arial, sans-serif; font-size: 38px; font-weight: 900; }
+    .social-title h3 { font-size: 42px; text-transform: uppercase; font-weight: 900; }
+    .post { position: relative; z-index: 2; background: white; color: var(--charcoal); border: 4px solid var(--line); box-shadow: 5px 5px 0 var(--charcoal); padding: 22px; margin-bottom: 18px; }
+    .post small { color: var(--facebook); font-family: "Outfit", sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: .16em; }
+    .post h4 { font-size: 22px; text-transform: uppercase; margin: 8px 0; }
+    .post p { color: var(--muted); font-size: 14px; font-weight: 700; margin: 0; }
+
+    .widget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .widget-icon { width: 66px; height: 66px; display: grid; place-items: center; color: white; border: 4px solid var(--line); box-shadow: 4px 4px 0 var(--charcoal); font-family: Arial, sans-serif; font-size: 34px; font-weight: 900; margin-bottom: 28px; }
+    .widget-icon.fb { background: var(--facebook); }
+    .widget-icon.yt { background: var(--youtube); font-size: 26px; }
+    .social-widget { padding: 32px; display: flex; flex-direction: column; }
+    .social-widget h3 { font-size: 32px; text-transform: uppercase; font-weight: 900; margin-bottom: 14px; }
+    .social-widget p { color: var(--muted); font-weight: 700; flex: 1; margin-bottom: 26px; }
+
+    .about-site { background: white; }
+    .about-layout { display: grid; grid-template-columns: .9fr 1.1fr; gap: 64px; align-items: center; }
+    .about-logo-card { position: relative; }
+    .about-logo-card::before { content: ""; position: absolute; inset: 0; background: var(--gold); border: 4px solid var(--line); box-shadow: 12px 12px 0 var(--charcoal); transform: rotate(-4deg) scale(1.04); }
+    .about-logo-inner { position: relative; background: var(--cream); border: 4px solid var(--line); box-shadow: 8px 8px 0 var(--charcoal); padding: 42px; }
+    .about-badge { width: 112px; height: 112px; display: grid; place-items: center; background: var(--red); color: white; border: 4px solid var(--line); box-shadow: 6px 6px 0 var(--charcoal); font-family: "Outfit", sans-serif; font-size: 40px; font-weight: 900; margin-bottom: 28px; }
+    .about-logo-inner h2, .about-copy h3 { font-size: clamp(48px, 6vw, 78px); text-transform: uppercase; font-weight: 900; letter-spacing: -.06em; margin-bottom: 24px; }
+    .about-logo-inner h2 span, .about-copy h3 span { color: var(--red); }
+    .about-logo-inner p, .about-copy p { color: var(--muted); font-size: 20px; font-weight: 700; }
+    .fact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 30px 0; }
+    .fact-card { background: var(--cream); border: 3px solid var(--line); box-shadow: 4px 4px 0 var(--charcoal); padding: 20px; font-family: "Outfit", sans-serif; font-weight: 900; text-transform: uppercase; }
+    .department-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 48px 0; }
+    .department-box { border: 4px solid var(--line); box-shadow: 8px 8px 0 var(--charcoal); padding: 36px; }
+    .department-box.dark { background: var(--charcoal); color: white; box-shadow: 8px 8px 0 var(--red); }
+    .department-box.light { background: var(--cream); }
+    .department-box h3 { font-size: 42px; text-transform: uppercase; font-weight: 900; margin-bottom: 20px; }
+    .pill-list { display: flex; flex-wrap: wrap; gap: 12px; }
+    .pill-list span { border: 2px solid var(--line); background: white; color: var(--charcoal); box-shadow: 3px 3px 0 var(--charcoal); padding: 9px 13px; font-family: "Outfit", sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; }
+    .department-box.dark .pill-list span { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.1); color: white; box-shadow: none; }
+
+    footer {
+      background: var(--charcoal);
+      color: white;
+      padding: 74px 48px 34px;
+      border-top: 8px solid var(--red);
+    }
+
+    .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 36px; padding-bottom: 46px; border-bottom: 2px solid rgba(255,255,255,.12); }
+    footer h4 { color: var(--gold); text-transform: uppercase; font-size: 20px; margin-bottom: 20px; letter-spacing: .1em; }
+    footer p, footer li { color: rgba(255,255,255,.74); font-weight: 700; }
+    footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 11px; }
+    footer li::before { content: ""; display: inline-block; width: 7px; height: 7px; background: var(--red); border-radius: 99px; margin-right: 10px; }
+    footer a:hover { color: var(--gold); }
+    .socials { display: flex; gap: 12px; margin-top: 20px; }
+    .socials a { width: 42px; height: 42px; display: grid; place-items: center; border: 2px solid rgba(255,255,255,.25); background: rgba(255,255,255,.06); font-weight: 900; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 24px; padding-top: 28px; color: rgba(255,255,255,.55); font-weight: 700; font-size: 14px; }
+
+    @media (max-width: 980px) {
+      .nav { height: auto; padding: 18px 22px; align-items: flex-start; }
+      .nav-links { display: none; }
+      .hero-inner, .section-head, .support-card, .athletics-inner, .updates-top, .social-grid, .footer-grid, .about-layout, .department-panel { grid-template-columns: 1fr; }
+      .hero-inner { padding: 70px 24px 80px; }
+      .events-card { margin-bottom: 0; }
+      section { padding: 70px 24px; }
+      .grid.three, .grid.two, .report-row, .widget-grid, .fact-grid { grid-template-columns: 1fr; }
+      .support-image { border-left: 0; border-top: 4px solid var(--line); }
+      .footer-bottom { flex-direction: column; }
+    }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 68px; }
+      .hero p { font-size: 18px; }
+      .actions { flex-direction: column; align-items: stretch; }
+      .message-card, .spot-body { grid-template-columns: 1fr; }
+      .stat { right: 10px; }
+      .calendar-frame iframe { height: 520px; }
+    }
+
+    /* ===== Accessibility Widget ===== */
+    .a11y-fab {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #146ff8;
+      border: none;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+      cursor: pointer;
+      z-index: 99999;
+      display: grid;
+      place-items: center;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .a11y-fab:hover { transform: scale(1.06); background: #0a5fe0; }
+    .a11y-fab:focus-visible { outline: 3px solid #ffb81c; outline-offset: 3px; }
+    .a11y-fab svg { width: 34px; height: 34px; fill: #fff; }
+
+    .a11y-panel {
+      position: fixed;
+      left: 20px;
+      bottom: 90px;
+      width: 340px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: #fff;
+      color: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.35);
+      z-index: 99999;
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .a11y-panel.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .a11y-panel-header {
+      background: #146ff8;
+      color: #fff;
+      padding: 16px 20px;
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .a11y-panel-header h3 {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .a11y-close {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+    .a11y-close:hover { opacity: .8; }
+    .a11y-section-title {
+      padding: 14px 16px 6px;
+      font-family: "Outfit", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #6b7280;
+      border-top: 1px solid #eef0f4;
+    }
+    .a11y-section-title:first-of-type { border-top: 0; }
+    .a11y-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 6px 16px 12px;
+    }
+    .a11y-lang {
+      display: flex;
+      gap: 8px;
+      padding: 6px 16px 12px;
+    }
+    .a11y-lang button {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #e2e6ee;
+      background: #f4f6fa;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #1a1a1a;
+    }
+    .a11y-lang button.active {
+      background: #146ff8;
+      color: #fff;
+      border-color: #146ff8;
+    }
+    .a11y-btn {
+      background: #f4f6fa;
+      border: 2px solid #e2e6ee;
+      border-radius: 8px;
+      padding: 14px 8px;
+      cursor: pointer;
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a1a1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      text-align: center;
+      transition: all .15s ease;
+    }
+    .a11y-btn:hover { background: #e8eef9; border-color: #146ff8; }
+    .a11y-btn.active { background: #146ff8; color: #fff; border-color: #146ff8; }
+    .a11y-btn .ico { font-size: 20px; }
+    .a11y-reset {
+      margin: 0 16px 16px;
+      width: calc(100% - 32px);
+      padding: 12px;
+      background: #1a1a1a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: "Outfit", sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .a11y-reset:hover { background: #444; }
+
+    /* Effects applied to <html> */
+    html.a11y-text-lg, html.a11y-text-lg body { font-size: 18px !important; }
+    html.a11y-text-xl, html.a11y-text-xl body { font-size: 21px !important; }
+    html.a11y-text-sm, html.a11y-text-sm body { font-size: 13px !important; }
+    html.a11y-contrast body {
+      background: #000 !important;
+      color: #fff !important;
+    }
+    html.a11y-contrast body * {
+      background-color: #000 !important;
+      color: #ffeb3b !important;
+      border-color: #ffeb3b !important;
+    }
+    html.a11y-contrast a, html.a11y-contrast a * { color: #00e5ff !important; }
+    html.a11y-invert { filter: invert(1) hue-rotate(180deg); }
+    html.a11y-invert img, html.a11y-invert iframe, html.a11y-invert video,
+    html.a11y-invert .a11y-fab, html.a11y-invert .a11y-panel { filter: invert(1) hue-rotate(180deg); }
+    html.a11y-links a {
+      text-decoration: underline !important;
+      background: #ffeb3b !important;
+      color: #000 !important;
+      padding: 2px 4px !important;
+    }
+    html.a11y-readable, html.a11y-readable body, html.a11y-readable * {
+      font-family: Verdana, Tahoma, Arial, sans-serif !important;
+      letter-spacing: .03em !important;
+      line-height: 1.7 !important;
+    }
+    html.a11y-cursor, html.a11y-cursor * {
+      cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="black" stroke="white" stroke-width="1" d="M4 2l16 9-7 2-2 7z"/></svg>') 4 4, auto !important;
+    }
+    html.a11y-pause *, html.a11y-pause *::before, html.a11y-pause *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+    html.a11y-line-spacing, html.a11y-line-spacing body, html.a11y-line-spacing * { line-height: 2 !important; }
+    html.a11y-letter-spacing, html.a11y-letter-spacing body, html.a11y-letter-spacing * { letter-spacing: .12em !important; word-spacing: .16em !important; }
+    html.a11y-align-left * { text-align: left !important; }
+    html.a11y-align-center * { text-align: center !important; }
+    html.a11y-align-right * { text-align: right !important; }
+    html.a11y-hide-images img, html.a11y-hide-images iframe, html.a11y-hide-images video,
+    html.a11y-hide-images [style*="background-image"], html.a11y-hide-images .support-image,
+    html.a11y-hide-images .photo-block, html.a11y-hide-images .hero, html.a11y-hide-images .hero-shape {
+      background-image: none !important;
+      visibility: hidden !important;
+    }
+    html.a11y-hide-images img, html.a11y-hide-images iframe, html.a11y-hide-images video { display: none !important; }
+    html.a11y-dark body, html.a11y-dark body * {
+      background-color: #1a1a1a !important;
+      color: #f0f0f0 !important;
+      border-color: #333 !important;
+    }
+    html.a11y-dark a, html.a11y-dark a * { color: #66b3ff !important; }
+    html.a11y-light body, html.a11y-light body * {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+    html.a11y-light a, html.a11y-light a * { color: #0044cc !important; }
+    html.a11y-monochrome { filter: grayscale(1); }
+    html.a11y-saturation-low { filter: saturate(.5); }
+    html.a11y-saturation-high { filter: saturate(2); }
+    html.a11y-monochrome.a11y-saturation-low,
+    html.a11y-monochrome.a11y-saturation-high { filter: grayscale(1); }
+    html.a11y-tooltips img[alt]:hover::after,
+    html.a11y-tooltips a[href]:hover::after {
+      content: attr(alt) attr(href);
+    }
+
+    /* Reading mask overlay */
+    .a11y-reading-mask {
+      position: fixed;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      z-index: 99998;
+      background: rgba(0,0,0,.7);
+    }
+    .a11y-reading-mask.top { top: 0; height: calc(50vh - 80px); }
+    .a11y-reading-mask.bottom { bottom: 0; height: calc(50vh - 80px); }
+
+    /* Reading guide line */
+    .a11y-reading-guide {
+      position: fixed;
+      left: 0;
+      right: 0;
+      height: 32px;
+      background: rgba(20, 111, 248, .35);
+      border-top: 2px solid #146ff8;
+      border-bottom: 2px solid #146ff8;
+      pointer-events: none;
+      z-index: 99998;
+    }
+
+    @media (max-width: 640px) {
+      .a11y-panel { width: calc(100vw - 32px); left: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="McCreary Central High School home">
+      <span class="mark">MC</span>
+      <span>McCreary Central<small>High School</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary navigation">
+      <a href="#about">About MCHS</a>
+      <a href="#academics">Academics</a>
+      <a href="#extracurricular">Extracurricular</a>
+      <a href="#departments">Departments</a>
+      <a href="#calendar">Calendar</a>
+      <a href="#spotlights">Spotlights</a>
+      <a href="#socials">Socials</a>
+      <a href="#quicklinks">Quick Links</a>
+      <a class="nav-cta" href="https://www.mccreary.k12.ky.us/parentportal" target="_blank" rel="noopener">Parent Portal</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero" id="top-hero">
+      <div class="hero-shape"></div>
+      <div class="hero-inner">
+        <div>
+          <span class="tag">Welcome to Raider Nation</span>
+          <h1>A Great<br><span class="stroke">Place</span><br>To Learn.</h1>
+          <p>McCreary Central is committed to community pride, academic excellence, and preparing every student for their future.</p>
+          <div class="actions">
+            <a class="button red" href="#academics">Explore Academics</a>
+            <a class="button light" href="#calendar">View Calendar</a>
+          </div>
+        </div>
+        <aside class="events-card">
+          <h3>Quick<br><span>Access</span></h3>
+          <div class="event"><div class="date"><small>GO</small>01</div><div><strong><a href="https://www.mccreary.k12.ky.us/parentportal" target="_blank" rel="noopener">Parent Portal</a></strong><span>Grades, attendance, and student information</span></div></div>
+          <div class="event"><div class="date"><small>GO</small>02</div><div><strong><a href="https://docs.google.com/forms/d/e/1FAIpQLSfi16-MblkjWzIvErv_Acz-SaUMD67RHNKbLmAFWosokjMHDw/viewform" target="_blank" rel="noopener">Student Led Helpdesk</a></strong><span>Student technology support form</span></div></div>
+          <div class="event"><div class="date"><small>GO</small>03</div><div><strong><a href="https://www.mccreary.k12.ky.us/required-trainings" target="_blank" rel="noopener">Required Trainings</a></strong><span>Training resources and requirements</span></div></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="about-site" id="about">
+      <div class="container about-layout">
+        <div class="about-logo-card">
+          <div class="about-logo-inner">
+            <div class="about-badge">MC</div>
+            <h2>About<br><span>Us</span></h2>
+            <p>Welcome to McCreary Central High School! Proudly home to the Raiders, MCHS is where learning, school spirit, and community come together.</p>
+          </div>
+        </div>
+        <div class="about-copy">
+          <span class="tag" style="background:var(--red);color:white">From the official MCHS site</span>
+          <h3>Learning, spirit, and <span>community</span> together.</h3>
+          <p>Here at MCHS, we're dedicated to helping every student grow, succeed, and find their path, both in and out of the classroom.</p>
+          <div class="fact-grid">
+            <div class="fact-card">Home of the Raiders</div>
+            <div class="fact-card">400 Raider Way</div>
+            <div class="fact-card">Stearns, KY 42647</div>
+          </div>
+          <a class="button dark" href="#quicklinks">Explore MCHS Resources</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="quicklinks">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Essential<br><span>Resources</span></h2>
+            <p>Quick access from the official MCHS site: Employment, Parent Portal, Student Led Helpdesk, Help Desk, Email, Training, Calendar, departments, extracurriculars, and reports.</p>
+          </div>
+          <div class="tilt-card">
+            <strong class="tag" style="margin-bottom:18px">Purple Star School</strong>
+            <p style="font-weight:700;color:var(--muted)">McCreary Central proudly supports the unique educational and social-emotional needs of military-connected children.</p>
+          </div>
+        </div>
+        <div class="grid three">
+          <a class="resource-card" href="https://www.mccreary.k12.ky.us/apply12" target="_blank" rel="noopener"><div class="card-top red">E</div><div class="card-body"><h3>Employment</h3><p>District and school job opportunities</p></div></a>
+          <a class="resource-card" href="https://www.mccreary.k12.ky.us/parentportal" target="_blank" rel="noopener"><div class="card-top gold">P</div><div class="card-body"><h3>Parent Portal</h3><p>Access grades, attendance, and student information</p></div></a>
+          <a class="resource-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfi16-MblkjWzIvErv_Acz-SaUMD67RHNKbLmAFWosokjMHDw/viewform" target="_blank" rel="noopener"><div class="card-top dark">SH</div><div class="card-body"><h3>Student Led Helpdesk</h3><p>Submit a student technology help request</p></div></a>
+          <a class="resource-card" href="https://www.mccreary.k12.ky.us/departments/technology/technology-servicehelp-requests" target="_blank" rel="noopener"><div class="card-top red">H</div><div class="card-body"><h3>Help Desk</h3><p>Technology service and support requests</p></div></a>
+          <a class="resource-card" href="https://www.mccreary.k12.ky.us/campus11" target="_blank" rel="noopener"><div class="card-top gold">E</div><div class="card-body"><h3>Email</h3><p>Staff and student email access</p></div></a>
+          <a class="resource-card" href="https://www.mccreary.k12.ky.us/required-trainings" target="_blank" rel="noopener"><div class="card-top dark">T</div><div class="card-body"><h3>Training</h3><p>Required training resources</p></div></a>
+          <a class="resource-card" href="#calendar"><div class="card-top red">C</div><div class="card-body"><h3>Calendar</h3><p>Events and schedules</p></div></a>
+          <a class="resource-card" href="#departments"><div class="card-top gold">D</div><div class="card-body"><h3>Departments</h3><p>Math, English, Science, Social Studies, Arts & Humanities, CTE, Cadre, and Guidance</p></div></a>
+          <a class="resource-card" href="https://docs.google.com/document/d/17qbjZqiE-Pcq4SPab1kVJDtdSCAyaECnNZ14ysraPGU/edit?tab=t.0" target="_blank" rel="noopener"><div class="card-top dark">TR</div><div class="card-body"><h3>Weekly Treasure Report</h3><p>View the latest weekly school report</p></div></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="calendar-section" id="calendar">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>School<br><span>Calendar</span></h2>
+            <p>Stay up to date with official McCreary Central events, schedules, and important school dates.</p>
+          </div>
+          <div class="tilt-card">
+            <strong class="tag" style="margin-bottom:18px">Live Calendar</strong>
+            <p style="font-weight:700;color:var(--muted)">This embedded calendar updates from the official Google Calendar source.</p>
+          </div>
+        </div>
+        <div class="calendar-frame">
+          <iframe src="https://calendar.google.com/calendar/embed?src=c_29f1ec56b3406adeff1e40af7193a61bb7abbff0c407d200fdb159fb6bae377b%40group.calendar.google.com&amp;ctz=America%2FNew_York" width="800" height="600" frameborder="0" scrolling="no" title="McCreary Central High School Calendar"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="academics" id="academics">
+      <div class="container">
+        <div class="center-head">
+          <span class="tag">Excellence in Education</span>
+          <h2>Prepared for<br><span>The Future</span></h2>
+          <p>Comprehensive academic programs designed to challenge students and prepare them for success in college, career, and life.</p>
+        </div>
+        <div class="grid three">
+          <article class="program-card"><div class="card-top red">01</div><div class="card-body"><h3>College Ready</h3><p>Rigorous coursework, AP opportunities, and dual-credit options.</p></div></article>
+          <article class="program-card"><div class="card-top dark">02</div><div class="card-body"><h3>Career Tech</h3><p>Hands-on vocational training and certifications in high-demand fields.</p></div></article>
+          <article class="program-card"><div class="card-top gold">03</div><div class="card-body"><h3>Core Academics</h3><p>Strong foundations in math, science, language arts, and social studies.</p></div></article>
+        </div>
+
+        <div class="department-panel" id="departments">
+          <div class="department-box dark">
+            <span class="tag">Departments</span>
+            <h3>Learning paths across MCHS.</h3>
+            <div class="pill-list"><span>Math</span><span>English</span><span>Science</span><span>Social Studies</span><span>Arts & Humanities</span><span>Career & Technical Education</span><span>Cadre</span><span>Guidance</span></div>
+          </div>
+          <div class="department-box light" id="extracurricular">
+            <span class="tag" style="background:var(--red);color:white">Extracurricular</span>
+            <h3>Clubs and student organizations.</h3>
+            <p style="color:var(--muted);font-weight:700">Students can connect, lead, serve, and compete through extracurricular opportunities across campus.</p>
+            <div class="pill-list"><span>Clubs</span><span>TSA</span><span>FCA</span><span>FFA</span><span>HOSA</span><span>EdRising</span></div>
+          </div>
+        </div>
+
+        <div class="support-card">
+          <div>
+            <h3>Counseling &<br><span>Support</span></h3>
+            <p style="font-weight:700;color:var(--muted)">Our guidance department supports academic planning, social-emotional wellness, and post-secondary transitions.</p>
+            <div class="support-list"><span>Transcript Requests</span><span>Scholarship Information</span><span>Mental Health Resources</span><span>Scheduling</span></div>
+            <a class="button dark" href="#contact">Contact Guidance</a>
+          </div>
+          <div class="support-image" role="img" aria-label="Abstract student support image"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="athletics" id="athletics">
+      <div class="container athletics-inner">
+        <div class="photo-block" role="img" aria-label="Raider extracurricular abstract image"><div class="stat"><strong>6+</strong>Student Groups</div></div>
+        <div>
+          <span class="tag">Raider Extracurriculars</span>
+          <h2>Clubs,<br><span>Service,</span><br>Leadership.</h2>
+          <p>Extracurricular opportunities at McCreary Central help students build friendships, leadership skills, career readiness, and school pride beyond the classroom.</p>
+          <div class="values"><div class="value"><b>1</b>Clubs</div><div class="value"><b>2</b>TSA</div><div class="value"><b>3</b>FCA</div><div class="value"><b>4</b>FFA</div><div class="value"><b>5</b>HOSA</div><div class="value"><b>6</b>EdRising</div></div>
+          <div class="actions"><a class="button gold" href="#extracurricular">View Groups</a><a class="button light" href="#departments">View Departments</a></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="updates" id="community">
+      <div class="container">
+        <div class="updates-top">
+          <div>
+            <span class="tag" style="background:var(--red);color:white">Raider Updates</span>
+            <h2>Messages,<br><span>Treasure</span> &<br>Spotlights.</h2>
+            <p style="font-size:20px;font-weight:700;color:var(--muted)">A stronger home for the official Weekly Treasure Report, school leadership updates, student recognition, staff appreciation, and social media highlights.</p>
+          </div>
+          <div class="grid two">
+            <article class="message-card">
+              <div class="avatar">P</div>
+              <div><small style="color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:.14em">Principal's Message</small><h3>Principal's Message</h3><p>The official site reserves this space for the principal's message. It is ready for a welcome note, school priorities, and current reminders for students, families, and staff.</p><a class="button red" href="#principal">Read Full Message</a></div>
+            </article>
+            <a class="report-card" id="treasurer-report" href="https://docs.google.com/document/d/17qbjZqiE-Pcq4SPab1kVJDtdSCAyaECnNZ14ysraPGU/edit?tab=t.0" target="_blank" rel="noopener"><div class="big-icon">TR</div><h3>Weekly Treasure Report</h3><p>View the latest weekly school report for updates, important notices, and current Raider information.</p><strong>View Treasure Report</strong></a>
+            <article class="bulletin-card"><div class="big-icon">LB</div><h3>Official Site Links</h3><p>Quick access areas include Calendar, Quick Links, Extracurricular, Departments, Parent Portal, Student Led Helpdesk, and Socials.</p><strong style="color:var(--gold)">Explore Links</strong></article>
+          </div>
+        </div>
+
+        <div class="grid two" id="spotlights">
+          <article class="spotlight-card"><div class="spot-head gold"><span>Student of the Month</span><span>Award</span></div><div class="spot-body"><div class="initials">AS</div><div><h3>Name Coming Soon</h3><strong>Student recognition</strong><p>The official MCHS site includes a Student of the Month area ready for the current monthly honoree.</p></div></div></article>
+          <article class="spotlight-card"><div class="spot-head red"><span>Staff of the Month</span><span>Honor</span></div><div class="spot-body"><div class="initials">DH</div><div><h3>Name Coming Soon</h3><strong>Staff recognition</strong><p>The official MCHS site includes a Staff of the Month area ready for the current monthly honoree.</p></div></div></article>
+        </div>
+
+        <div class="social-grid" id="socials">
+          <section class="fb-feed" style="padding:36px">
+            <div class="social-title"><div class="social-logo">f</div><div><small style="font-weight:900;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.8)">Facebook Social Hub</small><h3>Raider Feed</h3></div></div>
+            <article class="post"><small>Campus Update</small><h4>Welcome to McCreary Central High School</h4><p>Learning, school spirit, and community come together</p></article>
+            <article class="post"><small>Extracurricular</small><h4>Clubs, TSA, FCA, FFA, HOSA, and EdRising</h4><p>Student groups and organizations</p></article>
+            <article class="post"><small>Families</small><h4>YouTube, Facebook, and TikTok socials</h4><p>Official MCHS social channels</p></article>
+          </section>
+          <div class="widget-grid">
+            <article class="social-widget"><div class="widget-icon fb">f</div><h3>Facebook Widget</h3><p>Feature recent posts, school announcements, photo updates, event reminders, and family communications from the official school page.</p><a class="button fb" href="#facebook">Follow on Facebook</a></article>
+            <article class="social-widget"><div class="widget-icon yt">▶</div><h3>YouTube Widget</h3><p>Showcase school videos, board updates, student features, athletics highlights, ceremonies, and livestream recordings.</p><a class="button yt" href="#youtube">Watch Videos</a></article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div><div class="brand" style="margin-bottom:20px"><span class="mark">MC</span><span>McCreary<br>Central</span></div><p>A Great Place To Learn. Proudly serving the students and families of McCreary County, Kentucky.</p><div class="socials"><a href="#facebook">f</a><a href="#youtube">▶</a><a href="#twitter">x</a><a href="#instagram">ig</a></div></div>
+        <div><h4>Contact Us</h4><p>400 Raider Way<br>Stearns, KY 42647</p><p>P: (606) 376-5051</p><p>F: (606) 376-3005</p><p>Contact Administration</p></div>
+        <div><h4>Quick Links</h4><ul><li><a href="https://www.mccreary.k12.ky.us/apply12" target="_blank" rel="noopener">Employment</a></li><li><a href="https://www.mccreary.k12.ky.us/parentportal" target="_blank" rel="noopener">Parent Portal</a></li><li><a href="https://docs.google.com/forms/d/e/1FAIpQLSfi16-MblkjWzIvErv_Acz-SaUMD67RHNKbLmAFWosokjMHDw/viewform" target="_blank" rel="noopener">Student Led Helpdesk</a></li><li><a href="https://www.mccreary.k12.ky.us/departments/technology/technology-servicehelp-requests" target="_blank" rel="noopener">Help Desk</a></li><li><a href="https://www.mccreary.k12.ky.us/campus11" target="_blank" rel="noopener">Email</a></li><li><a href="https://www.mccreary.k12.ky.us/required-trainings" target="_blank" rel="noopener">Training</a></li><li><a href="#calendar">Calendar</a></li></ul></div>
+        <div><h4>Resources</h4><ul><li><a href="#extracurricular">Extracurricular</a></li><li>Clubs</li><li>TSA</li><li>FCA</li><li>FFA</li><li>HOSA</li><li>EdRising</li><li><a href="#departments">Departments</a></li><li><a href="https://docs.google.com/document/d/17qbjZqiE-Pcq4SPab1kVJDtdSCAyaECnNZ14ysraPGU/edit?tab=t.0" target="_blank" rel="noopener">Weekly Treasure Report</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2026 McCreary Central High School. All rights reserved.</span><span>Privacy Policy · Accessibility · Title IX</span></div>
+    </div>
+  </footer>
+
+  <!-- ===== Accessibility Widget ===== -->
+  <button class="a11y-fab" id="a11yFab" aria-label="Open accessibility menu" aria-expanded="false" aria-controls="a11yPanel">
+    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="16" cy="5" r="3"/>
+      <path d="M26 9H6a1.5 1.5 0 0 0 0 3h6v17a1.5 1.5 0 0 0 3 0v-8h2v8a1.5 1.5 0 0 0 3 0V12h6a1.5 1.5 0 0 0 0-3z"/>
+    </svg>
+  </button>
+
+  <div class="a11y-panel" id="a11yPanel" role="dialog" aria-labelledby="a11yTitle" aria-hidden="true">
+    <div class="a11y-panel-header">
+      <h3 id="a11yTitle" data-i18n="title">Accessibility</h3>
+      <button class="a11y-close" id="a11yClose" aria-label="Close accessibility menu">×</button>
+    </div>
+
+    <div class="a11y-section-title" data-i18n="lang">Language</div>
+    <div class="a11y-lang">
+      <button data-lang="en" class="active">English</button>
+      <button data-lang="es">Español</button>
+    </div>
+
+    <div class="a11y-section-title" data-i18n="content">Content Adjustments</div>
+    <div class="a11y-grid">
+      <button class="a11y-btn" data-toggle="a11y-text-lg"><span class="ico">A+</span><span data-i18n="textLg">Bigger Text</span></button>
+      <button class="a11y-btn" data-toggle="a11y-text-xl"><span class="ico">A++</span><span data-i18n="textXl">Largest Text</span></button>
+      <button class="a11y-btn" data-toggle="a11y-text-sm"><span class="ico">A−</span><span data-i18n="textSm">Smaller Text</span></button>
+      <button class="a11y-btn" data-toggle="a11y-readable"><span class="ico">Aa</span><span data-i18n="readable">Readable Font</span></button>
+      <button class="a11y-btn" data-toggle="a11y-line-spacing"><span class="ico">≡</span><span data-i18n="lineSp">Line Spacing</span></button>
+      <button class="a11y-btn" data-toggle="a11y-letter-spacing"><span class="ico">A A</span><span data-i18n="letterSp">Letter Spacing</span></button>
+      <button class="a11y-btn" data-toggle="a11y-align-left"><span class="ico">⬅</span><span data-i18n="alignL">Align Left</span></button>
+      <button class="a11y-btn" data-toggle="a11y-align-center"><span class="ico">↔</span><span data-i18n="alignC">Align Center</span></button>
+      <button class="a11y-btn" data-toggle="a11y-align-right"><span class="ico">➡</span><span data-i18n="alignR">Align Right</span></button>
+    </div>
+
+    <div class="a11y-section-title" data-i18n="color">Color Adjustments</div>
+    <div class="a11y-grid">
+      <button class="a11y-btn" data-toggle="a11y-contrast"><span class="ico">◐</span><span data-i18n="contrast">High Contrast</span></button>
+      <button class="a11y-btn" data-toggle="a11y-dark"><span class="ico">🌙</span><span data-i18n="dark">Dark Mode</span></button>
+      <button class="a11y-btn" data-toggle="a11y-light"><span class="ico">☀</span><span data-i18n="light">Light Mode</span></button>
+      <button class="a11y-btn" data-toggle="a11y-invert"><span class="ico">◑</span><span data-i18n="invert">Invert Colors</span></button>
+      <button class="a11y-btn" data-toggle="a11y-monochrome"><span class="ico">●</span><span data-i18n="mono">Monochrome</span></button>
+      <button class="a11y-btn" data-toggle="a11y-saturation-low"><span class="ico">↓</span><span data-i18n="satLow">Low Saturation</span></button>
+      <button class="a11y-btn" data-toggle="a11y-saturation-high"><span class="ico">↑</span><span data-i18n="satHigh">High Saturation</span></button>
+      <button class="a11y-btn" data-toggle="a11y-links"><span class="ico">🔗</span><span data-i18n="links">Highlight Links</span></button>
+    </div>
+
+    <div class="a11y-section-title" data-i18n="orient">Orientation Tools</div>
+    <div class="a11y-grid">
+      <button class="a11y-btn" data-toggle="a11y-cursor"><span class="ico">➤</span><span data-i18n="cursor">Big Cursor</span></button>
+      <button class="a11y-btn" data-action="reading-guide"><span class="ico">━</span><span data-i18n="guide">Reading Guide</span></button>
+      <button class="a11y-btn" data-action="reading-mask"><span class="ico">▭</span><span data-i18n="mask">Reading Mask</span></button>
+      <button class="a11y-btn" data-toggle="a11y-pause"><span class="ico">❚❚</span><span data-i18n="pause">Pause Animations</span></button>
+      <button class="a11y-btn" data-toggle="a11y-hide-images"><span class="ico">🖼</span><span data-i18n="hideImg">Hide Images</span></button>
+      <button class="a11y-btn" data-action="mute"><span class="ico">🔇</span><span data-i18n="mute">Mute Sounds</span></button>
+      <button class="a11y-btn" data-toggle="a11y-tooltips"><span class="ico">💬</span><span data-i18n="tips">Tooltips</span></button>
+    </div>
+
+    <button class="a11y-reset" id="a11yReset" data-i18n="reset">Reset All</button>
+  </div>
+
+  <script>
+    (function () {
+      var fab = document.getElementById('a11yFab');
+      var panel = document.getElementById('a11yPanel');
+      var closeBtn = document.getElementById('a11yClose');
+      var resetBtn = document.getElementById('a11yReset');
+      var html = document.documentElement;
+      var STORAGE_KEY = 'a11yPrefs';
+      var LANG_KEY = 'a11yLang';
+
+      // Mutually exclusive groups (only one of each can be active)
+      var groups = [
+        ['a11y-text-sm', 'a11y-text-lg', 'a11y-text-xl'],
+        ['a11y-align-left', 'a11y-align-center', 'a11y-align-right'],
+        ['a11y-contrast', 'a11y-dark', 'a11y-light', 'a11y-invert'],
+        ['a11y-saturation-low', 'a11y-saturation-high']
+      ];
+
+      // ---- Widget UI translations ----
+      var uiStrings = {
+        en: {
+          title: 'Accessibility', lang: 'Language', content: 'Content Adjustments',
+          color: 'Color Adjustments', orient: 'Orientation Tools',
+          textLg: 'Bigger Text', textXl: 'Largest Text', textSm: 'Smaller Text',
+          readable: 'Readable Font', lineSp: 'Line Spacing', letterSp: 'Letter Spacing',
+          alignL: 'Align Left', alignC: 'Align Center', alignR: 'Align Right',
+          contrast: 'High Contrast', dark: 'Dark Mode', light: 'Light Mode',
+          invert: 'Invert Colors', mono: 'Monochrome', satLow: 'Low Saturation',
+          satHigh: 'High Saturation', links: 'Highlight Links',
+          cursor: 'Big Cursor', guide: 'Reading Guide', mask: 'Reading Mask',
+          pause: 'Pause Animations', hideImg: 'Hide Images', mute: 'Mute Sounds',
+          tips: 'Tooltips', reset: 'Reset All'
+        },
+        es: {
+          title: 'Accesibilidad', lang: 'Idioma', content: 'Ajustes de Contenido',
+          color: 'Ajustes de Color', orient: 'Herramientas de Orientación',
+          textLg: 'Texto Más Grande', textXl: 'Texto Máximo', textSm: 'Texto Más Pequeño',
+          readable: 'Fuente Legible', lineSp: 'Interlineado', letterSp: 'Espaciado de Letras',
+          alignL: 'Alinear Izquierda', alignC: 'Alinear Centro', alignR: 'Alinear Derecha',
+          contrast: 'Alto Contraste', dark: 'Modo Oscuro', light: 'Modo Claro',
+          invert: 'Invertir Colores', mono: 'Monocromo', satLow: 'Baja Saturación',
+          satHigh: 'Alta Saturación', links: 'Resaltar Enlaces',
+          cursor: 'Cursor Grande', guide: 'Guía de Lectura', mask: 'Máscara de Lectura',
+          pause: 'Pausar Animaciones', hideImg: 'Ocultar Imágenes', mute: 'Silenciar Sonidos',
+          tips: 'Tooltips', reset: 'Restablecer Todo'
+        }
+      };
+
+      // ---- Page content translations (English -> Spanish) ----
+      var pageDict = {
+        'A Great': 'Un Excelente',
+        'Place': 'Lugar',
+        'To Learn.': 'Para Aprender.',
+        'Welcome to Raider Nation': 'Bienvenido a la Nación Raider',
+        'McCreary Central is committed to community pride, academic excellence, and preparing every student for their future.':
+          'McCreary Central está comprometido con el orgullo comunitario, la excelencia académica y la preparación de cada estudiante para su futuro.',
+        'Explore Academics': 'Explorar Académicos',
+        'View Calendar': 'Ver Calendario',
+        'Quick': 'Acceso',
+        'Access': 'Rápido',
+        'Parent Portal': 'Portal de Padres',
+        'Grades, attendance, and student information': 'Calificaciones, asistencia e información del estudiante',
+        'Student Led Helpdesk': 'Mesa de Ayuda Estudiantil',
+        'Student technology support form': 'Formulario de soporte tecnológico estudiantil',
+        'Required Trainings': 'Capacitaciones Requeridas',
+        'Training resources and requirements': 'Recursos y requisitos de capacitación',
+        'About MCHS': 'Acerca de MCHS',
+        'Academics': 'Académicos',
+        'Extracurricular': 'Extracurricular',
+        'Departments': 'Departamentos',
+        'Calendar': 'Calendario',
+        'Spotlights': 'Destacados',
+        'Socials': 'Redes Sociales',
+        'Quick Links': 'Enlaces Rápidos',
+        'About': 'Acerca de',
+        'Us': 'Nosotros',
+        'Welcome to McCreary Central High School! Proudly home to the Raiders, MCHS is where learning, school spirit, and community come together.':
+          '¡Bienvenido a McCreary Central High School! Orgullosamente hogar de los Raiders, MCHS es donde el aprendizaje, el espíritu escolar y la comunidad se unen.',
+        'From the official MCHS site': 'Del sitio oficial de MCHS',
+        'Learning, spirit, and': 'Aprendizaje, espíritu y',
+        'community': 'comunidad',
+        'together.': 'juntos.',
+        "Here at MCHS, we're dedicated to helping every student grow, succeed, and find their path, both in and out of the classroom.":
+          'Aquí en MCHS, estamos dedicados a ayudar a cada estudiante a crecer, tener éxito y encontrar su camino, dentro y fuera del aula.',
+        'Home of the Raiders': 'Hogar de los Raiders',
+        '400 Raider Way': '400 Raider Way',
+        'Stearns, KY 42647': 'Stearns, KY 42647',
+        'Explore MCHS Resources': 'Explorar Recursos de MCHS',
+        'Essential': 'Recursos',
+        'Resources': 'Esenciales',
+        'Quick access from the official MCHS site: Employment, Parent Portal, Student Led Helpdesk, Help Desk, Email, Training, Calendar, departments, extracurriculars, and reports.':
+          'Acceso rápido desde el sitio oficial de MCHS: Empleo, Portal de Padres, Mesa de Ayuda Estudiantil, Mesa de Ayuda, Correo, Capacitación, Calendario, departamentos, extracurriculares e informes.',
+        'Purple Star School': 'Escuela Estrella Púrpura',
+        'McCreary Central proudly supports the unique educational and social-emotional needs of military-connected children.':
+          'McCreary Central apoya con orgullo las necesidades educativas y socioemocionales únicas de los niños conectados con el ejército.',
+        'Employment': 'Empleo',
+        'District and school job opportunities': 'Oportunidades de trabajo del distrito y la escuela',
+        'Access grades, attendance, and student information': 'Acceder a calificaciones, asistencia e información del estudiante',
+        'Submit a student technology help request': 'Enviar una solicitud de ayuda tecnológica estudiantil',
+        'Help Desk': 'Mesa de Ayuda',
+        'Technology service and support requests': 'Solicitudes de servicio y soporte tecnológico',
+        'Email': 'Correo',
+        'Staff and student email access': 'Acceso al correo del personal y los estudiantes',
+        'Training': 'Capacitación',
+        'Required training resources': 'Recursos de capacitación requeridos',
+        'Events and schedules': 'Eventos y horarios',
+        'Math, English, Science, Social Studies, Arts & Humanities, CTE, Cadre, and Guidance':
+          'Matemáticas, Inglés, Ciencias, Estudios Sociales, Artes y Humanidades, CTE, Cuadro y Orientación',
+        'Weekly Treasure Report': 'Informe Semanal del Tesoro',
+        'View the latest weekly school report': 'Ver el último informe escolar semanal',
+        'School': 'Calendario',
+        'Stay up to date with official McCreary Central events, schedules, and important school dates.':
+          'Manténgase al día con los eventos oficiales, horarios y fechas escolares importantes de McCreary Central.',
+        'Live Calendar': 'Calendario en Vivo',
+        'This embedded calendar updates from the official Google Calendar source.':
+          'Este calendario incrustado se actualiza desde la fuente oficial de Google Calendar.',
+        'Excellence in Education': 'Excelencia en la Educación',
+        'Prepared for': 'Preparados para',
+        'The Future': 'El Futuro',
+        'Comprehensive academic programs designed to challenge students and prepare them for success in college, career, and life.':
+          'Programas académicos integrales diseñados para desafiar a los estudiantes y prepararlos para el éxito en la universidad, la carrera y la vida.',
+        'College Ready': 'Listos para la Universidad',
+        'Rigorous coursework, AP opportunities, and dual-credit options.':
+          'Cursos rigurosos, oportunidades AP y opciones de doble crédito.',
+        'Career Tech': 'Carrera Técnica',
+        'Hands-on vocational training and certifications in high-demand fields.':
+          'Formación profesional práctica y certificaciones en campos de alta demanda.',
+        'Core Academics': 'Académicos Básicos',
+        'Strong foundations in math, science, language arts, and social studies.':
+          'Bases sólidas en matemáticas, ciencias, lengua y estudios sociales.',
+        'Learning paths across MCHS.': 'Rutas de aprendizaje en MCHS.',
+        'Clubs and student organizations.': 'Clubes y organizaciones estudiantiles.',
+        'Students can connect, lead, serve, and compete through extracurricular opportunities across campus.':
+          'Los estudiantes pueden conectarse, liderar, servir y competir a través de oportunidades extracurriculares en todo el campus.',
+        'Counseling &': 'Consejería y',
+        'Support': 'Apoyo',
+        'Our guidance department supports academic planning, social-emotional wellness, and post-secondary transitions.':
+          'Nuestro departamento de orientación apoya la planificación académica, el bienestar socioemocional y las transiciones postsecundarias.',
+        'Transcript Requests': 'Solicitudes de Transcripciones',
+        'Scholarship Information': 'Información de Becas',
+        'Mental Health Resources': 'Recursos de Salud Mental',
+        'Scheduling': 'Programación',
+        'Contact Guidance': 'Contactar Orientación',
+        'Raider Extracurriculars': 'Extracurriculares Raider',
+        'Clubs,': 'Clubes,',
+        'Service,': 'Servicio,',
+        'Leadership.': 'Liderazgo.',
+        'Extracurricular opportunities at McCreary Central help students build friendships, leadership skills, career readiness, and school pride beyond the classroom.':
+          'Las oportunidades extracurriculares en McCreary Central ayudan a los estudiantes a construir amistades, habilidades de liderazgo, preparación profesional y orgullo escolar más allá del aula.',
+        'Student Groups': 'Grupos Estudiantiles',
+        'Clubs': 'Clubes',
+        'View Groups': 'Ver Grupos',
+        'View Departments': 'Ver Departamentos',
+        'Raider Updates': 'Actualizaciones Raider',
+        'Messages,': 'Mensajes,',
+        'Treasure': 'Tesoro',
+        'Spotlights.': 'Destacados.',
+        'A stronger home for the official Weekly Treasure Report, school leadership updates, student recognition, staff appreciation, and social media highlights.':
+          'Un hogar más fuerte para el Informe Semanal del Tesoro oficial, actualizaciones de liderazgo escolar, reconocimiento a estudiantes, agradecimiento al personal y destacados de redes sociales.',
+        "Principal's Message": 'Mensaje del Director',
+        "The official site reserves this space for the principal's message. It is ready for a welcome note, school priorities, and current reminders for students, families, and staff.":
+          'El sitio oficial reserva este espacio para el mensaje del director. Está listo para una nota de bienvenida, prioridades escolares y recordatorios actuales para estudiantes, familias y personal.',
+        'Read Full Message': 'Leer Mensaje Completo',
+        'View the latest weekly school report for updates, important notices, and current Raider information.':
+          'Ver el último informe semanal de la escuela para actualizaciones, avisos importantes e información actual de los Raider.',
+        'View Treasure Report': 'Ver Informe del Tesoro',
+        'Official Site Links': 'Enlaces del Sitio Oficial',
+        'Quick access areas include Calendar, Quick Links, Extracurricular, Departments, Parent Portal, Student Led Helpdesk, and Socials.':
+          'Las áreas de acceso rápido incluyen Calendario, Enlaces Rápidos, Extracurricular, Departamentos, Portal de Padres, Mesa de Ayuda Estudiantil y Redes Sociales.',
+        'Explore Links': 'Explorar Enlaces',
+        'Student of the Month': 'Estudiante del Mes',
+        'Award': 'Premio',
+        'Name Coming Soon': 'Nombre Próximamente',
+        'Student recognition': 'Reconocimiento estudiantil',
+        'The official MCHS site includes a Student of the Month area ready for the current monthly honoree.':
+          'El sitio oficial de MCHS incluye un área de Estudiante del Mes lista para el homenajeado mensual actual.',
+        'Staff of the Month': 'Personal del Mes',
+        'Honor': 'Honor',
+        'Staff recognition': 'Reconocimiento al personal',
+        'The official MCHS site includes a Staff of the Month area ready for the current monthly honoree.':
+          'El sitio oficial de MCHS incluye un área de Personal del Mes lista para el homenajeado mensual actual.',
+        'Facebook Social Hub': 'Centro Social de Facebook',
+        'Raider Feed': 'Feed Raider',
+        'Campus Update': 'Actualización del Campus',
+        'Welcome to McCreary Central High School': 'Bienvenido a McCreary Central High School',
+        'Learning, school spirit, and community come together': 'Aprendizaje, espíritu escolar y comunidad se unen',
+        'Clubs, TSA, FCA, FFA, HOSA, and EdRising': 'Clubes, TSA, FCA, FFA, HOSA y EdRising',
+        'Student groups and organizations': 'Grupos y organizaciones estudiantiles',
+        'Families': 'Familias',
+        'YouTube, Facebook, and TikTok socials': 'Redes sociales de YouTube, Facebook y TikTok',
+        'Official MCHS social channels': 'Canales sociales oficiales de MCHS',
+        'Facebook Widget': 'Widget de Facebook',
+        'Feature recent posts, school announcements, photo updates, event reminders, and family communications from the official school page.':
+          'Presenta publicaciones recientes, anuncios escolares, actualizaciones de fotos, recordatorios de eventos y comunicaciones familiares desde la página oficial de la escuela.',
+        'Follow on Facebook': 'Seguir en Facebook',
+        'YouTube Widget': 'Widget de YouTube',
+        'Showcase school videos, board updates, student features, athletics highlights, ceremonies, and livestream recordings.':
+          'Muestra videos escolares, actualizaciones de la junta, destacados estudiantiles, destacados deportivos, ceremonias y grabaciones en vivo.',
+        'Watch Videos': 'Ver Videos',
+        'McCreary': 'McCreary',
+        'Central': 'Central',
+        'A Great Place To Learn. Proudly serving the students and families of McCreary County, Kentucky.':
+          'Un Excelente Lugar Para Aprender. Sirviendo con orgullo a los estudiantes y familias del condado de McCreary, Kentucky.',
+        'Contact Us': 'Contáctenos',
+        'Contact Administration': 'Contactar Administración',
+        '© 2026 McCreary Central High School. All rights reserved.':
+          '© 2026 McCreary Central High School. Todos los derechos reservados.',
+        'Privacy Policy · Accessibility · Title IX': 'Política de Privacidad · Accesibilidad · Título IX',
+        'McCreary Central High School | A Great Place to Learn': 'McCreary Central High School | Un Excelente Lugar Para Aprender'
+      };
+
+      // Cache original text nodes for restore
+      var originalNodes = [];
+      function cacheNodes() {
+        if (originalNodes.length) return;
+        var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+          acceptNode: function (n) {
+            if (!n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+            // Skip widget itself
+            var p = n.parentNode;
+            while (p) {
+              if (p.id === 'a11yPanel' || p.id === 'a11yFab' || p.tagName === 'SCRIPT' || p.tagName === 'STYLE') return NodeFilter.FILTER_REJECT;
+              p = p.parentNode;
+            }
+            return NodeFilter.FILTER_ACCEPT;
+          }
+        });
+        var node;
+        while ((node = walker.nextNode())) {
+          originalNodes.push({ node: node, text: node.nodeValue });
+        }
+      }
+
+      function applyPageLang(lang) {
+        cacheNodes();
+        originalNodes.forEach(function (item) {
+          var trimmed = item.text.trim();
+          if (lang === 'es' && pageDict[trimmed]) {
+            item.node.nodeValue = item.text.replace(trimmed, pageDict[trimmed]);
+          } else {
+            item.node.nodeValue = item.text;
+          }
+        });
+        document.documentElement.setAttribute('lang', lang);
+      }
+
+      function applyWidgetLang(lang) {
+        var dict = uiStrings[lang] || uiStrings.en;
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          var key = el.getAttribute('data-i18n');
+          if (dict[key]) el.textContent = dict[key];
+        });
+      }
+
+      function setLanguage(lang) {
+        applyPageLang(lang);
+        applyWidgetLang(lang);
+        document.querySelectorAll('.a11y-lang button').forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+        });
+        try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+      }
+
+      function saveState() {
+        var active = [];
+        document.querySelectorAll('.a11y-btn.active').forEach(function (b) {
+          var key = b.getAttribute('data-toggle') || ('action:' + b.getAttribute('data-action'));
+          active.push(key);
+        });
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(active)); } catch (e) {}
+      }
+
+      function loadState() {
+        try {
+          var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+          saved.forEach(function (key) {
+            if (key.indexOf('action:') === 0) {
+              var action = key.slice(7);
+              var btn = document.querySelector('.a11y-btn[data-action="' + action + '"]');
+              if (btn) btn.click();
+            } else {
+              html.classList.add(key);
+              var b = document.querySelector('.a11y-btn[data-toggle="' + key + '"]');
+              if (b) b.classList.add('active');
+            }
+          });
+        } catch (e) {}
+        var savedLang = 'en';
+        try { savedLang = localStorage.getItem(LANG_KEY) || 'en'; } catch (e) {}
+        setLanguage(savedLang);
+      }
+
+      function togglePanel(open) {
+        var willOpen = typeof open === 'boolean' ? open : !panel.classList.contains('open');
+        panel.classList.toggle('open', willOpen);
+        panel.setAttribute('aria-hidden', willOpen ? 'false' : 'true');
+        fab.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      }
+
+      fab.addEventListener('click', function () { togglePanel(); });
+      closeBtn.addEventListener('click', function () { togglePanel(false); });
+
+      // Toggle buttons (CSS class on <html>)
+      document.querySelectorAll('.a11y-btn[data-toggle]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var cls = btn.getAttribute('data-toggle');
+          groups.forEach(function (group) {
+            if (group.indexOf(cls) !== -1) {
+              group.forEach(function (other) {
+                if (other !== cls) {
+                  html.classList.remove(other);
+                  var ob = document.querySelector('.a11y-btn[data-toggle="' + other + '"]');
+                  if (ob) ob.classList.remove('active');
+                }
+              });
+            }
+          });
+          var nowActive = html.classList.toggle(cls);
+          btn.classList.toggle('active', nowActive);
+          saveState();
+        });
+      });
+
+      // Language buttons
+      document.querySelectorAll('.a11y-lang button').forEach(function (b) {
+        b.addEventListener('click', function () {
+          setLanguage(b.getAttribute('data-lang'));
+        });
+      });
+
+      // Custom action buttons
+      var readingMaskTop, readingMaskBottom, readingGuide;
+      function removeMask() {
+        if (readingMaskTop) { readingMaskTop.remove(); readingMaskTop = null; }
+        if (readingMaskBottom) { readingMaskBottom.remove(); readingMaskBottom = null; }
+      }
+      function removeGuide() {
+        if (readingGuide) { readingGuide.remove(); readingGuide = null; }
+        document.removeEventListener('mousemove', moveGuide);
+      }
+      function moveGuide(e) {
+        if (readingGuide) readingGuide.style.top = (e.clientY - 16) + 'px';
+      }
+      function muteAllMedia(mute) {
+        document.querySelectorAll('video, audio').forEach(function (m) { m.muted = mute; });
+      }
+
+      document.querySelectorAll('.a11y-btn[data-action]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var action = btn.getAttribute('data-action');
+          var nowActive = !btn.classList.contains('active');
+          btn.classList.toggle('active', nowActive);
+
+          if (action === 'reading-mask') {
+            if (nowActive) {
+              readingMaskTop = document.createElement('div');
+              readingMaskTop.className = 'a11y-reading-mask top';
+              readingMaskBottom = document.createElement('div');
+              readingMaskBottom.className = 'a11y-reading-mask bottom';
+              document.body.appendChild(readingMaskTop);
+              document.body.appendChild(readingMaskBottom);
+            } else { removeMask(); }
+          } else if (action === 'reading-guide') {
+            if (nowActive) {
+              readingGuide = document.createElement('div');
+              readingGuide.className = 'a11y-reading-guide';
+              document.body.appendChild(readingGuide);
+              document.addEventListener('mousemove', moveGuide);
+            } else { removeGuide(); }
+          } else if (action === 'mute') {
+            muteAllMedia(nowActive);
+          }
+          saveState();
+        });
+      });
+
+      resetBtn.addEventListener('click', function () {
+        document.querySelectorAll('.a11y-btn').forEach(function (b) {
+          var cls = b.getAttribute('data-toggle');
+          if (cls) html.classList.remove(cls);
+          b.classList.remove('active');
+        });
+        removeMask();
+        removeGuide();
+        muteAllMedia(false);
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && panel.classList.contains('open')) togglePanel(false);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!panel.classList.contains('open')) return;
+        if (panel.contains(e.target) || fab.contains(e.target)) return;
+        togglePanel(false);
+      });
+
+      loadState();
+    })();
+  </script>
+</body>
+</html>
   --radius-md:12px;
   --radius-lg:20px;
   --header-h:68px;
