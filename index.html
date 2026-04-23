@@ -936,5 +936,158 @@ document.addEventListener('click', function(e) {
   }
 })();
 </script>
+
+<!-- ===== Accessibility Widget ===== -->
+<style>
+  .a11y-fab{position:fixed;left:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#146ff8;border:none;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;z-index:99999;display:grid;place-items:center;transition:transform .2s ease,background .2s ease}
+  .a11y-fab:hover{transform:scale(1.06);background:#0a5fe0}
+  .a11y-fab:focus-visible{outline:3px solid #ffb81c;outline-offset:3px}
+  .a11y-fab svg{width:34px;height:34px;fill:#fff}
+  .a11y-panel{position:fixed;left:20px;bottom:90px;width:340px;max-height:80vh;overflow-y:auto;background:#fff;color:#1a1a1a;border-radius:10px;box-shadow:0 10px 35px rgba(0,0,0,.35);z-index:99999;font-family:"DM Sans",Arial,sans-serif;transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .2s ease,transform .2s ease}
+  .a11y-panel.open{opacity:1;transform:translateY(0);pointer-events:auto}
+  .a11y-panel-header{background:#146ff8;color:#fff;padding:16px 20px;border-radius:10px 10px 0 0;display:flex;align-items:center;justify-content:space-between}
+  .a11y-panel-header h3{margin:0;font-family:"Playfair Display",serif;font-size:18px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+  .a11y-close{background:transparent;border:none;color:#fff;font-size:22px;line-height:1;cursor:pointer;padding:4px 8px}
+  .a11y-close:hover{opacity:.8}
+  .a11y-section-title{padding:14px 16px 6px;font-family:"Playfair Display",serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:#6b7280;border-top:1px solid #eef0f4}
+  .a11y-section-title:first-of-type{border-top:0}
+  .a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:6px 16px 12px}
+  .a11y-lang{display:flex;gap:8px;padding:6px 16px 12px}
+  .a11y-lang button{flex:1;padding:10px;border:2px solid #e2e6ee;background:#f4f6fa;border-radius:8px;cursor:pointer;font-family:"DM Sans",Arial,sans-serif;font-weight:700;font-size:13px;color:#1a1a1a}
+  .a11y-lang button.active{background:#146ff8;color:#fff;border-color:#146ff8}
+  .a11y-btn{background:#f4f6fa;border:2px solid #e2e6ee;border-radius:8px;padding:14px 8px;cursor:pointer;font-family:"DM Sans",Arial,sans-serif;font-size:12px;font-weight:700;color:#1a1a1a;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;transition:all .15s ease}
+  .a11y-btn:hover{background:#e8eef9;border-color:#146ff8}
+  .a11y-btn.active{background:#146ff8;color:#fff;border-color:#146ff8}
+  .a11y-btn .ico{font-size:20px}
+  .a11y-reset{margin:0 16px 16px;width:calc(100% - 32px);padding:12px;background:#1a1a1a;color:#fff;border:none;border-radius:8px;font-family:"Playfair Display",serif;font-weight:800;text-transform:uppercase;letter-spacing:.08em;cursor:pointer;font-size:13px}
+  .a11y-reset:hover{background:#444}
+  html.a11y-text-lg,html.a11y-text-lg body{font-size:18px !important}
+  html.a11y-text-xl,html.a11y-text-xl body{font-size:21px !important}
+  html.a11y-text-sm,html.a11y-text-sm body{font-size:13px !important}
+  html.a11y-contrast body{background:#000 !important;color:#fff !important}
+  html.a11y-contrast body *{background-color:#000 !important;color:#ffeb3b !important;border-color:#ffeb3b !important}
+  html.a11y-contrast a,html.a11y-contrast a *{color:#00e5ff !important}
+  html.a11y-invert{filter:invert(1) hue-rotate(180deg)}
+  html.a11y-invert img,html.a11y-invert iframe,html.a11y-invert video,html.a11y-invert .a11y-fab,html.a11y-invert .a11y-panel{filter:invert(1) hue-rotate(180deg)}
+  html.a11y-links a{text-decoration:underline !important;background:#ffeb3b !important;color:#000 !important;padding:2px 4px !important}
+  html.a11y-readable,html.a11y-readable body,html.a11y-readable *{font-family:Verdana,Tahoma,Arial,sans-serif !important;letter-spacing:.03em !important;line-height:1.7 !important}
+  html.a11y-cursor,html.a11y-cursor *{cursor:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="black" stroke="white" stroke-width="1" d="M4 2l16 9-7 2-2 7z"/></svg>') 4 4,auto !important}
+  html.a11y-pause *,html.a11y-pause *::before,html.a11y-pause *::after{animation:none !important;transition:none !important}
+  html.a11y-line-spacing,html.a11y-line-spacing body,html.a11y-line-spacing *{line-height:2 !important}
+  html.a11y-letter-spacing,html.a11y-letter-spacing body,html.a11y-letter-spacing *{letter-spacing:.12em !important;word-spacing:.16em !important}
+  html.a11y-align-left *{text-align:left !important}
+  html.a11y-align-center *{text-align:center !important}
+  html.a11y-align-right *{text-align:right !important}
+  html.a11y-hide-images img,html.a11y-hide-images iframe,html.a11y-hide-images video,html.a11y-hide-images [style*="background-image"]{background-image:none !important;visibility:hidden !important}
+  html.a11y-hide-images img,html.a11y-hide-images iframe,html.a11y-hide-images video{display:none !important}
+  html.a11y-dark body,html.a11y-dark body *{background-color:#1a1a1a !important;color:#f0f0f0 !important;border-color:#333 !important}
+  html.a11y-dark a,html.a11y-dark a *{color:#66b3ff !important}
+  html.a11y-light body,html.a11y-light body *{background-color:#ffffff !important;color:#000000 !important}
+  html.a11y-light a,html.a11y-light a *{color:#0044cc !important}
+  html.a11y-monochrome{filter:grayscale(1)}
+  html.a11y-saturation-low{filter:saturate(.5)}
+  html.a11y-saturation-high{filter:saturate(2)}
+  html.a11y-monochrome.a11y-saturation-low,html.a11y-monochrome.a11y-saturation-high{filter:grayscale(1)}
+  html.a11y-tooltips img[alt]:hover::after,html.a11y-tooltips a[href]:hover::after{content:attr(alt) attr(href)}
+  .a11y-reading-mask{position:fixed;left:0;right:0;pointer-events:none;z-index:99998;background:rgba(0,0,0,.7)}
+  .a11y-reading-mask.top{top:0;height:calc(50vh - 80px)}
+  .a11y-reading-mask.bottom{bottom:0;height:calc(50vh - 80px)}
+  .a11y-reading-guide{position:fixed;left:0;right:0;height:32px;background:rgba(20,111,248,.35);border-top:2px solid #146ff8;border-bottom:2px solid #146ff8;pointer-events:none;z-index:99998}
+  @media (max-width:640px){.a11y-panel{width:calc(100vw - 32px);left:16px;right:16px}}
+</style>
+
+<button class="a11y-fab" id="a11yFab" aria-label="Open accessibility menu" aria-expanded="false" aria-controls="a11yPanel">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="16" cy="5" r="3"/>
+    <path d="M26 9H6a1.5 1.5 0 0 0 0 3h6v17a1.5 1.5 0 0 0 3 0v-8h2v8a1.5 1.5 0 0 0 3 0V12h6a1.5 1.5 0 0 0 0-3z"/>
+  </svg>
+</button>
+
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-labelledby="a11yTitle" aria-hidden="true">
+  <div class="a11y-panel-header">
+    <h3 id="a11yTitle" data-i18n="title">Accessibility</h3>
+    <button class="a11y-close" id="a11yClose" aria-label="Close accessibility menu">×</button>
+  </div>
+  <div class="a11y-section-title" data-i18n="lang">Language</div>
+  <div class="a11y-lang">
+    <button data-lang="en" class="active">English</button>
+    <button data-lang="es">Español</button>
+  </div>
+  <div class="a11y-section-title" data-i18n="content">Content Adjustments</div>
+  <div class="a11y-grid">
+    <button class="a11y-btn" data-toggle="a11y-text-lg"><span class="ico">A+</span><span data-i18n="textLg">Bigger Text</span></button>
+    <button class="a11y-btn" data-toggle="a11y-text-xl"><span class="ico">A++</span><span data-i18n="textXl">Largest Text</span></button>
+    <button class="a11y-btn" data-toggle="a11y-text-sm"><span class="ico">A−</span><span data-i18n="textSm">Smaller Text</span></button>
+    <button class="a11y-btn" data-toggle="a11y-readable"><span class="ico">Aa</span><span data-i18n="readable">Readable Font</span></button>
+    <button class="a11y-btn" data-toggle="a11y-line-spacing"><span class="ico">≡</span><span data-i18n="lineSp">Line Spacing</span></button>
+    <button class="a11y-btn" data-toggle="a11y-letter-spacing"><span class="ico">A A</span><span data-i18n="letterSp">Letter Spacing</span></button>
+    <button class="a11y-btn" data-toggle="a11y-align-left"><span class="ico">⬅</span><span data-i18n="alignL">Align Left</span></button>
+    <button class="a11y-btn" data-toggle="a11y-align-center"><span class="ico">↔</span><span data-i18n="alignC">Align Center</span></button>
+    <button class="a11y-btn" data-toggle="a11y-align-right"><span class="ico">➡</span><span data-i18n="alignR">Align Right</span></button>
+  </div>
+  <div class="a11y-section-title" data-i18n="color">Color Adjustments</div>
+  <div class="a11y-grid">
+    <button class="a11y-btn" data-toggle="a11y-contrast"><span class="ico">◐</span><span data-i18n="contrast">High Contrast</span></button>
+    <button class="a11y-btn" data-toggle="a11y-dark"><span class="ico">🌙</span><span data-i18n="dark">Dark Mode</span></button>
+    <button class="a11y-btn" data-toggle="a11y-light"><span class="ico">☀</span><span data-i18n="light">Light Mode</span></button>
+    <button class="a11y-btn" data-toggle="a11y-invert"><span class="ico">◑</span><span data-i18n="invert">Invert Colors</span></button>
+    <button class="a11y-btn" data-toggle="a11y-monochrome"><span class="ico">●</span><span data-i18n="mono">Monochrome</span></button>
+    <button class="a11y-btn" data-toggle="a11y-saturation-low"><span class="ico">↓</span><span data-i18n="satLow">Low Saturation</span></button>
+    <button class="a11y-btn" data-toggle="a11y-saturation-high"><span class="ico">↑</span><span data-i18n="satHigh">High Saturation</span></button>
+    <button class="a11y-btn" data-toggle="a11y-links"><span class="ico">🔗</span><span data-i18n="links">Highlight Links</span></button>
+  </div>
+  <div class="a11y-section-title" data-i18n="orient">Orientation Tools</div>
+  <div class="a11y-grid">
+    <button class="a11y-btn" data-toggle="a11y-cursor"><span class="ico">➤</span><span data-i18n="cursor">Big Cursor</span></button>
+    <button class="a11y-btn" data-action="reading-guide"><span class="ico">━</span><span data-i18n="guide">Reading Guide</span></button>
+    <button class="a11y-btn" data-action="reading-mask"><span class="ico">▭</span><span data-i18n="mask">Reading Mask</span></button>
+    <button class="a11y-btn" data-toggle="a11y-pause"><span class="ico">❚❚</span><span data-i18n="pause">Pause Animations</span></button>
+    <button class="a11y-btn" data-toggle="a11y-hide-images"><span class="ico">🖼</span><span data-i18n="hideImg">Hide Images</span></button>
+    <button class="a11y-btn" data-action="mute"><span class="ico">🔇</span><span data-i18n="mute">Mute Sounds</span></button>
+    <button class="a11y-btn" data-toggle="a11y-tooltips"><span class="ico">💬</span><span data-i18n="tips">Tooltips</span></button>
+  </div>
+  <button class="a11y-reset" id="a11yReset" data-i18n="reset">Reset All</button>
+</div>
+
+<script>
+(function () {
+  var fab = document.getElementById('a11yFab');
+  var panel = document.getElementById('a11yPanel');
+  var closeBtn = document.getElementById('a11yClose');
+  var resetBtn = document.getElementById('a11yReset');
+  var html = document.documentElement;
+  var STORAGE_KEY = 'a11yPrefs';
+  var LANG_KEY = 'a11yLang';
+  var groups = [
+    ['a11y-text-sm','a11y-text-lg','a11y-text-xl'],
+    ['a11y-align-left','a11y-align-center','a11y-align-right'],
+    ['a11y-contrast','a11y-dark','a11y-light','a11y-invert'],
+    ['a11y-saturation-low','a11y-saturation-high']
+  ];
+  var uiStrings = {
+    en:{title:'Accessibility',lang:'Language',content:'Content Adjustments',color:'Color Adjustments',orient:'Orientation Tools',textLg:'Bigger Text',textXl:'Largest Text',textSm:'Smaller Text',readable:'Readable Font',lineSp:'Line Spacing',letterSp:'Letter Spacing',alignL:'Align Left',alignC:'Align Center',alignR:'Align Right',contrast:'High Contrast',dark:'Dark Mode',light:'Light Mode',invert:'Invert Colors',mono:'Monochrome',satLow:'Low Saturation',satHigh:'High Saturation',links:'Highlight Links',cursor:'Big Cursor',guide:'Reading Guide',mask:'Reading Mask',pause:'Pause Animations',hideImg:'Hide Images',mute:'Mute Sounds',tips:'Tooltips',reset:'Reset All'},
+    es:{title:'Accesibilidad',lang:'Idioma',content:'Ajustes de Contenido',color:'Ajustes de Color',orient:'Herramientas de Orientación',textLg:'Texto Más Grande',textXl:'Texto Máximo',textSm:'Texto Más Pequeño',readable:'Fuente Legible',lineSp:'Interlineado',letterSp:'Espaciado de Letras',alignL:'Alinear Izquierda',alignC:'Alinear Centro',alignR:'Alinear Derecha',contrast:'Alto Contraste',dark:'Modo Oscuro',light:'Modo Claro',invert:'Invertir Colores',mono:'Monocromo',satLow:'Baja Saturación',satHigh:'Alta Saturación',links:'Resaltar Enlaces',cursor:'Cursor Grande',guide:'Guía de Lectura',mask:'Máscara de Lectura',pause:'Pausar Animaciones',hideImg:'Ocultar Imágenes',mute:'Silenciar Sonidos',tips:'Tooltips',reset:'Restablecer Todo'}
+  };
+  function applyWidgetLang(lang){var dict=uiStrings[lang]||uiStrings.en;document.querySelectorAll('[data-i18n]').forEach(function(el){var key=el.getAttribute('data-i18n');if(dict[key])el.textContent=dict[key];});}
+  function setLanguage(lang){applyWidgetLang(lang);document.documentElement.setAttribute('lang',lang);document.querySelectorAll('.a11y-lang button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});try{localStorage.setItem(LANG_KEY,lang);}catch(e){}}
+  function saveState(){var active=[];document.querySelectorAll('.a11y-btn.active').forEach(function(b){var key=b.getAttribute('data-toggle')||('action:'+b.getAttribute('data-action'));active.push(key);});try{localStorage.setItem(STORAGE_KEY,JSON.stringify(active));}catch(e){}}
+  function loadState(){try{var saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');saved.forEach(function(key){if(key.indexOf('action:')===0){var action=key.slice(7);var btn=document.querySelector('.a11y-btn[data-action="'+action+'"]');if(btn)btn.click();}else{html.classList.add(key);var b=document.querySelector('.a11y-btn[data-toggle="'+key+'"]');if(b)b.classList.add('active');}});}catch(e){}var savedLang='en';try{savedLang=localStorage.getItem(LANG_KEY)||'en';}catch(e){}setLanguage(savedLang);}
+  function togglePanel(open){var willOpen=typeof open==='boolean'?open:!panel.classList.contains('open');panel.classList.toggle('open',willOpen);panel.setAttribute('aria-hidden',willOpen?'false':'true');fab.setAttribute('aria-expanded',willOpen?'true':'false');}
+  fab.addEventListener('click',function(){togglePanel();});
+  closeBtn.addEventListener('click',function(){togglePanel(false);});
+  document.querySelectorAll('.a11y-btn[data-toggle]').forEach(function(btn){btn.addEventListener('click',function(){var cls=btn.getAttribute('data-toggle');groups.forEach(function(group){if(group.indexOf(cls)!==-1){group.forEach(function(other){if(other!==cls){html.classList.remove(other);var ob=document.querySelector('.a11y-btn[data-toggle="'+other+'"]');if(ob)ob.classList.remove('active');}});}});var nowActive=html.classList.toggle(cls);btn.classList.toggle('active',nowActive);saveState();});});
+  document.querySelectorAll('.a11y-lang button').forEach(function(b){b.addEventListener('click',function(){setLanguage(b.getAttribute('data-lang'));});});
+  var readingMaskTop,readingMaskBottom,readingGuide;
+  function removeMask(){if(readingMaskTop){readingMaskTop.remove();readingMaskTop=null;}if(readingMaskBottom){readingMaskBottom.remove();readingMaskBottom=null;}}
+  function removeGuide(){if(readingGuide){readingGuide.remove();readingGuide=null;}document.removeEventListener('mousemove',moveGuide);}
+  function moveGuide(e){if(readingGuide)readingGuide.style.top=(e.clientY-16)+'px';}
+  function muteAllMedia(mute){document.querySelectorAll('video, audio').forEach(function(m){m.muted=mute;});}
+  document.querySelectorAll('.a11y-btn[data-action]').forEach(function(btn){btn.addEventListener('click',function(){var action=btn.getAttribute('data-action');var nowActive=!btn.classList.contains('active');btn.classList.toggle('active',nowActive);if(action==='reading-mask'){if(nowActive){readingMaskTop=document.createElement('div');readingMaskTop.className='a11y-reading-mask top';readingMaskBottom=document.createElement('div');readingMaskBottom.className='a11y-reading-mask bottom';document.body.appendChild(readingMaskTop);document.body.appendChild(readingMaskBottom);}else{removeMask();}}else if(action==='reading-guide'){if(nowActive){readingGuide=document.createElement('div');readingGuide.className='a11y-reading-guide';document.body.appendChild(readingGuide);document.addEventListener('mousemove',moveGuide);}else{removeGuide();}}else if(action==='mute'){muteAllMedia(nowActive);}saveState();});});
+  resetBtn.addEventListener('click',function(){document.querySelectorAll('.a11y-btn').forEach(function(b){var cls=b.getAttribute('data-toggle');if(cls)html.classList.remove(cls);b.classList.remove('active');});removeMask();removeGuide();muteAllMedia(false);try{localStorage.removeItem(STORAGE_KEY);}catch(e){}});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&panel.classList.contains('open'))togglePanel(false);});
+  document.addEventListener('click',function(e){if(!panel.classList.contains('open'))return;if(panel.contains(e.target)||fab.contains(e.target))return;togglePanel(false);});
+  loadState();
+})();
+</script>
 </body>
 </html>
