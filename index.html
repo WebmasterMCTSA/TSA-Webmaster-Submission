@@ -937,6 +937,30 @@ document.addEventListener('click', function(e) {
 })();
 </script>
 
+<!-- ===== Google Translate (hidden, driven by accessibility widget) ===== -->
+<div id="google_translate_element" style="display:none"></div>
+<style>
+  /* Hide Google's default bar/tooltip so only our widget controls it */
+  .goog-te-banner-frame.skiptranslate,
+  .goog-te-gadget-icon,
+  #goog-gt-tt,
+  .goog-te-balloon-frame { display: none !important; }
+  body { top: 0 !important; }
+  .goog-tooltip, .goog-tooltip:hover { display: none !important; }
+  .goog-text-highlight { background: none !important; box-shadow: none !important; }
+</style>
+<script>
+  function googleTranslateElementInit(){
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,es',
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
+
 <!-- ===== Accessibility Widget ===== -->
 <style>
   .a11y-fab{position:fixed;left:20px;bottom:20px;width:58px;height:58px;border-radius:50%;background:#146ff8;border:none;box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;z-index:99999;display:grid;place-items:center;transition:transform .2s ease,background .2s ease}
@@ -1069,7 +1093,26 @@ document.addEventListener('click', function(e) {
     es:{title:'Accesibilidad',lang:'Idioma',content:'Ajustes de Contenido',color:'Ajustes de Color',orient:'Herramientas de Orientación',textLg:'Texto Más Grande',textXl:'Texto Máximo',textSm:'Texto Más Pequeño',readable:'Fuente Legible',lineSp:'Interlineado',letterSp:'Espaciado de Letras',alignL:'Alinear Izquierda',alignC:'Alinear Centro',alignR:'Alinear Derecha',contrast:'Alto Contraste',dark:'Modo Oscuro',light:'Modo Claro',invert:'Invertir Colores',mono:'Monocromo',satLow:'Baja Saturación',satHigh:'Alta Saturación',links:'Resaltar Enlaces',cursor:'Cursor Grande',guide:'Guía de Lectura',mask:'Máscara de Lectura',pause:'Pausar Animaciones',hideImg:'Ocultar Imágenes',mute:'Silenciar Sonidos',tips:'Tooltips',reset:'Restablecer Todo'}
   };
   function applyWidgetLang(lang){var dict=uiStrings[lang]||uiStrings.en;document.querySelectorAll('[data-i18n]').forEach(function(el){var key=el.getAttribute('data-i18n');if(dict[key])el.textContent=dict[key];});}
-  function setLanguage(lang){applyWidgetLang(lang);document.documentElement.setAttribute('lang',lang);document.querySelectorAll('.a11y-lang button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});try{localStorage.setItem(LANG_KEY,lang);}catch(e){}}
+  function applyPageLang(lang){
+    // Use Google Translate widget to translate the whole page
+    var select = document.querySelector('select.goog-te-combo');
+    if(!select){ return false; }
+    select.value = (lang === 'en') ? '' : lang;
+    select.dispatchEvent(new Event('change'));
+    return true;
+  }
+  function setLanguage(lang){
+    applyWidgetLang(lang);
+    document.documentElement.setAttribute('lang',lang);
+    document.querySelectorAll('.a11y-lang button').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-lang')===lang);});
+    try{localStorage.setItem(LANG_KEY,lang);}catch(e){}
+    // Retry page translation until Google Translate widget is ready
+    var attempts = 0;
+    (function tryApply(){
+      if(applyPageLang(lang)) return;
+      if(++attempts < 40) setTimeout(tryApply, 150);
+    })();
+  }
   function saveState(){var active=[];document.querySelectorAll('.a11y-btn.active').forEach(function(b){var key=b.getAttribute('data-toggle')||('action:'+b.getAttribute('data-action'));active.push(key);});try{localStorage.setItem(STORAGE_KEY,JSON.stringify(active));}catch(e){}}
   function loadState(){try{var saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');saved.forEach(function(key){if(key.indexOf('action:')===0){var action=key.slice(7);var btn=document.querySelector('.a11y-btn[data-action="'+action+'"]');if(btn)btn.click();}else{html.classList.add(key);var b=document.querySelector('.a11y-btn[data-toggle="'+key+'"]');if(b)b.classList.add('active');}});}catch(e){}var savedLang='en';try{savedLang=localStorage.getItem(LANG_KEY)||'en';}catch(e){}setLanguage(savedLang);}
   function togglePanel(open){var willOpen=typeof open==='boolean'?open:!panel.classList.contains('open');panel.classList.toggle('open',willOpen);panel.setAttribute('aria-hidden',willOpen?'false':'true');fab.setAttribute('aria-expanded',willOpen?'true':'false');}
