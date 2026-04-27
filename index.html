@@ -263,6 +263,10 @@
     .event strong { display: block; font-weight: 900; }
     .event span { color: var(--muted); font-weight: 700; font-size: 14px; }
  
+    /* ===== QA ICON SVG STYLES ===== */
+    .qa-icon svg { width: 26px; height: 26px; fill: white; }
+    .qa-icon.gold svg { fill: var(--charcoal); }
+ 
     section { padding: 96px 48px; }
     .container { max-width: 1280px; margin: 0 auto; }
  
@@ -325,7 +329,8 @@
     .card-top.red { background: var(--red); }
     .card-top.dark { background: var(--charcoal); }
     .card-top.gold { background: var(--gold); color: var(--charcoal); }
-    .card-top svg { width: 48px; height: 48px; flex-shrink: 0; }
+    .card-top svg { width: 48px; height: 48px; flex-shrink: 0; fill: white; }
+    .card-top.gold svg { fill: var(--charcoal); }
  
     .card-body { padding: 28px; }
     .card-body h3 { font-size: 28px; font-weight: 900; text-transform: uppercase; margin-bottom: 10px; }
@@ -378,10 +383,12 @@
       display: grid;
       place-items: center;
       flex-shrink: 0;
-      font-size: 36px;
     }
     .blue-school-banner h3 { font-size: 32px; font-weight: 900; text-transform: uppercase; color: white; margin-bottom: 4px; }
     .blue-school-banner p { margin: 0; color: rgba(255,255,255,.85); font-weight: 700; max-width: 720px; }
+ 
+    /* Blue school icon SVG */
+    .bs-icon svg { width: 40px; height: 40px; fill: #003f8a; }
  
     /* ===== CTE PRIDE BANNER ===== */
     .cte-banner {
@@ -498,6 +505,7 @@
     .values { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin: 34px 0; }
     .value { display: flex; align-items: center; gap: 12px; font-family: "Outfit", sans-serif; font-weight: 900; text-transform: uppercase; }
     .value b { width: 44px; height: 44px; display: grid; place-items: center; background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.22); color: var(--gold); font-style: normal; }
+    .value b svg { width: 22px; height: 22px; fill: var(--gold); }
  
     /* ===== PORTRAIT OF A LEARNER ===== */
     .pol-section { background: var(--charcoal); color: white; padding: 96px 48px; }
@@ -510,7 +518,8 @@
       transition: .25s ease;
     }
     .pol-card:hover { background: rgba(158,27,27,.55); border-color: var(--gold); }
-    .pol-icon { font-size: 36px; margin-bottom: 14px; }
+    .pol-icon { margin-bottom: 14px; display: flex; align-items: center; justify-content: center; }
+    .pol-icon svg { width: 36px; height: 36px; fill: var(--gold); }
     .pol-card h4 { font-size: 18px; font-weight: 900; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
     .pol-card p { color: rgba(255,255,255,.78); font-size: 14px; font-weight: 700; margin: 0; }
  
@@ -555,25 +564,156 @@
     .spot-body strong { color: var(--red); text-transform: uppercase; letter-spacing: .1em; font-size: 13px; }
     .spot-body p { color: var(--muted); font-weight: 700; }
  
-    /* ===== CTE PROGRAMS SECTION ===== */
-    .department-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin: 48px 0; }
-    .department-box { border: 4px solid var(--line); box-shadow: 8px 8px 0 var(--charcoal); padding: 36px; }
-    .department-box.dark { background: var(--charcoal); color: white; box-shadow: 8px 8px 0 var(--red); }
-    .department-box.light { background: var(--cream); }
-    .department-box h3 { font-size: 36px; text-transform: uppercase; font-weight: 900; margin-bottom: 20px; }
-    .cte-photo-box { min-height: 300px; background: linear-gradient(135deg, rgba(158,27,27,.75), rgba(255,184,28,.55)), #222; border: 4px solid var(--line); box-shadow: 8px 8px 0 var(--charcoal); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
-    .cte-photo-box .cte-ph-label { color: white; font-family: "Outfit", sans-serif; font-weight: 900; text-transform: uppercase; font-size: 14px; letter-spacing: .14em; text-align: center; padding: 0 20px; }
-    .cte-photo-box .cte-ph-icon { font-size: 52px; }
+    /* ===== EXTRACURRICULAR — REDESIGNED ===== */
+    .extracurricular-section { background: var(--charcoal); color: white; padding: 96px 48px; }
+    .extracurricular-section .section-intro { margin-bottom: 64px; }
+    .extracurricular-section .section-intro h2 {
+      font-size: clamp(54px, 9vw, 116px);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.07em;
+      color: white;
+      line-height: .88;
+      margin: 16px 0 24px;
+    }
+    .extracurricular-section .section-intro h2 span { color: var(--gold); }
+    .extracurricular-section .section-intro p {
+      color: rgba(255,255,255,.72);
+      font-size: 20px;
+      font-weight: 700;
+      max-width: 620px;
+      border-left: 5px solid var(--red);
+      padding-left: 20px;
+    }
  
-    .pill-list { display: flex; flex-wrap: wrap; gap: 12px; }
-    .pill-list span { border: 2px solid var(--line); background: white; color: var(--charcoal); box-shadow: 3px 3px 0 var(--charcoal); padding: 9px 13px; font-family: "Outfit", sans-serif; font-size: 13px; font-weight: 900; text-transform: uppercase; }
-    .department-box.dark .pill-list span { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.1); color: white; box-shadow: none; }
+    /* Organization cards */
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 4px solid rgba(255,255,255,.15);
+      margin-bottom: 48px;
+    }
+    .org-card {
+      padding: 36px 32px;
+      border-right: 2px solid rgba(255,255,255,.12);
+      border-bottom: 2px solid rgba(255,255,255,.12);
+      position: relative;
+      transition: .25s ease;
+      cursor: default;
+    }
+    .org-card:nth-child(3n) { border-right: none; }
+    .org-card:nth-last-child(-n+3) { border-bottom: none; }
+    .org-card:hover { background: rgba(158,27,27,.45); }
+    .org-card:hover .org-abbr { color: white; -webkit-text-stroke: 0; }
+    .org-abbr {
+      font-family: "Outfit", sans-serif;
+      font-size: 56px;
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--gold);
+      letter-spacing: -.04em;
+      line-height: 1;
+      margin-bottom: 10px;
+      transition: .25s ease;
+    }
+    .org-name {
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: white;
+      margin-bottom: 8px;
+    }
+    .org-desc {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,.58);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .org-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: "Outfit", sans-serif;
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--gold);
+      border: 2px solid rgba(255,184,28,.35);
+      padding: 7px 14px;
+      transition: .2s ease;
+    }
+    .org-contact:hover { background: var(--gold); color: var(--charcoal); border-color: var(--gold); }
+    .org-contact svg { width: 12px; height: 12px; fill: currentColor; }
  
-    .cte-programs-list { display: grid; gap: 10px; }
-    .cte-program-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 14px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); }
-    .cte-program-item span { font-weight: 700; font-size: 14px; }
-    .cte-program-item a { font-size: 12px; font-weight: 900; color: var(--gold); text-decoration: none; letter-spacing: .08em; text-transform: uppercase; }
-    .cte-program-item a:hover { color: white; }
+    /* CTE Programs strip */
+    .cte-strip {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 0;
+      background: rgba(255,255,255,.04);
+      border: 3px solid rgba(255,255,255,.14);
+    }
+    .cte-strip-label {
+      background: var(--red);
+      border-right: 3px solid rgba(255,255,255,.14);
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .cte-strip-label h3 {
+      font-size: 42px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -.04em;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .cte-strip-label p {
+      color: rgba(255,255,255,.8);
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .cte-programs-grid {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-content: start;
+    }
+    .cte-program-tile {
+      background: rgba(255,255,255,.06);
+      border: 2px solid rgba(255,255,255,.12);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: .2s ease;
+    }
+    .cte-program-tile:hover { background: rgba(255,255,255,.12); border-color: var(--gold); }
+    .cte-program-tile .prog-name {
+      font-family: "Outfit", sans-serif;
+      font-weight: 900;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: white;
+    }
+    .cte-program-tile .prog-contact {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .cte-program-tile .prog-contact:hover { color: white; }
  
     /* ===== SOCIALS ===== */
     .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 56px; }
@@ -630,6 +770,7 @@
       .hero-inner { padding: 70px 24px 80px; }
       .events-card { margin-bottom: 0; }
       section { padding: 70px 24px; }
+      .extracurricular-section { padding: 70px 24px; }
       .grid.three, .grid.two, .grid.four { grid-template-columns: 1fr 1fr; }
       .pol-grid { grid-template-columns: 1fr 1fr; }
       .support-image { border-left: 0; border-top: 4px solid var(--line); }
@@ -637,6 +778,12 @@
       .island-banner { flex-direction: column; }
       .blue-school-banner { flex-direction: column; }
       .cte-banner { flex-direction: column; }
+      .org-grid { grid-template-columns: 1fr 1fr; }
+      .org-card:nth-child(2n) { border-right: none; }
+      .org-card:nth-child(3n) { border-right: 2px solid rgba(255,255,255,.12); }
+      .cte-strip { grid-template-columns: 1fr; }
+      .cte-strip-label { border-right: none; border-bottom: 3px solid rgba(255,255,255,.14); }
+      .cte-programs-grid { grid-template-columns: 1fr 1fr; }
     }
  
     @media (max-width: 640px) {
@@ -649,6 +796,9 @@
       .grid.three, .grid.two, .grid.four { grid-template-columns: 1fr; }
       .pol-grid { grid-template-columns: 1fr; }
       .teacher-grid { grid-template-columns: 1fr 1fr; }
+      .org-grid { grid-template-columns: 1fr; }
+      .org-card { border-right: none !important; }
+      .cte-programs-grid { grid-template-columns: 1fr; }
     }
  
     /* ===== Accessibility Widget ===== */
@@ -717,15 +867,21 @@
           <div class="events-card">
             <h3>Quick<br><span>Access</span></h3>
             <div class="event">
-              <div class="qa-icon dark" style="font-size:18px;color:white;">🎓</div>
+              <div class="qa-icon dark">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+              </div>
               <div><strong><a href="https://kyede8.infinitecampus.org/campus/portal/mccreary.jsp" target="_blank" rel="noopener">Infinite Campus</a></strong><span>Grades, attendance, and student information</span></div>
             </div>
             <div class="event">
-              <div class="qa-icon red" style="font-size:18px;color:white;">📚</div>
+              <div class="qa-icon red">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+              </div>
               <div><strong><a href="https://classroom.google.com" target="_blank" rel="noopener">Google Classroom</a></strong><span>Assignments, coursework, and learning</span></div>
             </div>
             <div class="event">
-              <div class="qa-icon gold" style="font-size:18px;">📅</div>
+              <div class="qa-icon gold">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/></svg>
+              </div>
               <div><strong><a href="https://calendar.google.com/calendar/embed?src=c_29f1ec56b3406adeff1e40af7193a61bb7abbff0c407d200fdb159fb6bae377b%40group.calendar.google.com&ctz=America%2FNew_York" target="_blank" rel="noopener">School Calendar</a></strong><span>Events, schedules, and important dates</span></div>
             </div>
           </div>
@@ -735,7 +891,9 @@
  
     <!-- ===== BLUE SCHOOL BANNER ===== -->
     <div class="blue-school-banner">
-      <div class="bs-icon">🔵</div>
+      <div class="bs-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5L12 1zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/></svg>
+      </div>
       <div>
         <h3>Kentucky Blue School of Excellence</h3>
         <p>McCreary Central High School is proud to be recognized as a Blue School by the Kentucky Department of Education — a designation honoring schools that demonstrate outstanding achievement and continuous improvement.</p>
@@ -745,8 +903,8 @@
     <!-- ===== CTE TOP SCHOOL BANNER ===== -->
     <div class="cte-banner">
       <div>
-        <h3>🏆 Top School in Kentucky for CTE & Career Readiness</h3>
-        <p>McCreary Central is one of Kentucky's top-ranked schools for Career & Technical Education — preparing students for high-demand careers with industry certifications, dual credit, and real-world training.</p>
+        <h3>Top School in Kentucky for CTE &amp; Career Readiness</h3>
+        <p>McCreary Central is one of Kentucky's top-ranked schools for Career &amp; Technical Education — preparing students for high-demand careers with industry certifications, dual credit, and real-world training.</p>
       </div>
     </div>
  
@@ -766,42 +924,58 @@
         <div class="grid four">
  
           <a class="resource-card" href="https://kyede8.infinitecampus.org/campus/portal/mccreary.jsp" target="_blank" rel="noopener">
-            <div class="card-top red">🎓</div>
+            <div class="card-top red">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+            </div>
             <div class="card-body"><h3>Infinite Campus</h3><p>Grades, attendance, and student information portal</p></div>
           </a>
  
           <a class="resource-card" href="https://classroom.google.com" target="_blank" rel="noopener">
-            <div class="card-top dark">📚</div>
+            <div class="card-top dark">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            </div>
             <div class="card-body"><h3>Google Classroom</h3><p>Access coursework, assignments, and resources</p></div>
           </a>
  
           <a class="resource-card" href="https://m365.cloud.microsoft/apps/" target="_blank" rel="noopener">
-            <div class="card-top gold">📧</div>
+            <div class="card-top gold">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </div>
             <div class="card-body"><h3>Email (Microsoft 365)</h3><p>Staff and student email access</p></div>
           </a>
  
           <a class="resource-card" href="https://thinkhelpdesk.com/McCreary/usr_job.cfm" target="_blank" rel="noopener">
-            <div class="card-top red">🔧</div>
+            <div class="card-top red">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
+            </div>
             <div class="card-body"><h3>Help Desk</h3><p>Technology service and support requests</p></div>
           </a>
  
           <a class="resource-card" href="https://docs.google.com/forms/d/e/1FAIpQLSfi16-MblkjWzIvErv_Acz-SaUMD67RHNKbLmAFWosokjMHDw/viewform" target="_blank" rel="noopener">
-            <div class="card-top dark">🧑‍💻</div>
+            <div class="card-top dark">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg>
+            </div>
             <div class="card-body"><h3>Student Led Helpdesk</h3><p>Submit a student technology help request</p></div>
           </a>
  
           <a class="resource-card" href="https://www.mccreary.k12.ky.us/required-trainings" target="_blank" rel="noopener">
-            <div class="card-top gold">📋</div>
+            <div class="card-top gold">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+            </div>
             <div class="card-body"><h3>Required Trainings</h3><p>Staff training resources and requirements</p></div>
           </a>
  
           <a class="resource-card" href="https://docs.google.com/document/d/1ZhAypkLYnvJaySVCv_KfXiV4lxnSsflYrh2JuJQVswI/edit?usp=sharing" target="_blank" rel="noopener">
-            <div class="card-top red">📖</div>
+            <div class="card-top red">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+            </div>
             <div class="card-body"><h3>Dress Code / Handbook</h3><p>Student handbook and dress code policy</p></div>
           </a>
  
           <a class="resource-card" href="https://docs.google.com/document/d/17qbjZqiE-Pcq4SPab1kVJDtdSCAyaECnNZ14ysraPGU/edit?tab=t.0" target="_blank" rel="noopener">
-            <div class="card-top dark">📰</div>
+            <div class="card-top dark">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            </div>
             <div class="card-body"><h3>Weekly Treasure Report</h3><p>Latest weekly school updates and notices</p></div>
           </a>
  
@@ -812,7 +986,7 @@
     <!-- ===== ISLAND TIME / CLEVER ===== -->
     <div class="island-banner">
       <div>
-        <h3>🏝️ Schedule Innovation Islands</h3>
+        <h3>Schedule Innovation Islands</h3>
         <p>Access Island Time scheduling and all your learning apps through Clever — your single sign-on portal for every digital tool at MCHS.</p>
       </div>
       <a class="button gold" href="https://clever.com" target="_blank" rel="noopener">Open Clever</a>
@@ -879,7 +1053,9 @@
         </div>
         <div class="grid two">
           <article class="program-card">
-            <div class="card-top red">🎓</div>
+            <div class="card-top red">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+            </div>
             <div class="card-body">
               <h3>College Ready</h3>
               <p>Rigorous coursework, AP opportunities, dual-credit options, and college preparation resources to help every Raider reach their higher education goals.</p>
@@ -887,7 +1063,9 @@
             </div>
           </article>
           <article class="program-card">
-            <div class="card-top dark">💼</div>
+            <div class="card-top dark">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.34C18 2.54 15.96.5 13.5.5c-1.32 0-2.5.57-3.36 1.46L9 3.12l-1.14-1.16C6.96 1.07 5.78.5 4.5.5 2.04.5 0 2.54 0 4.66c0 .46.11.9.18 1.34H0c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-9 11H9v-2h2v2zm0-4H9v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+            </div>
             <div class="card-body">
               <h3>Career Ready</h3>
               <p>Industry certifications, work-based learning, internships, and CTE pathways in high-demand fields — one of the top CTE programs in Kentucky.</p>
@@ -1031,59 +1209,128 @@
       </div>
     </section>
  
-    <!-- ===== EXTRACURRICULAR / CTE PROGRAMS ===== -->
-    <section id="extracurricular" style="background:var(--cream);">
+    <!-- ===== EXTRACURRICULAR / CTE PROGRAMS — REDESIGNED ===== -->
+    <section class="extracurricular-section" id="extracurricular">
       <div class="container">
-        <div class="section-head">
-          <div>
-            <span class="tag" style="background:var(--red);color:white">Extracurricular</span>
-            <h2>TSA, FFA,<br><span>HOSA,</span><br>JROTC &amp;<br>More.</h2>
-            <p>Student clubs, service organizations, and career groups at McCreary Central give every Raider a place to lead, serve, and grow.</p>
-          </div>
-          <div></div>
+ 
+        <div class="section-intro">
+          <span class="tag" style="background:var(--red);color:white;">Extracurricular</span>
+          <h2>Lead.<br><span>Compete.</span><br>Grow.</h2>
+          <p>Student organizations, career groups, and CTE programs give every Raider a place to build real skills — and real futures.</p>
         </div>
  
-        <div class="department-panel">
-          <!-- CTE Programs picture placeholder + list -->
-          <div>
-            <div class="cte-photo-box" style="margin-bottom:24px;">
-              <div class="cte-ph-icon">🏭</div>
-              <div class="cte-ph-label">CTE Program Photo<br><span style="font-size:11px;opacity:.7;">(Replace with your CTE photo)</span></div>
-            </div>
-            <div class="department-box dark">
-              <h3>CTE Programs</h3>
-              <div class="cte-programs-list">
-                <div class="cte-program-item"><span>Environmental Sciences</span><a href="mailto:cameron.lee@mccreary.kyschools.us">Contact Cameron Lee</a></div>
-                <div class="cte-program-item"><span>Carpentry</span><a href="mailto:tim.freels@mccreary.kyschools.us">Contact Tim Freels</a></div>
-                <div class="cte-program-item"><span>Auto Mechanics</span><a href="mailto:stephen.grundy@mccreary.kyschools.us">Contact Stephen Grundy</a></div>
-                <div class="cte-program-item"><span>Nursing (HOSA)</span><a href="mailto:tiffeny.stephens@mccreary.kyschools.us">Contact Tiffeny Stephens</a></div>
-                <div class="cte-program-item"><span>Teaching &amp; Learning (EdRising)</span><a href="mailto:tamra.wilson@mccreary.kyschools.us">Contact Tamra Wilson</a></div>
-                <div class="cte-program-item"><span>Engineering (TSA)</span><a href="mailto:travis.smith@mccreary.kyschools.us">Contact Travis Smith</a></div>
-                <div class="cte-program-item"><span>Information Technology</span><a href="mailto:collin.crabtree@mccreary.kyschools.us">Contact Collin Crabtree</a></div>
-                <div class="cte-program-item"><span>JAG</span><a href="mailto:cole.burke@mccreary.kyschools.us">Contact Cole Burke</a></div>
-                <div class="cte-program-item"><span>JROTC</span><a href="mailto:garry.galloway@mccreary.kyschools.us">Contact Garry Galloway</a></div>
-              </div>
-            </div>
+        <!-- Organization cards grid -->
+        <div class="org-grid">
+ 
+          <div class="org-card">
+            <div class="org-abbr">TSA</div>
+            <div class="org-name">Technology Student Association</div>
+            <div class="org-desc">Competitions in engineering, coding, and design. Hands-on STEM challenges that prepare students for tech careers.</div>
+            <a class="org-contact" href="mailto:travis.smith@mccreary.kyschools.us">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Contact Mr. Smith
+            </a>
           </div>
  
-          <!-- Clubs -->
-          <div class="department-box light">
-            <span class="tag" style="background:var(--red);color:white">Clubs &amp; Organizations</span>
-            <h3>Connect, Lead &amp; Serve.</h3>
-            <p style="color:var(--muted);font-weight:700;margin-bottom:24px;">Students can connect, lead, serve, and compete through extracurricular opportunities across campus.</p>
-            <div class="pill-list" style="margin-bottom:24px;">
-              <span>TSA</span>
-              <span>FFA</span>
-              <span>HOSA</span>
-              <span>JROTC</span>
-              <span>FCA</span>
-              <span>EdRising</span>
-              <span>JAG</span>
+          <div class="org-card">
+            <div class="org-abbr">FFA</div>
+            <div class="org-name">Future Farmers of America</div>
+            <div class="org-desc">Agricultural education, leadership development, and community service rooted in Kentucky's proud farming heritage.</div>
+            <a class="org-contact" href="mailto:cameron.lee@mccreary.kyschools.us">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Contact Mr. Lee
+            </a>
+          </div>
+ 
+          <div class="org-card">
+            <div class="org-abbr">HOSA</div>
+            <div class="org-name">Health Occupations Students of America</div>
+            <div class="org-desc">Competitive events, certifications, and leadership for students pursuing health science and nursing careers.</div>
+            <a class="org-contact" href="mailto:tiffeny.stephens@mccreary.kyschools.us">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Contact Ms. Stephens
+            </a>
+          </div>
+ 
+          <div class="org-card">
+            <div class="org-abbr">JROTC</div>
+            <div class="org-name">Junior Reserve Officers' Training Corps</div>
+            <div class="org-desc">Discipline, leadership, and service. JROTC builds character and prepares students for military service or civilian leadership.</div>
+            <a class="org-contact" href="mailto:garry.galloway@mccreary.kyschools.us">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Contact Sgt. Galloway
+            </a>
+          </div>
+ 
+          <div class="org-card">
+            <div class="org-abbr">JAG</div>
+            <div class="org-name">Jobs for America's Graduates</div>
+            <div class="org-desc">Career readiness, job placement, and life skills for students preparing to enter the workforce with confidence.</div>
+            <a class="org-contact" href="mailto:cole.burke@mccreary.kyschools.us">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Contact Mr. Burke
+            </a>
+          </div>
+ 
+          <div class="org-card">
+            <div class="org-abbr">EdRising</div>
+            <div class="org-name">Education Rising (Future Educators)</div>
+            <div class="org-desc">For students passionate about teaching. Gain classroom experience and connect with the next generation of Kentucky educators.</div>
+            <a class="org-contact" href="mailto:tamra.wilson@mccreary.kyschools.us">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              Contact Ms. Wilson
+            </a>
+          </div>
+ 
+        </div>
+ 
+        <!-- CTE Programs strip -->
+        <div class="cte-strip">
+          <div class="cte-strip-label">
+            <h3>CTE Programs</h3>
+            <p>Kentucky's top-ranked Career &amp; Technical Education pathways — earn certifications, dual credit, and industry experience before graduation.</p>
+            <a class="button gold" href="mailto:michelle.shepherd@mccreary.kyschools.us">Talk to Dr. Shepherd</a>
+          </div>
+          <div class="cte-programs-grid">
+            <div class="cte-program-tile">
+              <div class="prog-name">Environmental Sciences</div>
+              <a class="prog-contact" href="mailto:cameron.lee@mccreary.kyschools.us">cameron.lee@</a>
             </div>
-            <p style="color:var(--muted);font-weight:700;font-size:14px;">Questions about joining a club or organization? Contact the program teacher listed in the CTE Programs section, or reach out to our guidance counselors.</p>
-            <a class="button dark" href="https://mchs.mccreary.k12.ky.us/quick-links/guidance-department" target="_blank" rel="noopener" style="margin-top:20px;">Contact Guidance</a>
+            <div class="cte-program-tile">
+              <div class="prog-name">Carpentry</div>
+              <a class="prog-contact" href="mailto:tim.freels@mccreary.kyschools.us">tim.freels@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">Auto Mechanics</div>
+              <a class="prog-contact" href="mailto:stephen.grundy@mccreary.kyschools.us">stephen.grundy@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">Nursing (HOSA)</div>
+              <a class="prog-contact" href="mailto:tiffeny.stephens@mccreary.kyschools.us">tiffeny.stephens@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">Teaching &amp; Learning</div>
+              <a class="prog-contact" href="mailto:tamra.wilson@mccreary.kyschools.us">tamra.wilson@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">Engineering (TSA)</div>
+              <a class="prog-contact" href="mailto:travis.smith@mccreary.kyschools.us">travis.smith@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">Information Technology</div>
+              <a class="prog-contact" href="mailto:collin.crabtree@mccreary.kyschools.us">collin.crabtree@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">JAG</div>
+              <a class="prog-contact" href="mailto:cole.burke@mccreary.kyschools.us">cole.burke@</a>
+            </div>
+            <div class="cte-program-tile">
+              <div class="prog-name">JROTC</div>
+              <a class="prog-contact" href="mailto:garry.galloway@mccreary.kyschools.us">garry.galloway@</a>
+            </div>
           </div>
         </div>
+ 
       </div>
     </section>
  
@@ -1098,14 +1345,30 @@
           <h2>Play<br><span>Hard,</span><br>Win Big.</h2>
           <p>McCreary Central Raiders compete with heart across a full slate of varsity and junior varsity sports — building teamwork, discipline, and school pride on every field and court.</p>
           <div class="values">
-            <div class="value"><b>🏈</b>Football</div>
-            <div class="value"><b>🏀</b>Basketball</div>
-            <div class="value"><b>⚾</b>Baseball</div>
-            <div class="value"><b>🥎</b>Softball</div>
-            <div class="value"><b>⚽</b>Soccer</div>
-            <div class="value"><b>🏐</b>Volleyball</div>
-            <div class="value"><b>🎽</b>Cross Country</div>
-            <div class="value"><b>🎾</b>Tennis</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><path d="M20.56 3.34a1 1 0 0 0-1-.08l-17 8a1 1 0 0 0 .14 1.9l7.38 1.64 1.64 7.38a1 1 0 0 0 .98.82h.07a1 1 0 0 0 .89-.69l8-17a1 1 0 0 0-.1-.97z"/></svg>
+            </b>Football</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M18.4 5.6L5.6 18.4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+            </b>Basketball</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="4" ry="9" fill="none" stroke="currentColor" stroke-width="2"/><ellipse cx="12" cy="12" rx="9" ry="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>
+            </b>Baseball</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+            </b>Softball</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z"/></svg>
+            </b>Soccer</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM10 5.47l4 1.4v11.66l-4-1.4V5.47zm-5 .99l3-1.01v11.7l-3 1.12V6.46zm14 11.08l-3 1.01V6.86l3-1.12v11.8z"/></svg>
+            </b>Volleyball</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><path d="M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.6 13.9l1-4.4 2.1 2v6h2v-7.5l-2.1-2 .6-3c1.3 1.5 3.3 2.5 5.5 2.5v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1l-5.2 2.2v4.7h2v-3.4l1.8-.7-1.6 8.1-4.9-1-.4 2 7 1.4z"/></svg>
+            </b>Cross Country</div>
+            <div class="value"><b>
+              <svg viewBox="0 0 24 24"><path d="M17 6.82C16.33 5.73 15.25 5 14 5c-2.21 0-4 1.79-4 4 0 .36.05.71.13 1.04C8.5 10.5 7 12.1 7 14c0 2.21 1.79 4 4 4 .95 0 1.82-.33 2.5-.88l4.18 4.17 1.41-1.41-4.17-4.18c.55-.68.88-1.55.88-2.5 0-.54-.11-1.05-.3-1.52L17 9.97V16h2V6h-2v.82z"/></svg>
+            </b>Tennis</div>
           </div>
           <div class="actions">
             <a class="button gold" href="mailto:charlotte.barnett@mccreary.kyschools.us">Athletic Office</a>
@@ -1122,14 +1385,46 @@
         <h2 style="font-size:clamp(42px,7vw,84px);font-weight:900;text-transform:uppercase;letter-spacing:-.06em;color:white;margin:16px 0 8px;">What Every<br><span style="color:var(--gold);">Raider</span><br>Becomes.</h2>
         <p style="color:rgba(255,255,255,.78);font-size:18px;font-weight:700;max-width:600px;margin-bottom:0;">McCreary Central graduates are equipped with the knowledge, skills, and character to thrive in college, career, and community. Our Portrait of a Learner defines what that looks like.</p>
         <div class="pol-grid">
-          <div class="pol-card"><div class="pol-icon">🧠</div><h4>Critical Thinker</h4><p>Raiders analyze, evaluate, and create — approaching problems with curiosity and evidence-based reasoning.</p></div>
-          <div class="pol-card"><div class="pol-icon">🤝</div><h4>Effective Communicator</h4><p>Articulating ideas clearly and respectfully in writing, speaking, and digital formats across all audiences.</p></div>
-          <div class="pol-card"><div class="pol-icon">🌍</div><h4>Responsible Citizen</h4><p>Engaged in community, ethical in decision-making, and aware of their impact on the world around them.</p></div>
-          <div class="pol-card"><div class="pol-icon">💡</div><h4>Creative Problem Solver</h4><p>Embracing innovation, persistence, and collaboration to meet real-world challenges with confidence.</p></div>
-          <div class="pol-card"><div class="pol-icon">📈</div><h4>Career & College Ready</h4><p>Armed with credentials, certifications, and experience to succeed in the next chapter — whatever that looks like.</p></div>
-          <div class="pol-card"><div class="pol-icon">❤️</div><h4>Culturally Aware</h4><p>Respecting diversity, including military-connected students, and building a welcoming, inclusive school community.</p></div>
-          <div class="pol-card"><div class="pol-icon">🔗</div><h4>Collaborative Leader</h4><p>Working with others, lifting teammates, and stepping up to lead when the team needs it most.</p></div>
-          <div class="pol-card"><div class="pol-icon">🎯</div><h4>Self-Directed Learner</h4><p>Setting goals, managing time, and taking ownership of their academic journey from day one.</p></div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7z"/></svg></div>
+            <h4>Critical Thinker</h4>
+            <p>Raiders analyze, evaluate, and create — approaching problems with curiosity and evidence-based reasoning.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+            <h4>Effective Communicator</h4>
+            <p>Articulating ideas clearly and respectfully in writing, speaking, and digital formats across all audiences.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+            <h4>Responsible Citizen</h4>
+            <p>Engaged in community, ethical in decision-making, and aware of their impact on the world around them.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg></div>
+            <h4>Creative Problem Solver</h4>
+            <p>Embracing innovation, persistence, and collaboration to meet real-world challenges with confidence.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.34 0-2.12-2.04-4.16-4.5-4.16-1.32 0-2.5.57-3.36 1.46L9 3.12l-1.14-1.16C6.96 1.07 5.78.5 4.5.5 2.04.5 0 2.54 0 4.66c0 .46.11.9.18 1.34H0c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-9 11H9v-2h2v2zm0-4H9v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg></div>
+            <h4>Career &amp; College Ready</h4>
+            <p>Armed with credentials, certifications, and experience to succeed in the next chapter — whatever that looks like.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></div>
+            <h4>Culturally Aware</h4>
+            <p>Respecting diversity, including military-connected students, and building a welcoming, inclusive school community.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+            <h4>Collaborative Leader</h4>
+            <p>Working with others, lifting teammates, and stepping up to lead when the team needs it most.</p>
+          </div>
+          <div class="pol-card">
+            <div class="pol-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></div>
+            <h4>Self-Directed Learner</h4>
+            <p>Setting goals, managing time, and taking ownership of their academic journey from day one.</p>
+          </div>
         </div>
         <div style="margin-top:36px;">
           <a class="button gold" href="https://drive.google.com/file/d/1pbxV_iTGatjgxj8fauU9L-ia_6jmFyCo/view?usp=sharing" target="_blank" rel="noopener">View Full Portrait of a Learner Document</a>
@@ -1154,7 +1449,7 @@
             <div class="button dark" style="margin-top:20px;display:inline-flex;">View Treasure Report →</div>
           </a>
           <article class="bulletin-card">
-            <div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;margin-bottom:12px;color:var(--gold);">📰</div>
+            <div style="font-family:'Outfit',sans-serif;font-size:52px;font-weight:900;margin-bottom:12px;color:var(--gold);">MC</div>
             <h3>School Announcements</h3>
             <p>Check the calendar for upcoming events, and follow our Facebook page for daily updates, photos, and family communications from MCHS.</p>
             <a class="button gold" href="https://www.facebook.com/p/McCreary-Central-High-School-61550759507890/" target="_blank" rel="noopener" style="margin-top:20px;">Follow on Facebook</a>
@@ -1196,7 +1491,6 @@
           </div>
         </div>
         <div class="yt-embed-wrapper">
-          <!-- Latest video from channel - auto-plays latest upload -->
           <iframe src="https://www.youtube.com/embed?listType=user_uploads&list=mccrearyraiders&index=1" allowfullscreen title="Latest McCreary Raiders YouTube video"></iframe>
         </div>
       </div>
@@ -1215,7 +1509,9 @@
         </div>
         <div class="grid two">
           <article class="program-card">
-            <div class="card-top red">💼</div>
+            <div class="card-top red">
+              <svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.34 0-2.12-2.04-4.16-4.5-4.16-1.32 0-2.5.57-3.36 1.46L9 3.12l-1.14-1.16C6.96 1.07 5.78.5 4.5.5 2.04.5 0 2.54 0 4.66c0 .46.11.9.18 1.34H0c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-9 11H9v-2h2v2zm0-4H9v-2h2v2zm4 4h-2v-2h2v2zm0-4h-2v-2h2v2z"/></svg>
+            </div>
             <div class="card-body">
               <h3>District Employment</h3>
               <p>Apply for open positions across McCreary County schools and support staff roles. View all current openings through the official hiring portal.</p>
@@ -1223,7 +1519,9 @@
             </div>
           </article>
           <article class="program-card">
-            <div class="card-top dark">🎓</div>
+            <div class="card-top dark">
+              <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
+            </div>
             <div class="card-body">
               <h3>Work-Based Learning</h3>
               <p>Internships, job shadowing, and local employer partnerships — contact our CTE Coordinator, Dr. Michelle Shepherd, to explore options for students.</p>
@@ -1261,9 +1559,9 @@
               <h3 style="font-size:26px;text-transform:uppercase;font-weight:900;margin-bottom:12px;">Raider Social Hub</h3>
               <p style="color:var(--muted);font-weight:700;margin-bottom:20px;">Stay up-to-date with announcements, event photos, sports highlights, and family communications from McCreary Central's official channels.</p>
               <div style="display:flex;flex-direction:column;gap:10px;font-weight:900;font-size:14px;">
-                <span>📘 Facebook — Daily updates &amp; photos</span>
-                <span>▶️ YouTube — Videos &amp; highlights</span>
-                <span>📅 Google Calendar — Events &amp; schedules</span>
+                <span>Facebook — Daily updates &amp; photos</span>
+                <span>YouTube — Videos &amp; highlights</span>
+                <span>Google Calendar — Events &amp; schedules</span>
               </div>
             </div>
           </div>
