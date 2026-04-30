@@ -24,7 +24,6 @@
   --radius-md:12px;
   --radius-lg:20px;
   --header-h:68px;
-  --banner-h:42px;
   --ff-display:'Playfair Display',Georgia,serif;
   --ff-body:'DM Sans','Segoe UI',sans-serif;
 }
@@ -62,17 +61,8 @@ header.scrolled{background:rgba(13,27,15,0.95);backdrop-filter:blur(12px);-webki
 .drawer a span{font-size:0.7rem;color:var(--moss);font-family:var(--ff-body);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding-top:0.1rem}
 .drawer-fb{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)!important}
 .drawer-fb i{font-size:1rem;color:#8ab4f8;margin-right:0.5rem}
-#burn-ban-bar{background:var(--forest);padding:0.6rem 1.25rem;display:flex;align-items:center;justify-content:center;gap:0.65rem;flex-wrap:wrap;font-size:0.8rem;min-height:var(--banner-h);position:fixed;top:var(--header-h);left:0;right:0;z-index:998;}
-#burn-ban-bar .bb-label{color:var(--gold-light);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:0.7rem;white-space:nowrap}
-#burn-ban-bar .bb-status{font-weight:500;color:#fff;display:flex;align-items:center;gap:0.4rem}
-#burn-ban-bar .bb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-#burn-ban-bar .bb-dot.active{background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.7)}
-#burn-ban-bar .bb-dot.inactive{background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,0.6)}
-#burn-ban-bar .bb-dot.loading{background:var(--gold);animation:pulse 1.2s ease-in-out infinite}
-#burn-ban-bar .bb-source{font-size:0.68rem;color:rgba(255,255,255,0.4);margin-left:auto}
-#burn-ban-bar .bb-source a{color:rgba(255,255,255,0.4);text-decoration:underline}
-@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
-.hero{position:relative;height:100svh;min-height:500px;overflow:hidden;display:flex;align-items:flex-end;padding-top:calc(var(--header-h) + var(--banner-h));}
+50%{opacity:1}}
+.hero{position:relative;height:100svh;min-height:500px;overflow:hidden;display:flex;align-items:flex-end;padding-top:var(--header-h);}
 .hero-slides{position:absolute;inset:0}
 .hero-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.4s ease}
 .hero-slides img.active{opacity:1}
@@ -252,6 +242,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 .foot-social a:hover{background:#1877f2;color:#fff}
 .foot-btm{text-align:center;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.07)}
 .foot-btm p{font-size:0.73rem;color:rgba(255,255,255,0.28)}
+@keyframes bbpulse{0%,100%{opacity:0.4}50%{opacity:1}}
+@keyframes bbpulse{0%,100%{opacity:0.4}50%{opacity:1}}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.6s ease,transform 0.6s ease}
 .reveal.on{opacity:1;transform:translateY(0)}
 .d1{transition-delay:0.1s}
@@ -331,20 +323,10 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" class="drawer-fb"><span>FB</span><i class="fa-brands fa-facebook-f"></i>Facebook</a>
 </nav>
 
-<!-- BURN BAN BANNER -->
-<div id="burn-ban-bar">
-  <span class="bb-label"><i class="fa-solid fa-fire" style="margin-right:0.35rem;color:#ef4444"></i>McCreary County Burn Ban</span>
-  <span class="bb-status" id="bbStatus">
-    <span class="bb-dot loading" id="bbDot"></span>
-    <span id="bbText">Checking status&hellip;</span>
-  </span>
-  <span class="bb-source"><a href="https://eec.ky.gov/Natural-Resources/Forestry/wildland-fire-management/pages/county-burn-bans.aspx" target="_blank">KY EEC Source <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem"></i></a></span>
-</div>
-
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-slides" id="heroSlides">
-    <img src="images/Jumps.jpg" class="active" alt="Devils Jumps">
+    <img src="images/Jumps.jpg" class="active" alt="Devils Jump">
     <img src="images/CFalls-Web.jpg" alt="Cumberland Falls">
     <img src="images/NatArch-Web.jpg" alt="Natural Arch">
     <img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock">
@@ -580,9 +562,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   </div>
   <div class="records-form reveal">
     <h3><i class="fa-solid fa-file-magnifying-glass" style="margin-right:0.5rem;color:var(--gold)"></i>Submit a Records Request</h3>
-    <form class="rfrow" action="https://formsubmit.co/records@mccrearycounty.com" method="POST">
+    <form class="rfrow" action="https://formsubmit.co/records@mccrearycounty.com" method="POST" onsubmit="handleFormSubmit(this,event)">
       <input type="hidden" name="_subject" value="Open Records Request &mdash; McCreary County Fiscal Court">
-      <input type="hidden" name="_next" value="https://mccrearycounty.com/records-thank-you.html">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
       <input type="text" name="_honey" style="display:none">
@@ -617,7 +598,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       <img src="images/CFalls-Web.jpg" class="active" alt="Cumberland Falls">
       <img src="images/Crack-in-the-rocks-Web.jpg" alt="Crack in the Rocks">
       <img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock">
-      <img src="images/Jumps.jpg" alt="Devils Jumps">
+      <img src="images/Jumps.jpg" alt="Devils Jump">
       <img src="images/YOL-Web.jpg" alt="Year of the Land">
     </div>
     <div class="t-overlay"></div>
@@ -631,7 +612,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <a href="https://www.google.com/maps/search/?api=1&query=Cumberland+Falls+State+Resort+Park+KY" target="_blank" class="attr-card reveal"><img src="images/Cumberland-Falls-Web.jpg" alt="Cumberland Falls"><div class="attr-info"><h4>Cumberland Falls</h4><p>The "Niagara of the South"</p></div></a>
     <a href="https://www.google.com/maps/search/?api=1&query=Natural+Arch+Scenic+Area+Kentucky" target="_blank" class="attr-card reveal d1"><img src="images/NatArch-Web.jpg" alt="Natural Arch"><div class="attr-info"><h4>Natural Arch</h4><p>Iconic geological wonder</p></div></a>
     <a href="https://www.google.com/maps/search/?api=1&query=Buzzard+Rock+McCreary+County+KY" target="_blank" class="attr-card reveal d2"><img src="images/Buzzrock-Web.jpg" alt="Buzzard Rock"><div class="attr-info"><h4>Buzzard Rock</h4><p>Panoramic forest views</p></div></a>
-    <a href="https://www.google.com/maps/search/?api=1&query=Devils+Jumps+McCreary+County+KY" target="_blank" class="attr-card reveal d3"><img src="images/Jumps.jpg" alt="Devils Jumps"><div class="attr-info"><h4>Devils Jumps</h4><p>Cliffside adventure trail</p></div></a>
+    <a href="https://www.google.com/maps/search/?api=1&query=Devils+Jumps+McCreary+County+KY" target="_blank" class="attr-card reveal d3"><img src="images/Jumps.jpg" alt="Devils Jump"><div class="attr-info"><h4>Devils Jump</h4><p>Cliffside adventure trail</p></div></a>
     <a href="https://www.google.com/maps/search/?api=1&query=Eagle+Falls+Kentucky" target="_blank" class="attr-card reveal d1"><img src="images/EagleFalls-Web.jpg" alt="Eagle Falls"><div class="attr-info"><h4>Eagle Falls</h4><p>Hidden forest waterfall</p></div></a>
     <a href="https://www.google.com/maps/search/?api=1&query=Princess+Falls+Kentucky" target="_blank" class="attr-card reveal d2"><img src="images/Princess-Fass-Web.jpg" alt="Princess Falls"><div class="attr-info"><h4>Princess Falls</h4><p>Serene and picturesque</p></div></a>
   </div>
@@ -658,31 +639,31 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     <button class="res-tab" data-panel="healthcare">Healthcare</button>
     <button class="res-tab" data-panel="memorial">Memorial Services</button>
   </div>
-  <div class="res-panel active" id="panel-utilities">
+    <div class="res-panel active" id="panel-utilities">
     <div class="res-list">
-      <a href="https://www.mccrearywater.com/" target="_blank" class="res-link">McCreary County Water District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://www.skrecc.com/" target="_blank" class="res-link">South Kentucky RECC (Electric) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://lge-ku.com/" target="_blank" class="res-link">LG &amp; KU (Electric) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://highland.net/" target="_blank" class="res-link">Highland Telephone (Internet) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://lge-ku.com/" target="_blank" class="res-link">LG &amp; KU (Electric) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.mccrearywater.com/" target="_blank" class="res-link">McCreary County Water District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.scottsolidwaste.com/contact-us" target="_blank" class="res-link">Scott Solid Waste <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.skrecc.com/" target="_blank" class="res-link">South Kentucky RECC (Electric) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://www.spectrum.com/services/kentucky/stearns" target="_blank" class="res-link">Spectrum (Cable &amp; Internet) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
-  <div class="res-panel" id="panel-community">
+    <div class="res-panel" id="panel-community">
     <div class="res-list">
-      <a href="https://mccrearylibrary.org/" target="_blank" class="res-link">McCreary County Public Library <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://mccrearycountysheriff.com/" target="_blank" class="res-link">McCreary County Sheriff's Office <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://commercial.century21.com/real-estate/mccreary-county-ky/LNKYMCCREARY/" target="_blank" class="res-link">Commercial Real Estate &mdash; Century 21 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://fw.ky.gov/Pages/default.aspx" target="_blank" class="res-link">KDFWR &mdash; Hunting &amp; Fishing Licenses <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.facebook.com/groups/333838313325580/" target="_blank" class="res-link">Little League Signups (Facebook) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/9arJ4RQeYAQQzcai9" target="_blank" class="res-link">McCreary County Health Department <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.mccrearyjournal.com/" target="_blank" class="res-link">McCreary County Journal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/w9rFgYVixLxE6FTx6" target="_blank" class="res-link">McCreary County Park &amp; Youth Baseball/Softball Fields <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://mccrearylibrary.org/" target="_blank" class="res-link">McCreary County Public Library <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/xzdj7oxkhSXHxRXi7" target="_blank" class="res-link">McCreary County Senior Citizens <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://mccrearycountysheriff.com/" target="_blank" class="res-link">McCreary County Sheriff's Office <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://www.qpublic.net/ky/mccreary/index.html" target="_blank" class="res-link">PVA Property Records Search <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://stearnskygolf.com/" target="_blank" class="res-link">Stearns KY Golf <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/7BTt4Y1FF1aviEdm7" target="_blank" class="res-link">Stearns Ranger District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://www.unitedcumberland.com/" target="_blank" class="res-link">United Cumberland Bank <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://www.scottsolidwaste.com/contact-us" target="_blank" class="res-link">Scott Solid Waste <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://maps.app.goo.gl/xzdj7oxkhSXHxRXi7" target="_blank" class="res-link">McCreary County Senior Citizens <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://www.mccrearyjournal.com/" target="_blank" class="res-link">McCreary County Journal <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://fw.ky.gov/Pages/default.aspx" target="_blank" class="res-link">KDFWR &mdash; Hunting &amp; Fishing Licenses <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://maps.app.goo.gl/w9rFgYVixLxE6FTx6" target="_blank" class="res-link">McCreary County Park &amp; Youth Baseball/Softball Fields <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://www.facebook.com/groups/333838313325580/" target="_blank" class="res-link">Little League Signups (Facebook) <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://stearnskygolf.com/" target="_blank" class="res-link">Stearns KY Golf <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://www.qpublic.net/ky/mccreary/index.html" target="_blank" class="res-link">PVA Property Records Search <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://commercial.century21.com/real-estate/mccreary-county-ky/LNKYMCCREARY/" target="_blank" class="res-link">Commercial Real Estate &mdash; Century 21 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
     <div style="margin-top:0.85rem;background:#fff;border-radius:10px;padding:1rem 1.1rem;border:1px solid rgba(0,0,0,0.07);font-size:0.83rem;color:#444;line-height:1.75">
       <strong style="display:block;font-size:0.78rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--forest-mid);margin-bottom:0.35rem"><i class="fa-solid fa-tree" style="margin-right:0.4rem"></i>McCreary County Park &mdash; Community Center</strong>
@@ -690,29 +671,40 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       To make reservations, contact <a href="mailto:melissa@mccrearycounty.com" style="color:var(--forest-mid)">Melissa Vanover</a> at <a href="tel:6063767275" style="color:var(--forest-mid)">606-376-7275</a>.
     </div>
   </div>
-  <div class="res-panel" id="panel-fire">
+    <div class="res-panel" id="panel-fire">
+    <div style="background:var(--forest);border-radius:var(--radius-md);padding:1rem 1.15rem;margin-bottom:0.75rem;display:flex;align-items:center;gap:0.85rem;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:0.5rem;flex:1;min-width:180px">
+        <i class="fa-solid fa-fire" style="font-size:1rem;color:#ef4444;flex-shrink:0"></i>
+        <span style="font-size:0.7rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-light)">McCreary County Burn Ban</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.45rem">
+        <span id="bbDot" style="width:9px;height:9px;border-radius:50%;background:var(--gold);display:inline-block;animation:bbpulse 1.2s ease-in-out infinite;flex-shrink:0"></span>
+        <span id="bbText" style="font-size:0.83rem;font-weight:500;color:#fff">Checking status&hellip;</span>
+      </div>
+      <a href="https://eec.ky.gov/Natural-Resources/Forestry/wildland-fire-management/pages/county-burn-bans.aspx" target="_blank" style="font-size:0.68rem;color:rgba(255,255,255,0.45);text-decoration:underline;white-space:nowrap">KY EEC Source <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.55rem"></i></a>
+    </div>
     <div class="res-list">
+      <a href="https://usfiredept.com/eagle-sawyer-fire-protection-district-6756.html" target="_blank" class="res-link">Eagle-Sawyer Fire Protection District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/Nq6kFbfXqrVhnAY5A" target="_blank" class="res-link">McCreary County EMS <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://usfiredept.com/north-mccreary-fire-protection-district-16629.html" target="_blank" class="res-link">North McCreary Fire Protection District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://usfiredept.com/south-mccreary-fire-and-rescue-21443.html" target="_blank" class="res-link">South McCreary Fire &amp; Rescue <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://usfiredept.com/west-mccreary-volunteer-fire-department-24859.html" target="_blank" class="res-link">West McCreary Volunteer Fire Department <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://usfiredept.com/whitley-city-fire-department-25265.html" target="_blank" class="res-link">Whitley City Fire Department <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://usfiredept.com/north-mccreary-fire-protection-district-16629.html" target="_blank" class="res-link">North McCreary Fire Protection District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://usfiredept.com/eagle-sawyer-fire-protection-district-6756.html" target="_blank" class="res-link">Eagle-Sawyer Fire Protection District <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
-  <div class="res-panel" id="panel-healthcare">
+    <div class="res-panel" id="panel-healthcare">
     <div class="res-list">
-      <a href="https://maps.app.goo.gl/a78UALoPntqd11kw8" target="_blank" class="res-link">South Fork Medical <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/1Yy4tzhuHG7WcshE9" target="_blank" class="res-link">Associates in Eyecare <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/peu2coAmKAbYuAvp9" target="_blank" class="res-link">Cumberland Family Clinic <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/FERbXgDqcdTmNxqX7" target="_blank" class="res-link">Eastern Kentucky Health Care <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/xBACzeHBnv2SuxhVA" target="_blank" class="res-link">Family Dental of Kentucky <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/MN4bUgA5remNhpEw6" target="_blank" class="res-link">First Choice Immediate Care <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/zouw8AubJErSWwXWA" target="_blank" class="res-link">Hope Primary &amp; Urgent Care <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://maps.app.goo.gl/peu2coAmKAbYuAvp9" target="_blank" class="res-link">Cumberland Family Clinic <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://maps.app.goo.gl/xBACzeHBnv2SuxhVA" target="_blank" class="res-link">Family Dental of Kentucky <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-      <a href="https://maps.app.goo.gl/1Yy4tzhuHG7WcshE9" target="_blank" class="res-link">Associates in Eyecare <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://maps.app.goo.gl/FuwKZmJkNRPr5rvu6" target="_blank" class="res-link">Kroger Pharmacy <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      <a href="https://maps.app.goo.gl/a78UALoPntqd11kw8" target="_blank" class="res-link">South Fork Medical <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
     </div>
   </div>
-  <div class="res-panel" id="panel-memorial">
+    <div class="res-panel" id="panel-memorial">
     <div class="res-list">
       <a href="https://www.strunkfuneralhome.net/" target="_blank" class="res-link">Hickman-Strunk Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       <a href="https://www.mccrearyfh.com/" target="_blank" class="res-link">McCreary Funeral Home <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
@@ -751,9 +743,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
     <div class="cform reveal d1">
       <h3>Send a Message</h3>
-      <form class="frow" action="https://formsubmit.co/info@mccrearycounty.com" method="POST">
+      <form class="frow" action="https://formsubmit.co/info@mccrearycounty.com" method="POST" onsubmit="handleFormSubmit(this,event)">
         <input type="hidden" name="_subject" value="Website Message &mdash; McCreary County Fiscal Court">
-        <input type="hidden" name="_next" value="https://mccrearycounty.com/thank-you.html">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" style="display:none">
@@ -807,6 +798,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
     <div class="foot-btm">
       <p>&copy; 2025 McCreary County Fiscal Court &nbsp;&middot;&nbsp; Whitley City, Kentucky &nbsp;&middot;&nbsp; All rights reserved</p>
+      <p style="margin-top:0.4rem">Photography &copy; <a href="https://www.facebook.com/GregDavisPhotographer" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.45);text-decoration:underline">Greg Davis Photographer</a></p>
+      <p style="margin-top:0.35rem">Photography by <a href="https://www.facebook.com/GregDavisPhotographer" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.45);text-decoration:underline;transition:color 0.2s" onmouseover="this.style.color='rgba(255,255,255,0.85)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Greg Davis Photographer</a></p>
     </div>
   </div>
 </footer>
@@ -850,7 +843,7 @@ drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 
 (function(){
   const imgs = document.querySelectorAll('#tourismHero .t-slides img');
-  const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jumps','Year of the Land'];
+  const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jump','Year of the Land'];
   const cap = document.getElementById('tCaption');
   let cur = 0;
   function go(i){ imgs[cur].classList.remove('active'); cur=(i+imgs.length)%imgs.length; imgs[cur].classList.add('active'); if(cap) cap.textContent=caps[cur]; }
@@ -891,9 +884,44 @@ document.addEventListener('click', function(e) {
   }
 });
 
+
+
+
+
+function handleFormSubmit(form, e) {
+  e.preventDefault();
+  const btn = form.querySelector('button[type="submit"]');
+  const origHTML = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Submitted'; btn.disabled = true; btn.style.opacity = '0.75'; }
+  fetch(form.action, { method: 'POST', body: new FormData(form) })
+    .then(() => {
+      form.reset();
+      if (btn) { btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Submitted!'; btn.style.opacity = '1'; }
+    })
+    .catch(() => {
+      if (btn) { btn.innerHTML = origHTML; btn.disabled = false; btn.style.opacity = '1'; }
+    });
+}
+
+function handleFormSubmit(form, e) {
+  e.preventDefault();
+  const btn = form.querySelector('button[type="submit"]');
+  const origHTML = btn ? btn.innerHTML : '';
+  if (btn) { btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Submitted'; btn.disabled = true; btn.style.opacity = '0.75'; }
+  fetch(form.action, { method: 'POST', body: new FormData(form) })
+    .then(() => {
+      form.reset();
+      if (btn) { btn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Submitted!'; btn.disabled = false; btn.style.opacity = '1'; }
+    })
+    .catch(() => {
+      if (btn) { btn.innerHTML = origHTML; btn.disabled = false; btn.style.opacity = '1'; }
+    });
+}
+
 (async function fetchBurnBan() {
   const dot = document.getElementById('bbDot');
   const txt = document.getElementById('bbText');
+  if (!dot || !txt) return;
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -902,8 +930,8 @@ document.addEventListener('click', function(e) {
         model: 'claude-sonnet-4-20250514',
         max_tokens: 300,
         tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        system: `You are a data extraction assistant. Your ONLY job is to check whether McCreary County, Kentucky currently has an active burn ban according to the Kentucky Energy and Environment Cabinet (EEC) website. Use web_search to find the current burn ban status for McCreary County Kentucky from eec.ky.gov or other official sources. After searching, respond with ONLY a JSON object in this exact format, nothing else: {"active": true, "details": "short reason or date if known"} OR {"active": false, "details": "no active burn ban"} OR {"active": null, "details": "unable to determine"}. No markdown, no explanation, just the raw JSON object.`,
-        messages: [{ role: 'user', content: 'Is there currently an active burn ban for McCreary County Kentucky? Check the Kentucky EEC website.' }]
+        system: `You are a data extraction assistant. Your ONLY job is to check whether McCreary County, Kentucky currently has an active burn ban. Use web_search to check eec.ky.gov. Respond with ONLY a JSON object: {"active": true, "details": "reason"} OR {"active": false, "details": "no active burn ban"} OR {"active": null, "details": "unable to determine"}. No markdown, no explanation.`,
+        messages: [{ role: 'user', content: 'Is there currently an active burn ban for McCreary County Kentucky?' }]
       })
     });
     if (!response.ok) throw new Error('API error ' + response.status);
@@ -914,25 +942,25 @@ document.addEventListener('click', function(e) {
     let result;
     try { result = JSON.parse(clean); } catch(e) {
       const lower = resultText.toLowerCase();
-      if (lower.includes('"active": true') || lower.includes('"active":true')) { result = { active: true, details: 'Active burn ban in effect' }; }
-      else if (lower.includes('"active": false') || lower.includes('"active":false')) { result = { active: false, details: 'No active burn ban' }; }
-      else { result = { active: null, details: 'Status unavailable \u2014 check KY EEC' }; }
+      if (lower.includes('"active":true') || lower.includes('"active": true')) result = { active: true, details: '' };
+      else if (lower.includes('"active":false') || lower.includes('"active": false')) result = { active: false, details: '' };
+      else result = { active: null, details: '' };
     }
-    dot.classList.remove('loading');
+    dot.style.animation = 'none';
     if (result.active === true) {
-      dot.classList.add('active');
-      txt.textContent = 'BURN BAN IN EFFECT' + (result.details && result.details !== 'Active burn ban in effect' ? ' \u2014 ' + result.details : '');
+      dot.style.cssText += ';background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.7)';
+      txt.textContent = 'BURN BAN IN EFFECT' + (result.details ? ' — ' + result.details : '');
       txt.style.color = '#fca5a5'; txt.style.fontWeight = '600';
     } else if (result.active === false) {
-      dot.classList.add('inactive');
+      dot.style.cssText += ';background:#22c55e;box-shadow:0 0 6px rgba(34,197,94,0.6)';
       txt.textContent = 'No active burn ban'; txt.style.color = '#86efac';
     } else {
       dot.style.background = '#e0b96a';
-      txt.textContent = 'Status unavailable \u2014 visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)';
+      txt.textContent = 'Status unavailable — visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)';
     }
   } catch(err) {
-    dot.classList.remove('loading'); dot.style.background = '#e0b96a';
-    txt.textContent = 'Status unavailable \u2014 visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)';
+    if (dot) { dot.style.animation = 'none'; dot.style.background = '#e0b96a'; }
+    if (txt) { txt.textContent = 'Status unavailable — visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)'; }
   }
 })();
 </script>
