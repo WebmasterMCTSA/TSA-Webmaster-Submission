@@ -273,6 +273,11 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 .d1{transition-delay:0.1s}
 .d2{transition-delay:0.2s}
 .d3{transition-delay:0.3s}
+.form-success{display:none;align-items:center;gap:0.65rem;padding:0.95rem 1.1rem;border-radius:var(--radius-md);font-size:0.87rem;font-weight:500}
+.form-success.show{display:flex}
+.form-success i{font-size:1.1rem;flex-shrink:0}
+.form-error{display:none;align-items:center;gap:0.65rem;padding:0.85rem 1.1rem;border-radius:var(--radius-md);font-size:0.83rem}
+.form-error.show{display:flex}
 @media(min-width:768px){
   :root{--header-h:72px}
   .burger{display:none}
@@ -668,9 +673,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 
   <div class="records-form reveal">
     <h3><i class="fa-solid fa-file-magnifying-glass" style="margin-right:0.5rem;color:var(--gold)"></i>Submit a Records Request</h3>
-    <form class="rfrow" action="https://formsubmit.co/debbie@mccrearycounty.com" method="POST">
+    <form class="rfrow" id="recordsForm" action="https://formsubmit.co/debbie@mccrearycounty.com" method="POST">
       <input type="hidden" name="_subject" value="Open Records Request &mdash; McCreary County Fiscal Court">
-      <input type="hidden" name="_next" value="https://mccrearycounty.com/records-thank-you.html">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
       <input type="text" name="_honey" style="display:none">
@@ -688,7 +692,15 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       </select>
       <input type="text" name="record_date_or_period" placeholder="Approximate Date or Time Period of Record">
       <textarea name="description" rows="4" placeholder="Please describe the record(s) you are requesting in detail&hellip;" required></textarea>
-      <button type="submit"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+      <button type="submit" id="recordsSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
+      <div class="form-success" id="recordsSuccess" style="background:rgba(74,124,82,0.18);color:#bfe6c4;border:1px solid rgba(74,124,82,0.4)">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Thank you &mdash; your records request has been sent. Our office will follow up with you soon.</span>
+      </div>
+      <div class="form-error" id="recordsError" style="background:rgba(220,80,80,0.15);color:#ffc9c9;border:1px solid rgba(220,80,80,0.35)">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span>Sorry, something went wrong sending your request. Please try again or email debbie@mccrearycounty.com directly.</span>
+      </div>
     </form>
   </div>
 </div>
@@ -857,16 +869,23 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
     <div class="cform reveal d1">
       <h3>Send a Message</h3>
-      <form class="frow" action="https://formsubmit.co/joshua@mccrearycounty.com" method="POST">
+      <form class="frow" id="contactForm" action="https://formsubmit.co/joshua@mccrearycounty.com" method="POST">
         <input type="hidden" name="_subject" value="Website Message &mdash; McCreary County Fiscal Court">
-        <input type="hidden" name="_next" value="https://mccrearycounty.com/thank-you.html">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" style="display:none">
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-        <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        <button type="submit" id="contactSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
+        <div class="form-success" id="contactSuccess" style="background:rgba(74,124,82,0.12);color:#1a3a1e;border:1px solid rgba(74,124,82,0.3)">
+          <i class="fa-solid fa-circle-check" style="color:var(--moss)"></i>
+          <span>Thank you &mdash; your message has been sent. We'll get back to you soon.</span>
+        </div>
+        <div class="form-error" id="contactError" style="background:rgba(220,80,80,0.1);color:#8a2020;border:1px solid rgba(220,80,80,0.3)">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span>Sorry, something went wrong sending your message. Please try again or email joshua@mccrearycounty.com directly.</span>
+        </div>
       </form>
     </div>
   </div>
@@ -1015,6 +1034,51 @@ function toggleBudgetYear(btn) {
     panel.classList.add('open');
   }
 }
+
+/* ---- AJAX form submission (no page redirect, inline confirmation) ---- */
+function handleAjaxForm(formId, submitBtnId, successId, errorId) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+  const btn = document.getElementById(submitBtnId);
+  const successEl = document.getElementById(successId);
+  const errorEl = document.getElementById(errorId);
+  const btnOriginalHTML = btn.innerHTML;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    errorEl.classList.remove('show');
+    successEl.classList.remove('show');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+    try {
+      const formData = new FormData(form);
+      const action = form.getAttribute('action');
+      // Use FormSubmit's AJAX endpoint
+      const ajaxAction = action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
+      const response = await fetch(ajaxAction, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: formData
+      });
+
+      if (response.ok) {
+        form.reset();
+        successEl.classList.add('show');
+        btn.style.display = 'none';
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      errorEl.classList.add('show');
+      btn.disabled = false;
+      btn.innerHTML = btnOriginalHTML;
+    }
+  });
+}
+
+handleAjaxForm('recordsForm', 'recordsSubmitBtn', 'recordsSuccess', 'recordsError');
+handleAjaxForm('contactForm', 'contactSubmitBtn', 'contactSuccess', 'contactError');
 
 (async function fetchBurnBan() {
   const dot = document.getElementById('bbDot');
