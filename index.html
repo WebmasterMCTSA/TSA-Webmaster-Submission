@@ -956,7 +956,7 @@ drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 
 (function(){
   const imgs = document.querySelectorAll('#tourismHero .t-slides img');
-  const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jumps','Year of the Land'];
+  const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jumps','Big South Fork Overlook'];
   const cap = document.getElementById('tCaption');
   let cur = 0;
   function go(i){ imgs[cur].classList.remove('active'); cur=(i+imgs.length)%imgs.length; imgs[cur].classList.add('active'); if(cap) cap.textContent=caps[cur]; }
