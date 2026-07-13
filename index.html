@@ -57,11 +57,8 @@ header.scrolled{background:rgba(13,27,15,0.95);backdrop-filter:blur(12px);-webki
 .burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 .drawer{position:fixed;top:var(--header-h);left:0;right:0;bottom:0;background:var(--ink);z-index:999;transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;padding:2rem 1.5rem;gap:0.2rem;overflow-y:auto;}
 .drawer.open{transform:translateX(0)}
-.drawer a{color:rgba(255,255,255,0.7);font-family:var(--ff-display);font-size:1.55rem;font-weight:400;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between;transition:color 0.2s;}
+.drawer a{color:rgba(255,255,255,0.7);font-family:var(--ff-display);font-size:1.55rem;font-weight:400;padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;text-align:center;transition:color 0.2s;}
 .drawer a:hover{color:var(--gold-light)}
-.drawer a span{font-size:0.7rem;color:var(--moss);font-family:var(--ff-body);font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding-top:0.1rem}
-.drawer-fb{margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.1)!important}
-.drawer-fb i{font-size:1rem;color:#8ab4f8;margin-right:0.5rem}
 #burn-ban-bar{background:var(--forest);padding:0.6rem 1.25rem;display:flex;align-items:center;justify-content:center;gap:0.65rem;flex-wrap:wrap;font-size:0.8rem;min-height:var(--banner-h);position:fixed;top:var(--header-h);left:0;right:0;z-index:998;}
 #burn-ban-bar .bb-label{color:var(--gold-light);font-weight:500;letter-spacing:0.06em;text-transform:uppercase;font-size:0.7rem;white-space:nowrap}
 #burn-ban-bar .bb-status{font-weight:500;color:#fff;display:flex;align-items:center;gap:0.4rem}
@@ -340,15 +337,14 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 
 <!-- DRAWER -->
 <nav class="drawer" id="drawer" aria-hidden="true">
-  <a href="#history"><span>01</span>History</a>
-  <a href="#about"><span>02</span>About</a>
-  <a href="#officials"><span>03</span>Officials</a>
-  <a href="#events"><span>04</span>Events</a>
-  <a href="#records-section"><span>05</span>Records</a>
-  <a href="#tourism"><span>06</span>Tourism</a>
-  <a href="#resources"><span>07</span>Resources</a>
-  <a href="#contact"><span>08</span>Contact</a>
-  <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" class="drawer-fb"><span>FB</span><i class="fa-brands fa-facebook-f"></i>Facebook</a>
+  <a href="#history">History</a>
+  <a href="#about">About</a>
+  <a href="#officials">Officials</a>
+  <a href="#events">Events</a>
+  <a href="#records-section">Records</a>
+  <a href="#tourism">Tourism</a>
+  <a href="#resources">Resources</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <!-- HERO -->
