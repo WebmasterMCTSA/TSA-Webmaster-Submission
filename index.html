@@ -673,11 +673,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 
   <div class="records-form reveal">
     <h3><i class="fa-solid fa-file-magnifying-glass" style="margin-right:0.5rem;color:var(--gold)"></i>Submit a Records Request</h3>
-    <form class="rfrow" id="recordsForm" action="https://formsubmit.co/debbie@mccrearycounty.com" method="POST">
-      <input type="hidden" name="_subject" value="Open Records Request &mdash; McCreary County Fiscal Court">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="text" name="_honey" style="display:none">
+    <form class="rfrow" id="recordsForm" data-formsubmit-endpoint="https://formsubmit.co/ajax/debbie@mccrearycounty.com">
       <input type="text" name="full_name" placeholder="Your Full Name" required autocomplete="name">
       <input type="email" name="email" placeholder="Your Email Address" required autocomplete="email">
       <input type="tel" name="phone" placeholder="Phone Number (optional)" autocomplete="tel">
@@ -692,6 +688,8 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
       </select>
       <input type="text" name="record_date_or_period" placeholder="Approximate Date or Time Period of Record">
       <textarea name="description" rows="4" placeholder="Please describe the record(s) you are requesting in detail&hellip;" required></textarea>
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <input type="hidden" name="_subject" value="Open Records Request &mdash; McCreary County Fiscal Court">
       <button type="submit" id="recordsSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Submit Request</button>
       <div class="form-success" id="recordsSuccess" style="background:rgba(74,124,82,0.18);color:#bfe6c4;border:1px solid rgba(74,124,82,0.4)">
         <i class="fa-solid fa-circle-check"></i>
@@ -869,14 +867,12 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
     </div>
     <div class="cform reveal d1">
       <h3>Send a Message</h3>
-      <form class="frow" id="contactForm" action="https://formsubmit.co/joshua@mccrearycounty.com" method="POST">
-        <input type="hidden" name="_subject" value="Website Message &mdash; McCreary County Fiscal Court">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="text" name="_honey" style="display:none">
+      <form class="frow" id="contactForm" data-formsubmit-endpoint="https://formsubmit.co/ajax/joshua@mccrearycounty.com">
         <input type="text" name="name" placeholder="Your Name" required autocomplete="name">
         <input type="email" name="email" placeholder="Your Email" required autocomplete="email">
         <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <input type="hidden" name="_subject" value="Website Message &mdash; McCreary County Fiscal Court">
         <button type="submit" id="contactSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
         <div class="form-success" id="contactSuccess" style="background:rgba(74,124,82,0.12);color:#1a3a1e;border:1px solid rgba(74,124,82,0.3)">
           <i class="fa-solid fa-circle-check" style="color:var(--moss)"></i>
@@ -937,193 +933,238 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 </footer>
 
 <script>
-const hdr = document.getElementById('header');
-const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 60);
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
+/* ============================================================
+   FORM HANDLING — runs FIRST, isolated, and defensively.
+   This binds the Contact and Records forms so they NEVER perform
+   a native submit/navigation. Every path (success or failure)
+   is handled entirely with JS + fetch, showing an inline message
+   in place instead of redirecting anywhere.
+   ============================================================ */
+(function () {
+  function bindAjaxForm(formId, submitBtnId, successId, errorId) {
+    var form = document.getElementById(formId);
+    if (!form) return;
+    var btn = document.getElementById(submitBtnId);
+    var successEl = document.getElementById(successId);
+    var errorEl = document.getElementById(errorId);
+    var endpoint = form.getAttribute('data-formsubmit-endpoint');
+    var btnOriginalHTML = btn ? btn.innerHTML : '';
 
-const burger = document.getElementById('burger');
-const drawer = document.getElementById('drawer');
-burger.addEventListener('click', () => {
-  const open = drawer.classList.toggle('open');
-  burger.classList.toggle('open', open);
-  burger.setAttribute('aria-expanded', open);
-  drawer.setAttribute('aria-hidden', !open);
-  document.body.style.overflow = open ? 'hidden' : '';
-});
-drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  drawer.classList.remove('open'); burger.classList.remove('open');
-  burger.setAttribute('aria-expanded', false); drawer.setAttribute('aria-hidden', true);
-  document.body.style.overflow = '';
-}));
+    // Belt-and-suspenders: no matter what happens inside, never let this
+    // form navigate the page away. We attach the listener in the capture
+    // phase so it always runs, and we call preventDefault() synchronously
+    // as the very first thing — before any async work.
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-(function(){
-  const slides = document.querySelectorAll('#heroSlides img');
-  const dc = document.getElementById('heroDots');
-  let cur = 0;
-  slides.forEach((_,i) => {
-    const d = document.createElement('button');
-    d.className = 'h-dot'+(i===0?' active':'');
-    d.setAttribute('aria-label','Slide '+(i+1));
-    d.addEventListener('click', () => go(i));
-    dc.appendChild(d);
-  });
-  const dots = dc.querySelectorAll('.h-dot');
-  function go(i){ slides[cur].classList.remove('active'); dots[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('active'); }
-  setInterval(() => go((cur+1)%slides.length), 5500);
-})();
+      if (errorEl) errorEl.classList.remove('show');
+      if (successEl) successEl.classList.remove('show');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+      }
 
-(function(){
-  const imgs = document.querySelectorAll('#tourismHero .t-slides img');
-  const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jumps','Big South Fork Overlook'];
-  const cap = document.getElementById('tCaption');
-  let cur = 0;
-  function go(i){ imgs[cur].classList.remove('active'); cur=(i+imgs.length)%imgs.length; imgs[cur].classList.add('active'); if(cap) cap.textContent=caps[cur]; }
-  document.getElementById('tNext').addEventListener('click', () => go(cur+1));
-  document.getElementById('tPrev').addEventListener('click', () => go(cur-1));
-  setInterval(() => go(cur+1), 4800);
-})();
+      var formData = new FormData(form);
 
-document.querySelectorAll('.res-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.res-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.res-panel').forEach(p => p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('panel-'+tab.dataset.panel)?.classList.add('active');
-  });
-});
-
-const ro = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
-}, {threshold:0.1, rootMargin:'0px 0px -36px 0px'});
-document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
-const co = new IntersectionObserver(entries => {
-  entries.forEach((e,idx) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), idx*48); co.unobserve(e.target); } });
-}, {threshold:0.06, rootMargin:'0px 0px -24px 0px'});
-document.querySelectorAll('.ocard').forEach(c => co.observe(c));
-
-document.querySelectorAll('.ocard').forEach(card => {
-  card.addEventListener('click', function(e) {
-    const isOpen = this.classList.contains('tip-open');
-    document.querySelectorAll('.ocard').forEach(c => c.classList.remove('tip-open'));
-    if (!isOpen) this.classList.add('tip-open');
-  });
-});
-document.addEventListener('click', function(e) {
-  if (!e.target.closest('.ocard')) {
-    document.querySelectorAll('.ocard').forEach(c => c.classList.remove('tip-open'));
-  }
-});
-
-function toggleBudgetYear(btn) {
-  const panel = btn.nextElementSibling;
-  const isOpen = btn.getAttribute('aria-expanded') === 'true';
-  // Close all panels first
-  document.querySelectorAll('.budget-yr-btn').forEach(b => {
-    b.setAttribute('aria-expanded', 'false');
-    const icon = b.querySelector('i.fa-folder-open');
-    if (icon) { icon.classList.remove('fa-folder-open'); icon.classList.add('fa-folder'); }
-    b.nextElementSibling.classList.remove('open');
-  });
-  // Open the clicked one if it was closed
-  if (!isOpen) {
-    btn.setAttribute('aria-expanded', 'true');
-    const icon = btn.querySelector('i.fa-folder');
-    if (icon) { icon.classList.remove('fa-folder'); icon.classList.add('fa-folder-open'); }
-    panel.classList.add('open');
-  }
-}
-
-/* ---- AJAX form submission (no page redirect, inline confirmation) ---- */
-function handleAjaxForm(formId, submitBtnId, successId, errorId) {
-  const form = document.getElementById(formId);
-  if (!form) return;
-  const btn = document.getElementById(submitBtnId);
-  const successEl = document.getElementById(successId);
-  const errorEl = document.getElementById(errorId);
-  const btnOriginalHTML = btn.innerHTML;
-
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    errorEl.classList.remove('show');
-    successEl.classList.remove('show');
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-
-    try {
-      const formData = new FormData(form);
-      const action = form.getAttribute('action');
-      // Use FormSubmit's AJAX endpoint
-      const ajaxAction = action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
-      const response = await fetch(ajaxAction, {
+      fetch(endpoint, {
         method: 'POST',
         headers: { 'Accept': 'application/json' },
         body: formData
-      });
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error('Submission failed with status ' + response.status);
+          return response.json().catch(function () { return {}; });
+        })
+        .then(function () {
+          form.reset();
+          if (successEl) successEl.classList.add('show');
+          if (btn) btn.style.display = 'none';
+        })
+        .catch(function () {
+          if (errorEl) errorEl.classList.add('show');
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = btnOriginalHTML;
+          }
+        });
 
-      if (response.ok) {
-        form.reset();
-        successEl.classList.add('show');
-        btn.style.display = 'none';
-      } else {
-        throw new Error('Submission failed');
-      }
-    } catch (err) {
-      errorEl.classList.add('show');
-      btn.disabled = false;
-      btn.innerHTML = btnOriginalHTML;
+      return false;
+    }, true);
+  }
+
+  try { bindAjaxForm('recordsForm', 'recordsSubmitBtn', 'recordsSuccess', 'recordsError'); } catch (err) { /* no-op */ }
+  try { bindAjaxForm('contactForm', 'contactSubmitBtn', 'contactSuccess', 'contactError'); } catch (err) { /* no-op */ }
+})();
+
+/* ============================================================
+   Everything below is wrapped in try/catch per block so that a
+   failure in one piece of UI (calendar, sliders, etc.) can never
+   stop the rest of the page's scripts — including the form
+   handling above — from running.
+   ============================================================ */
+
+try {
+  const hdr = document.getElementById('header');
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 60);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+} catch (err) {}
+
+try {
+  const burger = document.getElementById('burger');
+  const drawer = document.getElementById('drawer');
+  burger.addEventListener('click', () => {
+    const open = drawer.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    drawer.setAttribute('aria-hidden', !open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    drawer.classList.remove('open'); burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', false); drawer.setAttribute('aria-hidden', true);
+    document.body.style.overflow = '';
+  }));
+} catch (err) {}
+
+try {
+  (function(){
+    const slides = document.querySelectorAll('#heroSlides img');
+    const dc = document.getElementById('heroDots');
+    let cur = 0;
+    slides.forEach((_,i) => {
+      const d = document.createElement('button');
+      d.className = 'h-dot'+(i===0?' active':'');
+      d.setAttribute('aria-label','Slide '+(i+1));
+      d.addEventListener('click', () => go(i));
+      dc.appendChild(d);
+    });
+    const dots = dc.querySelectorAll('.h-dot');
+    function go(i){ slides[cur].classList.remove('active'); dots[cur].classList.remove('active'); cur=i; slides[cur].classList.add('active'); dots[cur].classList.add('active'); }
+    setInterval(() => go((cur+1)%slides.length), 5500);
+  })();
+} catch (err) {}
+
+try {
+  (function(){
+    const imgs = document.querySelectorAll('#tourismHero .t-slides img');
+    const caps = ['Cumberland Falls','Crack in the Rocks','Buzzard Rock','Devils Jumps','Big South Fork Overlook'];
+    const cap = document.getElementById('tCaption');
+    let cur = 0;
+    function go(i){ imgs[cur].classList.remove('active'); cur=(i+imgs.length)%imgs.length; imgs[cur].classList.add('active'); if(cap) cap.textContent=caps[cur]; }
+    document.getElementById('tNext').addEventListener('click', () => go(cur+1));
+    document.getElementById('tPrev').addEventListener('click', () => go(cur-1));
+    setInterval(() => go(cur+1), 4800);
+  })();
+} catch (err) {}
+
+try {
+  document.querySelectorAll('.res-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.res-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.res-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-'+tab.dataset.panel)?.classList.add('active');
+    });
+  });
+} catch (err) {}
+
+try {
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); ro.unobserve(e.target); } });
+  }, {threshold:0.1, rootMargin:'0px 0px -36px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+} catch (err) {}
+
+try {
+  const co = new IntersectionObserver(entries => {
+    entries.forEach((e,idx) => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'), idx*48); co.unobserve(e.target); } });
+  }, {threshold:0.06, rootMargin:'0px 0px -24px 0px'});
+  document.querySelectorAll('.ocard').forEach(c => co.observe(c));
+} catch (err) {}
+
+try {
+  document.querySelectorAll('.ocard').forEach(card => {
+    card.addEventListener('click', function(e) {
+      const isOpen = this.classList.contains('tip-open');
+      document.querySelectorAll('.ocard').forEach(c => c.classList.remove('tip-open'));
+      if (!isOpen) this.classList.add('tip-open');
+    });
+  });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.ocard')) {
+      document.querySelectorAll('.ocard').forEach(c => c.classList.remove('tip-open'));
     }
   });
+} catch (err) {}
+
+function toggleBudgetYear(btn) {
+  try {
+    const panel = btn.nextElementSibling;
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.budget-yr-btn').forEach(b => {
+      b.setAttribute('aria-expanded', 'false');
+      const icon = b.querySelector('i.fa-folder-open');
+      if (icon) { icon.classList.remove('fa-folder-open'); icon.classList.add('fa-folder'); }
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.setAttribute('aria-expanded', 'true');
+      const icon = btn.querySelector('i.fa-folder');
+      if (icon) { icon.classList.remove('fa-folder'); icon.classList.add('fa-folder-open'); }
+      panel.classList.add('open');
+    }
+  } catch (err) {}
 }
 
-handleAjaxForm('recordsForm', 'recordsSubmitBtn', 'recordsSuccess', 'recordsError');
-handleAjaxForm('contactForm', 'contactSubmitBtn', 'contactSuccess', 'contactError');
-
-(async function fetchBurnBan() {
-  const dot = document.getElementById('bbDot');
-  const txt = document.getElementById('bbText');
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 300,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        system: `You are a data extraction assistant. Your ONLY job is to check whether McCreary County, Kentucky currently has an active burn ban according to the Kentucky Energy and Environment Cabinet (EEC) website. Use web_search to find the current burn ban status for McCreary County Kentucky from eec.ky.gov or other official sources. After searching, respond with ONLY a JSON object in this exact format, nothing else: {"active": true, "details": "short reason or date if known"} OR {"active": false, "details": "no active burn ban"} OR {"active": null, "details": "unable to determine"}. No markdown, no explanation, just the raw JSON object.`,
-        messages: [{ role: 'user', content: 'Is there currently an active burn ban for McCreary County Kentucky? Check the Kentucky EEC website.' }]
-      })
-    });
-    if (!response.ok) throw new Error('API error ' + response.status);
-    const data = await response.json();
-    let resultText = '';
-    for (const block of data.content) { if (block.type === 'text') resultText = block.text; }
-    const clean = resultText.replace(/```json|```/g, '').trim();
-    let result;
-    try { result = JSON.parse(clean); } catch(e) {
-      const lower = resultText.toLowerCase();
-      if (lower.includes('"active": true') || lower.includes('"active":true')) { result = { active: true, details: 'Active burn ban in effect' }; }
-      else if (lower.includes('"active": false') || lower.includes('"active":false')) { result = { active: false, details: 'No active burn ban' }; }
-      else { result = { active: null, details: 'Status unavailable \u2014 check KY EEC' }; }
-    }
-    dot.classList.remove('loading');
-    if (result.active === true) {
-      dot.classList.add('active');
-      txt.textContent = 'BURN BAN IN EFFECT' + (result.details && result.details !== 'Active burn ban in effect' ? ' \u2014 ' + result.details : '');
-      txt.style.color = '#fca5a5'; txt.style.fontWeight = '600';
-    } else if (result.active === false) {
-      dot.classList.add('inactive');
-      txt.textContent = 'No active burn ban'; txt.style.color = '#86efac';
-    } else {
-      dot.style.background = '#e0b96a';
+try {
+  (async function fetchBurnBan() {
+    const dot = document.getElementById('bbDot');
+    const txt = document.getElementById('bbText');
+    if (!dot || !txt) return;
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 300,
+          tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+          system: `You are a data extraction assistant. Your ONLY job is to check whether McCreary County, Kentucky currently has an active burn ban according to the Kentucky Energy and Environment Cabinet (EEC) website. Use web_search to find the current burn ban status for McCreary County Kentucky from eec.ky.gov or other official sources. After searching, respond with ONLY a JSON object in this exact format, nothing else: {"active": true, "details": "short reason or date if known"} OR {"active": false, "details": "no active burn ban"} OR {"active": null, "details": "unable to determine"}. No markdown, no explanation, just the raw JSON object.`,
+          messages: [{ role: 'user', content: 'Is there currently an active burn ban for McCreary County Kentucky? Check the Kentucky EEC website.' }]
+        })
+      });
+      if (!response.ok) throw new Error('API error ' + response.status);
+      const data = await response.json();
+      let resultText = '';
+      for (const block of data.content) { if (block.type === 'text') resultText = block.text; }
+      const clean = resultText.replace(/```json|```/g, '').trim();
+      let result;
+      try { result = JSON.parse(clean); } catch(e) {
+        const lower = resultText.toLowerCase();
+        if (lower.includes('"active": true') || lower.includes('"active":true')) { result = { active: true, details: 'Active burn ban in effect' }; }
+        else if (lower.includes('"active": false') || lower.includes('"active":false')) { result = { active: false, details: 'No active burn ban' }; }
+        else { result = { active: null, details: 'Status unavailable \u2014 check KY EEC' }; }
+      }
+      dot.classList.remove('loading');
+      if (result.active === true) {
+        dot.classList.add('active');
+        txt.textContent = 'BURN BAN IN EFFECT' + (result.details && result.details !== 'Active burn ban in effect' ? ' \u2014 ' + result.details : '');
+        txt.style.color = '#fca5a5'; txt.style.fontWeight = '600';
+      } else if (result.active === false) {
+        dot.classList.add('inactive');
+        txt.textContent = 'No active burn ban'; txt.style.color = '#86efac';
+      } else {
+        dot.style.background = '#e0b96a';
+        txt.textContent = 'Status unavailable \u2014 visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)';
+      }
+    } catch(err) {
+      dot.classList.remove('loading'); dot.style.background = '#e0b96a';
       txt.textContent = 'Status unavailable \u2014 visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)';
     }
-  } catch(err) {
-    dot.classList.remove('loading'); dot.style.background = '#e0b96a';
-    txt.textContent = 'Status unavailable \u2014 visit KY EEC'; txt.style.color = 'rgba(255,255,255,0.7)';
-  }
-})();
+  })();
+} catch (err) {}
 </script>
 </body>
 </html>
