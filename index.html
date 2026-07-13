@@ -242,7 +242,11 @@ header.scrolled{background:rgba(13,27,15,0.95);backdrop-filter:blur(12px);-webki
 .rfrow button:hover{background:var(--gold-light)}
 .rfrow button:active{transform:scale(0.97)}
 #social{background:var(--parchment)}
-.social-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border-radius:var(--radius-lg);padding:2.2rem 1.5rem;border:1px solid rgba(0,0,0,0.07);max-width:520px;margin:0 auto}
+.social-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border-radius:var(--radius-lg);padding:2.2rem 1.5rem;border:1px solid rgba(0,0,0,0.07);max-width:560px;margin:0 auto}
+.fb-embed-wrap{width:100%;max-width:500px;margin:1.4rem auto 0;border-radius:var(--radius-md);overflow:hidden;border:1px solid rgba(0,0,0,0.08);min-height:280px;background:var(--parchment)}
+.fb-embed-wrap .fb-page{width:100%!important}
+.fb-embed-wrap iframe{width:100%!important}
+.fb-embed-fallback{display:flex;flex-direction:column;align-items:center;gap:0.6rem;padding:2rem 1rem;font-size:0.82rem;color:#777}
 .fb-icon-wrap{width:62px;height:62px;border-radius:50%;background:#1877f2;display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
 .fb-icon-wrap i{font-size:1.75rem;color:#fff}
 .social-card h3{font-family:var(--ff-display);font-size:1.4rem;color:var(--forest);margin-bottom:0.5rem}
@@ -301,6 +305,9 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 </style>
 </head>
 <body>
+
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0"></script>
 
 <!-- HEADER -->
 <header id="header">
@@ -477,7 +484,7 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
 
     <div class="ocard"><img class="ocard-img" src="images/Debbie-Gilreath.png" alt="Debbie Gilreath"><div class="ocard-name">Debbie Gilreath</div><div class="ocard-role">Finance &amp; HR Director</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:debbie@mccrearycounty.com">debbie@mccrearycounty.com</a></div><div class="ocard-tooltip"><span class="tt-title">Contact for</span>County budget and financial inquiries, payroll, employee HR matters, and financial records requests.</div></div>
 
-    <div class="ocard"><img class="ocard-img" src="images/Joshua-Stephens.png" alt="Josh Stephens"><div class="ocard-name">Joshua Stephens</div><div class="ocard-role">Economic Development Dir.</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:joshua@mccrearycounty.com">joshua@mccrearycounty.com</a></div><div class="ocard-tooltip"><span class="tt-title">Contact for</span>Business development, grants and funding opportunities, new business inquiries, and county economic growth initiatives.</div></div>
+    <div class="ocard"><img class="ocard-img" src="images/Joshua-Stephens.png" alt="Josh Stephens"><div class="ocard-name">Joshua Stephens</div><div class="ocard-role">Economic Development Dir.</div><div class="ocard-contact"><a href="tel:6063762413">606-376-2413</a><br><a href="mailto:Joshua@mccrearycounty.com">Joshua@mccrearycounty.com</a></div><div class="ocard-tooltip"><span class="tt-title">Contact for</span>Business development, grants and funding opportunities, new business inquiries, and county economic growth initiatives.</div></div>
 
     <div class="ocard"><img class="ocard-img" src="images/Tony-Kidd.png" alt="Tony Kidd"><div class="ocard-name">Tony Kidd</div><div class="ocard-role">Road Dept. Supervisor</div><div class="ocard-contact"><a href="tel:6063768796">606-376-8796</a><br><a href="mailto:tony@mccrearycounty.com">tony@mccrearycounty.com</a></div><div class="ocard-tooltip"><span class="tt-title">Contact for</span>Road repairs, pothole reports, drainage issues, road signage, and county road maintenance requests.</div></div>
 
@@ -810,8 +817,28 @@ footer{background:var(--ink);padding:3rem 1.25rem 2rem}
   <div class="social-card reveal">
     <div class="fb-icon-wrap"><i class="fa-brands fa-facebook-f"></i></div>
     <h3>McCreary County Fiscal Court</h3>
-    <p>Stay up to date with county announcements, meeting notices, community news, and important updates &mdash; follow our official Facebook page.</p>
-    <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" rel="noopener noreferrer" class="btn-facebook"><i class="fa-brands fa-facebook-f"></i> Follow on Facebook</a>
+    <p>Stay up to date with county announcements, meeting notices, community news, and important updates &mdash; straight from our official Facebook page.</p>
+
+    <div class="fb-embed-wrap">
+      <div class="fb-page"
+        data-href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/"
+        data-tabs="timeline"
+        data-width=""
+        data-height="600"
+        data-small-header="false"
+        data-adapt-container-width="true"
+        data-hide-cover="false"
+        data-show-facepile="true">
+        <blockquote cite="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" class="fb-xfbml-parse-ignore">
+          <div class="fb-embed-fallback">
+            <i class="fa-brands fa-facebook-f" style="font-size:1.5rem;color:#1877f2"></i>
+            <span>Latest posts load once you're viewing this on the live site &mdash; or follow the link below to view the page directly.</span>
+          </div>
+        </blockquote>
+      </div>
+    </div>
+
+    <a href="https://www.facebook.com/p/McCreary-County-Fiscal-Court-61575088880712/" target="_blank" rel="noopener noreferrer" class="btn-facebook" style="margin-top:1.5rem"><i class="fa-brands fa-facebook-f"></i> Follow on Facebook</a>
   </div>
 </div>
 </div>
